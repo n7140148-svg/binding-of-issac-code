@@ -1,0 +1,73 @@
+========== FUNCTION FUN_0059ffc0@0059ffc0 ==========
+
+---- ASSEMBLY ----
+0059ffc0  PUSH EBP
+0059ffc1  MOV EBP,ESP
+0059ffc3  PUSH ESI
+0059ffc4  MOV ESI,dword ptr [EBP + 0x8]
+0059ffc7  PUSH EDI
+0059ffc8  MOV EDI,ECX
+0059ffca  TEST ESI,ESI
+0059ffcc  JNS 0x0059ffda
+0059ffce  MOV EAX,dword ptr [EDI + 0x1698]
+0059ffd4  POP EDI
+0059ffd5  POP ESI
+0059ffd6  POP EBP
+0059ffd7  RET 0x4
+0059ffda  MOV EAX,dword ptr [EDI + 0x169c]
+0059ffe0  MOV ECX,dword ptr [EDI + 0x1698]
+0059ffe6  SUB EAX,ECX
+0059ffe8  SAR EAX,0x4
+0059ffeb  CMP ESI,EAX
+0059ffed  JL 0x005a0004
+0059ffef  PUSH 0xb448fc
+0059fff4  PUSH 0x3
+0059fff6  CALL 0x0095e330
+005a0004  ADD ESI,ESI
+005a0006  POP EDI
+005a0007  LEA EAX,[ECX + ESI*0x8]
+005a000a  POP ESI
+005a000b  POP EBP
+005a000c  RET 0x4
+
+---- DECOMPILED C ----
+
+int __thiscall FUN_0059ffc0(int param_1,int param_2)
+
+{
+  if (param_2 < 0) {
+    return *(int *)(param_1 + 0x1698);
+  }
+  if (*(int *)(param_1 + 0x169c) - *(int *)(param_1 + 0x1698) >> 4 <= param_2) {
+                    /* WARNING: Subroutine does not return */
+    FUN_0095e330(3,"Collectible ID out of bounds!\n");
+  }
+  return *(int *)(param_1 + 0x1698) + param_2 * 0x10;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x207, 1) INT_SLESS (stack, 0x4, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x59ffda, 1) , (register, 0x207, 1)
+(unique, 0x10000037, 4) INT_ADD (register, 0x4, 4) , (const, 0x1698, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x0, 4) COPY (unique, 0x17200, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000037, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(unique, 0x1000002f, 4) INT_ADD (register, 0x4, 4) , (const, 0x169c, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000002f, 4)
+(unique, 0x10000033, 4) INT_ADD (register, 0x4, 4) , (const, 0x1698, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000033, 4)
+(register, 0x0, 4) INT_SUB (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(register, 0x0, 4) INT_SRIGHT (register, 0x0, 4) , (const, 0x4, 4)
+(unique, 0x18700, 1) INT_SLESSEQUAL (register, 0x0, 4) , (stack, 0x4, 4)
+ ---  CBRANCH (ram, 0x5a0004, 1) , (unique, 0x18700, 1)
+ ---  CALL (ram, 0x95e330, 8) , (const, 0x3, 4) , (unique, 0x1000002b, 4)
+ ---  RETURN (const, 0x1, 4)
+(unique, 0x1000002b, 4) COPY (const, 0xb448fc, 4)
+(unique, 0x6a00, 4) INT_MULT (stack, 0x4, 4) , (const, 0x10, 4)
+(unique, 0x6c00, 4) INT_ADD (unique, 0x17200, 4) , (unique, 0x6a00, 4)
+(register, 0x0, 4) COPY (unique, 0x6c00, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

@@ -1,0 +1,58 @@
+========== FUNCTION FUN_00427640@00427640 ==========
+
+---- ASSEMBLY ----
+00427640  MOV EAX,dword ptr [ECX + 0x8]
+00427643  CMP EAX,0x1
+00427646  JZ 0x0042765f
+00427648  CMP EAX,0x4
+0042764b  JZ 0x0042765f
+0042764d  CMP EAX,0x3
+00427650  JZ 0x0042765f
+00427652  CMP EAX,0x2
+00427655  JZ 0x0042765f
+00427657  CMP EAX,0x5
+0042765a  JZ 0x0042765f
+0042765c  XOR AL,AL
+0042765e  RET
+0042765f  MOV AL,0x1
+00427661  RET
+
+---- DECOMPILED C ----
+
+int __fastcall FUN_00427640(int param_1)
+
+{
+  int iVar1;
+  uint3 uVar2;
+  
+  iVar1 = *(int *)(param_1 + 8);
+  uVar2 = (uint3)((uint)iVar1 >> 8);
+  if ((((iVar1 != 1) && (iVar1 != 4)) && (iVar1 != 3)) && ((iVar1 != 2 && (iVar1 != 5)))) {
+    return (uint)uVar2 << 8;
+  }
+  return CONCAT31(uVar2,1);
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000021, 4) INT_ADD (register, 0x4, 4) , (const, 0x8, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000021, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x1, 4)
+ ---  CBRANCH (ram, 0x42765f, 1) , (register, 0x206, 1)
+(register, 0x1, 3) SUBPIECE (unique, 0x1000001d, 4) , (const, 0x0, 4)
+(unique, 0x1000001d, 4) INT_RIGHT (unique, 0x10000025, 4) , (const, 0x8, 4)
+(unique, 0x10000025, 4) CAST (unique, 0x17200, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x4, 4)
+ ---  CBRANCH (ram, 0x42765f, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x3, 4)
+ ---  CBRANCH (ram, 0x42765f, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x2, 4)
+ ---  CBRANCH (ram, 0x42765f, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x5, 4)
+ ---  CBRANCH (ram, 0x42765f, 1) , (register, 0x206, 1)
+(register, 0x0, 4) INT_LEFT (unique, 0x10000014, 4) , (const, 0x8, 4)
+(unique, 0x10000014, 4) INT_ZEXT (register, 0x1, 3)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) PIECE (register, 0x1, 3) , (const, 0x1, 1)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

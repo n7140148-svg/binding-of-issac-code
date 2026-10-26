@@ -1,0 +1,52 @@
+========== FUNCTION FUN_0059fd70@0059fd70 ==========
+
+---- ASSEMBLY ----
+0059fd70  PUSH EBP
+0059fd71  MOV EBP,ESP
+0059fd73  MOV EAX,dword ptr [EBP + 0x8]
+0059fd76  MOVQ XMM0,qword ptr [0x00a08c08]
+0059fd7e  MOV dword ptr [ECX + 0x334],EAX
+0059fd84  MOV EAX,[0x00a08c10]
+0059fd89  MOVQ qword ptr [ECX + 0x338],XMM0
+0059fd91  MOV dword ptr [ECX + 0x340],EAX
+0059fd97  POP EBP
+0059fd98  RET 0x4
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_0059fd70(int param_1,undefined4 param_2)
+
+{
+  undefined8 uVar1;
+  undefined4 uVar2;
+  
+  uVar1 = DAT_00a08c08;
+  *(undefined4 *)(param_1 + 0x334) = param_2;
+  uVar2 = DAT_00a08c10;
+  *(undefined8 *)(param_1 + 0x338) = uVar1;
+  *(undefined4 *)(param_1 + 0x340) = uVar2;
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000004, 8) COPY (ram, 0xa08c08, 8)
+(unique, 0x10000010, 4) INT_ADD (register, 0x4, 4) , (const, 0x334, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (stack, 0x4, 4)
+(ram, 0xa08c08, 8) INDIRECT (ram, 0xa08c08, 8) , (const, 0xa, 4)
+(ram, 0xa08c10, 4) INDIRECT (ram, 0xa08c10, 4) , (const, 0xa, 4)
+(unique, 0x1000000c, 4) COPY (ram, 0xa08c10, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000010, 4)
+(unique, 0x10000014, 4) INT_ADD (register, 0x4, 4) , (const, 0x338, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (unique, 0x10000004, 8)
+(ram, 0xa08c08, 8) INDIRECT (ram, 0xa08c08, 8) , (const, 0xe, 4)
+(ram, 0xa08c10, 4) INDIRECT (ram, 0xa08c10, 4) , (const, 0xe, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000014, 4)
+(unique, 0x10000018, 4) INT_ADD (register, 0x4, 4) , (const, 0x340, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (unique, 0x1000000c, 4)
+(ram, 0xa08c08, 8) INDIRECT (ram, 0xa08c08, 8) , (const, 0x11, 4)
+(ram, 0xa08c10, 4) INDIRECT (ram, 0xa08c10, 4) , (const, 0x11, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000018, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xa08c08, 8) COPY (ram, 0xa08c08, 8)
+(ram, 0xa08c10, 4) COPY (ram, 0xa08c10, 4)

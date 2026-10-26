@@ -1,0 +1,26 @@
+========== FUNCTION FUN_00421d20@00421d20 ==========
+
+---- ASSEMBLY ----
+00421d20  PUSH EBP
+00421d21  MOV EBP,ESP
+00421d23  MOV ECX,dword ptr [ECX]
+00421d25  MOV EAX,dword ptr [EBP + 0x8]
+00421d28  LEA EAX,[ECX + EAX*0x8]
+00421d2b  POP EBP
+00421d2c  RET 0x4
+
+---- DECOMPILED C ----
+
+int __thiscall FUN_00421d20(int *param_1,int param_2)
+
+{
+  return *param_1 + param_2 * 8;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x6a00, 4) INT_MULT (stack, 0x4, 4) , (const, 0x8, 4)
+(unique, 0x6c00, 4) INT_ADD (unique, 0x17200, 4) , (unique, 0x6a00, 4)
+(register, 0x0, 4) COPY (unique, 0x6c00, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

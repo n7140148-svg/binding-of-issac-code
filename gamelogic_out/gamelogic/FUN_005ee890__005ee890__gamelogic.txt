@@ -1,0 +1,25 @@
+========== FUNCTION FUN_005ee890@005ee890 ==========
+
+---- ASSEMBLY ----
+005ee890  INC dword ptr [ECX + 0x8]
+005ee893  MOV EAX,ECX
+005ee895  RET
+
+---- DECOMPILED C ----
+
+int __fastcall FUN_005ee890(int param_1)
+
+{
+  *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000000, 4) INT_ADD (register, 0x4, 4) , (const, 0x8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0xa300, 4) INT_ADD (unique, 0xa300, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0xa300, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000000, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

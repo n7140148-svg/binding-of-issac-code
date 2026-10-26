@@ -1,0 +1,63 @@
+========== FUNCTION operator=@00407c50 ==========
+
+---- ASSEMBLY ----
+00407c50  PUSH EBP
+00407c51  MOV EBP,ESP
+00407c53  MOV EDX,dword ptr [EBP + 0x8]
+00407c56  MOV EAX,EDX
+00407c58  PUSH ESI
+00407c59  PUSH EDI
+00407c5a  MOV ESI,ECX
+00407c5c  LEA EDI,[EAX + 0x1]
+00407c5f  NOP
+00407c60  MOV CL,byte ptr [EAX]
+00407c62  INC EAX
+00407c63  TEST CL,CL
+00407c65  JNZ 0x00407c60
+00407c67  SUB EAX,EDI
+00407c69  MOV ECX,ESI
+00407c6b  PUSH EAX
+00407c6c  PUSH EDX
+00407c6d  CALL 0x00407c80
+00407c72  POP EDI
+00407c73  POP ESI
+00407c74  POP EBP
+00407c75  RET 0x4
+
+---- DECOMPILED C ----
+
+/* Library Function - Single Match
+    public: char const * __thiscall SimpleString::operator=(char const *)
+   
+   Library: Visual Studio 2019 Release */
+
+char * __thiscall SimpleString::operator=(SimpleString *this,char *param_1)
+
+{
+  char cVar1;
+  char *pcVar2;
+  
+  pcVar2 = param_1;
+  do {
+    cVar1 = *pcVar2;
+    pcVar2 = pcVar2 + 1;
+  } while (cVar1 != '\0');
+  pcVar2 = (char *)FUN_00407c80(param_1,(int)pcVar2 - (int)(param_1 + 1));
+  return pcVar2;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(unique, 0x10000021, 4) COPY (stack, 0x4, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (register, 0x0, 4)
+(register, 0x0, 4) MULTIEQUAL (unique, 0x10000021, 4) , (register, 0x0, 4)
+(register, 0x0, 4) PTRADD (register, 0x0, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x407c60, 1) , (register, 0x206, 1)
+(register, 0x0, 4) INT_SUB (unique, 0x10000025, 4) , (unique, 0x10000029, 4)
+(unique, 0x10000025, 4) CAST (register, 0x0, 4)
+(unique, 0x10000029, 4) CAST (unique, 0x6600, 4)
+(unique, 0x1000002d, 4) CALL (ram, 0x407c80, 8) , (stack, 0x4, 4) , (register, 0x0, 4)
+(register, 0x0, 4) CAST (unique, 0x1000002d, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

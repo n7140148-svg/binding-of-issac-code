@@ -1,0 +1,32 @@
+========== FUNCTION FUN_00402eb0@00402eb0 ==========
+
+---- ASSEMBLY ----
+00402eb0  PUSH EBP
+00402eb1  MOV EBP,ESP
+00402eb3  PUSH ESI
+00402eb4  LEA EDX,[EBP + 0x8]
+00402eb7  MOV ESI,ECX
+00402eb9  CALL 0x00402b00
+00402ebe  MOV ECX,EDX
+00402ec0  CALL 0x00403130
+00402ec5  MOV EAX,ESI
+00402ec7  POP ESI
+00402ec8  POP EBP
+00402ec9  RET 0x114
+
+---- DECOMPILED C ----
+
+undefined4 __fastcall FUN_00402eb0(undefined4 param_1)
+
+{
+  FUN_00402b00();
+  FUN_00403130();
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+ ---  CALL (ram, 0x402b00, 8)
+ ---  CALL (ram, 0x403130, 8)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

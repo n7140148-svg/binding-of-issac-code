@@ -1,0 +1,48 @@
+========== FUNCTION FUN_00427260@00427260 ==========
+
+---- ASSEMBLY ----
+00427260  MOV EAX,dword ptr [ECX]
+00427262  OR EAX,dword ptr [ECX + 0x4]
+00427265  JNZ 0x00427272
+00427267  MOV EAX,dword ptr [ECX + 0x8]
+0042726a  OR EAX,dword ptr [ECX + 0xc]
+0042726d  JNZ 0x00427272
+0042726f  MOV AL,0x1
+00427271  RET
+00427272  XOR AL,AL
+00427274  RET
+
+---- DECOMPILED C ----
+
+uint __fastcall FUN_00427260(uint *param_1)
+
+{
+  uint uVar1;
+  
+  uVar1 = *param_1 | param_1[1];
+  if ((uVar1 == 0) && (uVar1 = param_1[2] | param_1[3], uVar1 == 0)) {
+    return 1;
+  }
+  return uVar1 & 0xffffff00;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x0, 4) INT_OR (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(register, 0x206, 1) INT_EQUAL (register, 0x0, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+ ---  CBRANCH (ram, 0x427272, 1) , (register, 0x206, 1)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x2, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x0, 4) INT_OR (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(register, 0x206, 1) INT_EQUAL (register, 0x0, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x3, 4) , (const, 0x4, 4)
+ ---  CBRANCH (ram, 0x427272, 1) , (register, 0x206, 1)
+(register, 0x0, 4) COPY (const, 0x1, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) INT_AND (register, 0x0, 4) , (const, 0xffffff00, 4)
+(register, 0x0, 4) MULTIEQUAL (register, 0x0, 4) , (register, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

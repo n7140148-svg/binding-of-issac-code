@@ -1,0 +1,902 @@
+========== FUNCTION FUN_0059ced0@0059ced0 ==========
+
+---- ASSEMBLY ----
+0059ced0  PUSH EBP
+0059ced1  MOV EBP,ESP
+0059ced3  SUB ESP,0xbc
+0059ced9  MOV EAX,[0x00baa3b4]
+0059cede  XOR EAX,EBP
+0059cee0  MOV dword ptr [EBP + -0x4],EAX
+0059cee3  PUSH EBX
+0059cee4  PUSH ESI
+0059cee5  MOV ESI,ECX
+0059cee7  PUSH EDI
+0059cee8  MOV EAX,dword ptr [ESI + 0x30]
+0059ceeb  CMP EAX,0x6
+0059ceee  JA 0x0059d248
+0059cef4  JMP dword ptr [EAX*0x4 + 0x59d25c]
+0059cefb  MOVSS XMM1,dword ptr [ESI + 0x2bc]
+0059cf03  XOR EAX,EAX
+0059cf05  MOV EDX,dword ptr [ESI + 0xb10]
+0059cf0b  XORPS XMM0,XMM0
+0059cf0e  COMISS XMM1,XMM0
+0059cf11  MOV ECX,0x4
+0059cf16  CMOVC EAX,ECX
+0059cf19  CMP EDX,0x1
+0059cf1c  JNZ 0x0059d0da
+0059cf22  MOV EDX,dword ptr [EAX + 0xb4481c]
+0059cf28  LEA ECX,[ESI + 0x6c]
+0059cf2b  MOV dword ptr [EBP + 0xffffff48],EDX
+0059cf31  CALL 0x00402320
+0059cf36  MOV ECX,EAX
+0059cf38  MOV BL,byte ptr [EAX]
+0059cf3a  CMP BL,byte ptr [EDX]
+0059cf3c  JNZ 0x0059cf58
+0059cf3e  TEST BL,BL
+0059cf40  JZ 0x0059cf54
+0059cf42  MOV BL,byte ptr [EAX + 0x1]
+0059cf45  CMP BL,byte ptr [EDX + 0x1]
+0059cf48  JNZ 0x0059cf58
+0059cf4a  ADD EAX,0x2
+0059cf4d  ADD EDX,0x2
+0059cf50  TEST BL,BL
+0059cf52  JNZ 0x0059cf38
+0059cf54  XOR EAX,EAX
+0059cf56  JMP 0x0059cf5d
+0059cf58  SBB EAX,EAX
+0059cf5a  OR EAX,0x1
+0059cf5d  TEST EAX,EAX
+0059cf5f  JZ 0x0059cf91
+0059cf61  MOV EDX,0xb4486c
+0059cf66  MOV EAX,ECX
+0059cf68  MOV BL,byte ptr [EAX]
+0059cf6a  CMP BL,byte ptr [EDX]
+0059cf6c  JNZ 0x0059cf88
+0059cf6e  TEST BL,BL
+0059cf70  JZ 0x0059cf84
+0059cf72  MOV BL,byte ptr [EAX + 0x1]
+0059cf75  CMP BL,byte ptr [EDX + 0x1]
+0059cf78  JNZ 0x0059cf88
+0059cf7a  ADD EAX,0x2
+0059cf7d  ADD EDX,0x2
+0059cf80  TEST BL,BL
+0059cf82  JNZ 0x0059cf68
+0059cf84  XOR EAX,EAX
+0059cf86  JMP 0x0059cf8d
+0059cf88  SBB EAX,EAX
+0059cf8a  OR EAX,0x1
+0059cf8d  TEST EAX,EAX
+0059cf8f  JZ 0x0059cfbf
+0059cf91  MOV EAX,0xb44850
+0059cf96  MOV DL,byte ptr [ECX]
+0059cf98  CMP DL,byte ptr [EAX]
+0059cf9a  JNZ 0x0059cfb6
+0059cf9c  TEST DL,DL
+0059cf9e  JZ 0x0059cfb2
+0059cfa0  MOV DL,byte ptr [ECX + 0x1]
+0059cfa3  CMP DL,byte ptr [EAX + 0x1]
+0059cfa6  JNZ 0x0059cfb6
+0059cfa8  ADD ECX,0x2
+0059cfab  ADD EAX,0x2
+0059cfae  TEST DL,DL
+0059cfb0  JNZ 0x0059cf96
+0059cfb2  XOR EAX,EAX
+0059cfb4  JMP 0x0059cfbb
+0059cfb6  SBB EAX,EAX
+0059cfb8  OR EAX,0x1
+0059cfbb  TEST EAX,EAX
+0059cfbd  JNZ 0x0059d006
+0059cfbf  CMP dword ptr [ESI + 0x70],0x0
+0059cfc3  LEA EDI,[ESI + 0x3c]
+0059cfc6  JNZ 0x0059cfd2
+0059cfc8  MOVSS XMM0,dword ptr [0x00b6ae44]
+0059cfd0  JMP 0x0059cfd7
+0059cfd2  MOVSS XMM0,dword ptr [ESI + 0x7c]
+0059cfd7  PUSH 0x0
+0059cfd9  PUSH dword ptr [EBP + 0xffffff48]
+0059cfdf  MOV ECX,EDI
+0059cfe1  MOVSS dword ptr [EBP + 0xffffff4c],XMM0
+0059cfe9  CALL 0x004054f0
+0059cfee  CMP dword ptr [ESI + 0x70],0x0
+0059cff2  JZ 0x0059d018
+0059cff4  MOVSS XMM1,dword ptr [EBP + 0xffffff4c]
+0059cffc  LEA ECX,[ESI + 0x6c]
+0059cfff  CALL 0x00403c00
+0059d004  JMP 0x0059d018
+0059d006  PUSH 0x0
+0059d008  PUSH dword ptr [EBP + 0xffffff48]
+0059d00e  LEA EDI,[ESI + 0x3c]
+0059d011  MOV ECX,EDI
+0059d013  CALL 0x004054f0
+0059d018  PUSH 0xb400ac
+0059d01d  MOV ECX,EDI
+0059d01f  CALL 0x004060f0
+0059d024  TEST AL,AL
+0059d026  JZ 0x0059d0ac
+0059d02c  PUSH ECX
+0059d02d  MOV dword ptr [ESP],0x3f800000
+0059d034  PUSH 0x0
+0059d036  PUSH 0x2
+0059d038  PUSH ECX
+0059d039  MOV dword ptr [ESP],0x3f800000
+0059d040  MOV ECX,ESI
+0059d042  PUSH 0xe2
+0059d047  CALL 0x006ad720
+0059d04c  LEA ECX,[EBP + 0xffffff50]
+0059d052  CALL 0x00430d70
+0059d057  CALL 0x0059cc30
+0059d05c  TEST AL,AL
+0059d05e  JNZ 0x0059d07a
+0059d060  PUSH ECX
+0059d061  MOV ECX,dword ptr [0x00bfd65c]
+0059d067  CALL 0x00706110
+0059d06c  XOR ECX,ECX
+0059d06e  CMP EAX,0x1c
+0059d071  SETNZ CL
+0059d074  ADD ECX,0x3
+0059d077  MOV dword ptr [EBP + -0x1c],ECX
+0059d07a  LEA EAX,[EBP + 0xffffff50]
+0059d080  MOV dword ptr [EBP + 0xffffff44],0x41200000
+0059d08a  PUSH EAX
+0059d08b  PUSH 0x6
+0059d08d  LEA EAX,[EBP + 0xffffff44]
+0059d093  MOV dword ptr [EBP + 0xffffff48],0x0
+0059d09d  PUSH EAX
+0059d09e  LEA EAX,[ESI + 0x294]
+0059d0a4  MOV ECX,ESI
+0059d0a6  PUSH EAX
+0059d0a7  CALL 0x006a1a20
+0059d0ac  CMP dword ptr [ESI + 0x70],0x0
+0059d0b0  JZ 0x0059d0bf
+0059d0b2  CMP byte ptr [ESI + 0x80],0x0
+0059d0b9  JNZ 0x0059d248
+0059d0bf  MOV dword ptr [ESI + 0xb10],0x2
+0059d0c9  POP EDI
+0059d0ca  POP ESI
+0059d0cb  POP EBX
+0059d0cc  MOV ECX,dword ptr [EBP + -0x4]
+0059d0cf  XOR ECX,EBP
+0059d0d1  CALL 0x009eacd7
+0059d0d6  MOV ESP,EBP
+0059d0d8  POP EBP
+0059d0d9  RET
+0059d0da  LEA ECX,[ESI + 0x3c]
+0059d0dd  PUSH 0x0
+0059d0df  CMP EDX,0x2
+0059d0e2  JNZ 0x0059d100
+0059d0e4  PUSH dword ptr [EAX + 0xb44814]
+0059d0ea  CALL 0x004054f0
+0059d0ef  POP EDI
+0059d0f0  POP ESI
+0059d0f1  POP EBX
+0059d0f2  MOV ECX,dword ptr [EBP + -0x4]
+0059d0f5  XOR ECX,EBP
+0059d0f7  CALL 0x009eacd7
+0059d0fc  MOV ESP,EBP
+0059d0fe  POP EBP
+0059d0ff  RET
+0059d100  PUSH dword ptr [EAX + 0xb4480c]
+0059d106  CALL 0x004054f0
+0059d10b  POP EDI
+0059d10c  POP ESI
+0059d10d  POP EBX
+0059d10e  MOV ECX,dword ptr [EBP + -0x4]
+0059d111  XOR ECX,EBP
+0059d113  CALL 0x009eacd7
+0059d118  MOV ESP,EBP
+0059d11a  POP EBP
+0059d11b  RET
+0059d11c  PUSH 0x0
+0059d11e  LEA ECX,[ESI + 0x3c]
+0059d121  PUSH 0xb40a88
+0059d126  CALL 0x004054f0
+0059d12b  POP EDI
+0059d12c  POP ESI
+0059d12d  POP EBX
+0059d12e  MOV ECX,dword ptr [EBP + -0x4]
+0059d131  XOR ECX,EBP
+0059d133  CALL 0x009eacd7
+0059d138  MOV ESP,EBP
+0059d13a  POP EBP
+0059d13b  RET
+0059d13c  PUSH 0x0
+0059d13e  LEA ECX,[ESI + 0x3c]
+0059d141  PUSH 0xb40aa0
+0059d146  CALL 0x004054f0
+0059d14b  POP EDI
+0059d14c  POP ESI
+0059d14d  POP EBX
+0059d14e  MOV ECX,dword ptr [EBP + -0x4]
+0059d151  XOR ECX,EBP
+0059d153  CALL 0x009eacd7
+0059d158  MOV ESP,EBP
+0059d15a  POP EBP
+0059d15b  RET
+0059d15c  PUSH 0x0
+0059d15e  LEA ECX,[ESI + 0x3c]
+0059d161  PUSH 0xb40a94
+0059d166  CALL 0x004054f0
+0059d16b  POP EDI
+0059d16c  POP ESI
+0059d16d  POP EBX
+0059d16e  MOV ECX,dword ptr [EBP + -0x4]
+0059d171  XOR ECX,EBP
+0059d173  CALL 0x009eacd7
+0059d178  MOV ESP,EBP
+0059d17a  POP EBP
+0059d17b  RET
+0059d17c  PUSH 0x0
+0059d17e  LEA ECX,[ESI + 0x3c]
+0059d181  PUSH 0xb448b8
+0059d186  CALL 0x004054f0
+0059d18b  POP EDI
+0059d18c  POP ESI
+0059d18d  POP EBX
+0059d18e  MOV ECX,dword ptr [EBP + -0x4]
+0059d191  XOR ECX,EBP
+0059d193  CALL 0x009eacd7
+0059d198  MOV ESP,EBP
+0059d19a  POP EBP
+0059d19b  RET
+0059d19c  PUSH 0x0
+0059d19e  LEA ECX,[ESI + 0x3c]
+0059d1a1  PUSH 0xb448ac
+0059d1a6  CALL 0x004054f0
+0059d1ab  POP EDI
+0059d1ac  POP ESI
+0059d1ad  POP EBX
+0059d1ae  MOV ECX,dword ptr [EBP + -0x4]
+0059d1b1  XOR ECX,EBP
+0059d1b3  CALL 0x009eacd7
+0059d1b8  MOV ESP,EBP
+0059d1ba  POP EBP
+0059d1bb  RET
+0059d1bc  PUSH 0x0
+0059d1be  LEA ECX,[ESI + 0x3c]
+0059d1c1  PUSH 0xb448a0
+0059d1c6  CALL 0x004054f0
+0059d1cb  MOV EAX,dword ptr [ESI + 0x314]
+0059d1d1  MOVSS XMM1,dword ptr [EAX + 0x294]
+0059d1d9  MOVSS XMM0,dword ptr [EAX + 0x298]
+0059d1e1  ADDSS XMM1,dword ptr [EAX + 0x2a4]
+0059d1e9  ADDSS XMM0,dword ptr [EAX + 0x2a8]
+0059d1f1  SUBSS XMM1,dword ptr [ESI + 0x294]
+0059d1f9  SUBSS XMM0,dword ptr [ESI + 0x298]
+0059d201  SUBSS XMM1,dword ptr [ESI + 0x2a4]
+0059d209  SUBSS XMM0,dword ptr [ESI + 0x2a8]
+0059d211  CALL 0x00447a80
+0059d216  MULSS XMM0,dword ptr [0x00b6aa84]
+0059d21e  SUBSS XMM0,dword ptr [ESI + 0xe0]
+0059d226  CALL 0x0065a640
+0059d22b  MULSS XMM0,dword ptr [0x00b6a3b0]
+0059d233  ADDSS XMM0,dword ptr [ESI + 0xe0]
+0059d23b  CALL 0x0065a640
+0059d240  MOVSS dword ptr [ESI + 0xe0],XMM0
+0059d248  MOV ECX,dword ptr [EBP + -0x4]
+0059d24b  POP EDI
+0059d24c  POP ESI
+0059d24d  XOR ECX,EBP
+0059d24f  POP EBX
+0059d250  CALL 0x009eacd7
+0059d255  MOV ESP,EBP
+0059d257  POP EBP
+0059d258  RET
+
+---- DECOMPILED C ----
+
+/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
+
+void __fastcall FUN_0059ced0(int param_1)
+
+{
+  byte bVar1;
+  char cVar2;
+  int iVar3;
+  uint uVar4;
+  byte *pbVar5;
+  byte *pbVar6;
+  undefined4 extraout_ECX;
+  byte *pbVar7;
+  char *pcVar8;
+  bool bVar9;
+  float fVar10;
+  undefined8 uVar11;
+  undefined4 uStack_c0;
+  undefined4 uStack_bc;
+  undefined4 uStack_b8;
+  undefined1 auStack_b4 [148];
+  int iStack_20;
+  uint local_8;
+  
+  local_8 = DAT_00baa3b4 ^ (uint)&stack0xfffffffc;
+  switch(*(undefined4 *)(param_1 + 0x30)) {
+  case 0:
+    iVar3 = 0;
+    if (*(float *)(param_1 + 700) < 0.0) {
+      iVar3 = 4;
+    }
+    if (*(int *)(param_1 + 0xb10) != 1) {
+      if (*(int *)(param_1 + 0xb10) != 2) {
+        FUN_004054f0(*(undefined4 *)((int)&PTR_s_HeadFrontWiggleClosed_00b4480c + iVar3),0);
+        return;
+      }
+      FUN_004054f0(*(undefined4 *)((int)&PTR_s_HeadFrontWiggleOpen_00b44814 + iVar3),0);
+      return;
+    }
+    uStack_bc = *(undefined4 *)((int)&PTR_s_HeadFrontWiggleTransition_00b4481c + iVar3);
+    uVar11 = FUN_00402320();
+    pbVar6 = (byte *)uVar11;
+    do {
+      pbVar7 = (byte *)((ulonglong)uVar11 >> 0x20);
+      pbVar5 = (byte *)uVar11;
+      bVar1 = *pbVar5;
+      bVar9 = bVar1 < *pbVar7;
+      if (bVar1 != *pbVar7) {
+LAB_0059cf58:
+        uVar4 = -(uint)bVar9 | 1;
+        goto LAB_0059cf5d;
+      }
+      if (bVar1 == 0) break;
+      bVar1 = pbVar5[1];
+      bVar9 = bVar1 < pbVar7[1];
+      if (bVar1 != pbVar7[1]) goto LAB_0059cf58;
+      uVar11 = CONCAT44(pbVar7 + 2,pbVar5 + 2);
+    } while (bVar1 != 0);
+    uVar4 = 0;
+LAB_0059cf5d:
+    if (uVar4 == 0) {
+LAB_0059cf91:
+      pcVar8 = "HeadBackWiggleTransition";
+      do {
+        bVar1 = *pbVar6;
+        bVar9 = bVar1 < (byte)*pcVar8;
+        if (bVar1 != *pcVar8) {
+LAB_0059cfb6:
+          uVar4 = -(uint)bVar9 | 1;
+          goto LAB_0059cfbb;
+        }
+        if (bVar1 == 0) break;
+        bVar1 = pbVar6[1];
+        bVar9 = bVar1 < (byte)pcVar8[1];
+        if (bVar1 != pcVar8[1]) goto LAB_0059cfb6;
+        pbVar6 = pbVar6 + 2;
+        pcVar8 = pcVar8 + 2;
+      } while (bVar1 != 0);
+      uVar4 = 0;
+LAB_0059cfbb:
+      if (uVar4 == 0) goto LAB_0059cfbf;
+      FUN_004054f0(uStack_bc,0);
+    }
+    else {
+      pcVar8 = "HeadFrontWiggleTransition";
+      pbVar5 = pbVar6;
+      do {
+        bVar1 = *pbVar5;
+        bVar9 = bVar1 < (byte)*pcVar8;
+        if (bVar1 != *pcVar8) {
+LAB_0059cf88:
+          uVar4 = -(uint)bVar9 | 1;
+          goto LAB_0059cf8d;
+        }
+        if (bVar1 == 0) break;
+        bVar1 = pbVar5[1];
+        bVar9 = bVar1 < (byte)pcVar8[1];
+        if (bVar1 != pcVar8[1]) goto LAB_0059cf88;
+        pbVar5 = pbVar5 + 2;
+        pcVar8 = pcVar8 + 2;
+      } while (bVar1 != 0);
+      uVar4 = 0;
+LAB_0059cf8d:
+      if (uVar4 != 0) goto LAB_0059cf91;
+LAB_0059cfbf:
+      uStack_b8 = DAT_00b6ae44;
+      if (*(int *)(param_1 + 0x70) != 0) {
+        uStack_b8 = *(undefined4 *)(param_1 + 0x7c);
+      }
+      FUN_004054f0(uStack_bc,0);
+      if (*(int *)(param_1 + 0x70) != 0) {
+        FUN_00403c00();
+      }
+    }
+    cVar2 = FUN_004060f0("Shoot");
+    if (cVar2 != '\0') {
+      FUN_006ad720(0xe2,0x3f800000,2,0,0x3f800000);
+      FUN_00430d70();
+      cVar2 = FUN_0059cc30();
+      if (cVar2 == '\0') {
+        iVar3 = FUN_00706110(extraout_ECX);
+        iStack_20 = (iVar3 != 0x1c) + 3;
+      }
+      uStack_c0 = 0x41200000;
+      uStack_bc = 0;
+      FUN_006a1a20(param_1 + 0x294,&uStack_c0,6,auStack_b4);
+    }
+    if ((*(int *)(param_1 + 0x70) == 0) || (*(char *)(param_1 + 0x80) == '\0')) {
+      *(undefined4 *)(param_1 + 0xb10) = 2;
+      return;
+    }
+    break;
+  case 1:
+    FUN_004054f0("Body1Wiggle",0);
+    return;
+  case 2:
+    FUN_004054f0("Body2Wiggle",0);
+    return;
+  case 3:
+    FUN_004054f0("Body3Wiggle",0);
+    return;
+  case 4:
+    FUN_004054f0("Body4Wiggle",0);
+    return;
+  case 5:
+    FUN_004054f0("Body5Wiggle",0);
+    return;
+  case 6:
+    FUN_004054f0("Body6Wiggle",0);
+    fVar10 = ((*(float *)(*(int *)(param_1 + 0x314) + 0x298) +
+              *(float *)(*(int *)(param_1 + 0x314) + 0x2a8)) - *(float *)(param_1 + 0x298)) -
+             *(float *)(param_1 + 0x2a8);
+    FUN_00447a80();
+    fVar10 = fVar10 * DAT_00b6aa84 - *(float *)(param_1 + 0xe0);
+    FUN_0065a640();
+    fVar10 = fVar10 * DAT_00b6a3b0 + *(float *)(param_1 + 0xe0);
+    FUN_0065a640();
+    *(float *)(param_1 + 0xe0) = fVar10;
+  }
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x10, 4) PTRSUB (register, 0x10, 4) , (const, 0xfffffffc, 4)
+(register, 0x0, 4) INT_XOR (ram, 0xbaa3b4, 4) , (unique, 0x1000020d, 4)
+(unique, 0x1000020d, 4) CAST (register, 0x10, 4)
+(unique, 0x10000211, 4) INT_ADD (register, 0x4, 4) , (const, 0x30, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000211, 4)
+ ---  BRANCHIND (unique, 0x17200, 4)
+(unique, 0x10000235, 4) INT_ADD (register, 0x4, 4) , (const, 0x2bc, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000235, 4)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+(unique, 0x10000239, 4) INT_ADD (register, 0x4, 4) , (const, 0xb10, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000239, 4)
+(unique, 0x50400, 1) FLOAT_LESS (unique, 0xa300, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x59cf19, 1) , (unique, 0x50400, 1)
+(register, 0x0, 4) COPY (const, 0x4, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x1, 4)
+(register, 0x0, 4) MULTIEQUAL (register, 0x0, 4) , (register, 0x0, 4)
+ ---  CBRANCH (ram, 0x59d0da, 1) , (register, 0x206, 1)
+(unique, 0x10000251, 4) INT_ADD (unique, 0x1000024d, 4) , (register, 0x0, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x100001dc, 4) PTRSUB (const, 0x0, 4) , (const, 0xb4481c, 4)
+(unique, 0x1000024d, 4) CAST (unique, 0x100001dc, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000251, 4)
+(VARIABLE, 0x0, 8) CALL (ram, 0x402320, 8)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x1bd, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x1bd, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x1bd, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x1bd, 4)
+(stack, 0xffffffffffffff44, 4) INDIRECT (unique, 0x17200, 4) , (const, 0x1bd, 4)
+(stack, 0xffffffffffffff48, 4) INDIRECT (stack, 0xffffffffffffff48, 4) , (const, 0x1bd, 4)
+(stack, 0xffffffffffffffe0, 4) INDIRECT (stack, 0xffffffffffffffe0, 4) , (const, 0x1bd, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (register, 0x0, 4) , (const, 0x1bd, 4)
+(register, 0x0, 4) SUBPIECE (VARIABLE, 0x0, 8) , (const, 0x0, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (register, 0x0, 4)
+(register, 0x0, 4) SUBPIECE (unique, 0x100001b4, 8) , (const, 0x0, 4)
+(register, 0x8, 4) SUBPIECE (unique, 0x100001f9, 8) , (const, 0x0, 4)
+(unique, 0x100001b4, 8) MULTIEQUAL (VARIABLE, 0x0, 8) , (unique, 0x100001bc, 8)
+(unique, 0x100001f9, 8) INT_RIGHT (unique, 0x10000255, 8) , (const, 0x20, 4)
+(unique, 0x10000255, 8) CAST (unique, 0x100001b4, 8)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (register, 0x8, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x59cf58, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17000, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x59cf54, 1) , (register, 0x206, 1)
+(unique, 0x6600, 4) PTRADD (register, 0x0, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x8, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x59cf58, 1) , (register, 0x206, 1)
+(register, 0x0, 4) PTRADD (register, 0x0, 4) , (const, 0x2, 4) , (const, 0x1, 4)
+(register, 0x8, 4) PTRADD (register, 0x8, 4) , (const, 0x2, 4) , (const, 0x1, 4)
+(unique, 0x100001bc, 8) PIECE (register, 0x8, 4) , (register, 0x0, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x59cf38, 1) , (register, 0x206, 1)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+ ---  BRANCH (ram, 0x59cf5d, 1)
+(unique, 0x48c00, 4) INT_ZEXT (register, 0x200, 1)
+(register, 0x200, 1) MULTIEQUAL (register, 0x200, 1) , (register, 0x200, 1)
+(unique, 0x10000093, 4) INT_2COMP (unique, 0x48c00, 4)
+(register, 0x0, 4) INT_OR (unique, 0x10000093, 4) , (const, 0x1, 4)
+(register, 0x206, 1) INT_EQUAL (register, 0x0, 4) , (const, 0x0, 4)
+(register, 0x0, 4) MULTIEQUAL (register, 0x0, 4) , (register, 0x0, 4)
+ ---  CBRANCH (ram, 0x59cf91, 1) , (register, 0x206, 1)
+(register, 0x8, 4) COPY (const, 0xb4486c, 4)
+(unique, 0x10000201, 4) COPY (register, 0x0, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (register, 0x0, 4)
+(register, 0x0, 4) MULTIEQUAL (unique, 0x10000201, 4) , (register, 0x0, 4)
+(register, 0x8, 4) MULTIEQUAL (register, 0x8, 4) , (register, 0x8, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (register, 0x8, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x1000025d, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(unique, 0x1000025d, 1) CAST (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x59cf88, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17000, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x59cf84, 1) , (register, 0x206, 1)
+(unique, 0x6600, 4) PTRADD (register, 0x0, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x8, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x1000025e, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(unique, 0x1000025e, 1) CAST (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x59cf88, 1) , (register, 0x206, 1)
+(register, 0x0, 4) PTRADD (register, 0x0, 4) , (const, 0x2, 4) , (const, 0x1, 4)
+(register, 0x8, 4) PTRADD (register, 0x8, 4) , (const, 0x2, 4) , (const, 0x1, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x59cf68, 1) , (register, 0x206, 1)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+ ---  BRANCH (ram, 0x59cf8d, 1)
+(unique, 0x48c00, 4) INT_ZEXT (register, 0x200, 1)
+(register, 0x200, 1) MULTIEQUAL (register, 0x200, 1) , (register, 0x200, 1)
+(unique, 0x1000009d, 4) INT_2COMP (unique, 0x48c00, 4)
+(register, 0x0, 4) INT_OR (unique, 0x1000009d, 4) , (const, 0x1, 4)
+(register, 0x206, 1) INT_NOTEQUAL (register, 0x0, 4) , (const, 0x0, 4)
+(register, 0x0, 4) MULTIEQUAL (register, 0x0, 4) , (register, 0x0, 4)
+ ---  CBRANCH (ram, 0x59cfbf, 1) , (register, 0x206, 1)
+(register, 0x0, 4) COPY (const, 0xb44850, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(register, 0x0, 4) MULTIEQUAL (register, 0x0, 4) , (register, 0x0, 4)
+(register, 0x4, 4) MULTIEQUAL (register, 0x0, 4) , (register, 0x4, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (register, 0x0, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x1000025f, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(unique, 0x1000025f, 1) CAST (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x59cfb6, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17000, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x59cfb2, 1) , (register, 0x206, 1)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x0, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x10000260, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(unique, 0x10000260, 1) CAST (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x59cfb6, 1) , (register, 0x206, 1)
+(register, 0x4, 4) PTRADD (register, 0x4, 4) , (const, 0x2, 4) , (const, 0x1, 4)
+(register, 0x0, 4) PTRADD (register, 0x0, 4) , (const, 0x2, 4) , (const, 0x1, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x59cf96, 1) , (register, 0x206, 1)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+ ---  BRANCH (ram, 0x59cfbb, 1)
+(unique, 0x48c00, 4) INT_ZEXT (register, 0x200, 1)
+(register, 0x200, 1) MULTIEQUAL (register, 0x200, 1) , (register, 0x200, 1)
+(unique, 0x100000a7, 4) INT_2COMP (unique, 0x48c00, 4)
+(register, 0x0, 4) INT_OR (unique, 0x100000a7, 4) , (const, 0x1, 4)
+(register, 0x206, 1) INT_EQUAL (register, 0x0, 4) , (const, 0x0, 4)
+(register, 0x0, 4) MULTIEQUAL (register, 0x0, 4) , (register, 0x0, 4)
+ ---  CBRANCH (ram, 0x59d006, 1) , (register, 0x206, 1)
+(unique, 0x10000261, 4) INT_ADD (register, 0x4, 4) , (const, 0x70, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000261, 4)
+ ---  CBRANCH (ram, 0x59cfd2, 1) , (register, 0x206, 1)
+(unique, 0x10000209, 4) COPY (ram, 0xb6ae44, 4)
+(unique, 0x10000265, 4) INT_ADD (register, 0x4, 4) , (const, 0x7c, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x10000205, 4) COPY (unique, 0xa300, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000265, 4)
+(register, 0x1200, 4) MULTIEQUAL (unique, 0x10000205, 4) , (unique, 0x10000209, 4)
+ ---  CALL (ram, 0x4054f0, 8) , (stack, 0xffffffffffffff44, 4) , (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x2f7, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x2f7, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x2f7, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x2f7, 4)
+(stack, 0xffffffffffffff44, 4) INDIRECT (stack, 0xffffffffffffff44, 4) , (const, 0x2f7, 4)
+(stack, 0xffffffffffffff48, 4) INDIRECT (register, 0x1200, 4) , (const, 0x2f7, 4)
+(stack, 0xffffffffffffffe0, 4) INDIRECT (stack, 0xffffffffffffffe0, 4) , (const, 0x2f7, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x2f7, 4)
+(unique, 0x10000269, 4) INT_ADD (register, 0x4, 4) , (const, 0x70, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000269, 4)
+ ---  CBRANCH (ram, 0x59d018, 1) , (register, 0x206, 1)
+ ---  CALL (ram, 0x403c00, 8)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x30f, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x30f, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x30f, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x30f, 4)
+(stack, 0xffffffffffffff44, 4) INDIRECT (stack, 0xffffffffffffff44, 4) , (const, 0x30f, 4)
+(stack, 0xffffffffffffff48, 4) INDIRECT (stack, 0xffffffffffffff48, 4) , (const, 0x30f, 4)
+(stack, 0xffffffffffffffe0, 4) INDIRECT (stack, 0xffffffffffffffe0, 4) , (const, 0x30f, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x30f, 4)
+ ---  BRANCH (ram, 0x59d018, 1)
+ ---  CALL (ram, 0x4054f0, 8) , (stack, 0xffffffffffffff44, 4) , (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x3e4, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x3e4, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x3e4, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x3e4, 4)
+(stack, 0xffffffffffffff44, 4) INDIRECT (stack, 0xffffffffffffff44, 4) , (const, 0x3e4, 4)
+(stack, 0xffffffffffffff48, 4) INDIRECT (stack, 0xffffffffffffff48, 4) , (const, 0x3e4, 4)
+(stack, 0xffffffffffffffe0, 4) INDIRECT (stack, 0xffffffffffffffe0, 4) , (const, 0x3e4, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x3e4, 4)
+(ram, 0xb6a3b0, 4) MULTIEQUAL (ram, 0xb6a3b0, 4) , (ram, 0xb6a3b0, 4) , (ram, 0xb6a3b0, 4)
+(ram, 0xb6aa84, 4) MULTIEQUAL (ram, 0xb6aa84, 4) , (ram, 0xb6aa84, 4) , (ram, 0xb6aa84, 4)
+(ram, 0xb6ae44, 4) MULTIEQUAL (ram, 0xb6ae44, 4) , (ram, 0xb6ae44, 4) , (ram, 0xb6ae44, 4)
+(ram, 0xbaa3b4, 4) MULTIEQUAL (ram, 0xbaa3b4, 4) , (ram, 0xbaa3b4, 4) , (ram, 0xbaa3b4, 4)
+(stack, 0xffffffffffffff44, 4) MULTIEQUAL (stack, 0xffffffffffffff44, 4) , (stack, 0xffffffffffffff44, 4) , (stack, 0xffffffffffffff44, 4)
+(stack, 0xffffffffffffff48, 4) MULTIEQUAL (stack, 0xffffffffffffff48, 4) , (stack, 0xffffffffffffff48, 4) , (stack, 0xffffffffffffff48, 4)
+(stack, 0xffffffffffffffe0, 4) MULTIEQUAL (stack, 0xffffffffffffffe0, 4) , (stack, 0xffffffffffffffe0, 4) , (stack, 0xffffffffffffffe0, 4)
+(stack, 0xfffffffffffffff8, 4) MULTIEQUAL (stack, 0xfffffffffffffff8, 4) , (stack, 0xfffffffffffffff8, 4) , (stack, 0xfffffffffffffff8, 4)
+(register, 0x0, 1) CALL (ram, 0x4060f0, 8) , (unique, 0x100001c4, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x317, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x317, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x317, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x317, 4)
+(stack, 0xffffffffffffff44, 4) INDIRECT (stack, 0xffffffffffffff44, 4) , (const, 0x317, 4)
+(stack, 0xffffffffffffff48, 4) INDIRECT (stack, 0xffffffffffffff48, 4) , (const, 0x317, 4)
+(stack, 0xffffffffffffffe0, 4) INDIRECT (stack, 0xffffffffffffffe0, 4) , (const, 0x317, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x317, 4)
+(unique, 0x100001c4, 4) COPY (const, 0xb400ac, 4)
+(register, 0x206, 1) INT_NOTEQUAL (register, 0x0, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x59d0ac, 1) , (register, 0x206, 1)
+ ---  CALL (ram, 0x6ad720, 8) , (const, 0xe2, 4) , (const, 0x3f800000, 4) , (const, 0x2, 4) , (const, 0x0, 4) , (const, 0x3f800000, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x338, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x338, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x338, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x338, 4)
+(stack, 0xffffffffffffff44, 4) INDIRECT (stack, 0xffffffffffffff44, 4) , (const, 0x338, 4)
+(stack, 0xffffffffffffff48, 4) INDIRECT (stack, 0xffffffffffffff48, 4) , (const, 0x338, 4)
+(stack, 0xffffffffffffffe0, 4) INDIRECT (stack, 0xffffffffffffffe0, 4) , (const, 0x338, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x338, 4)
+ ---  CALL (ram, 0x430d70, 8)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x33d, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x33d, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x33d, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x33d, 4)
+(stack, 0xffffffffffffff44, 4) INDIRECT (stack, 0xffffffffffffff44, 4) , (const, 0x33d, 4)
+(stack, 0xffffffffffffff48, 4) INDIRECT (stack, 0xffffffffffffff48, 4) , (const, 0x33d, 4)
+(stack, 0xffffffffffffffe0, 4) INDIRECT (stack, 0xffffffffffffffe0, 4) , (const, 0x33d, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x33d, 4)
+(register, 0x0, 1) CALL (ram, 0x59cc30, 8)
+(register, 0x4, 4) INDIRECT (const, 0x0, 4) , (const, 0x340, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x340, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x340, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x340, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x340, 4)
+(stack, 0xffffffffffffff44, 4) INDIRECT (stack, 0xffffffffffffff44, 4) , (const, 0x340, 4)
+(stack, 0xffffffffffffff48, 4) INDIRECT (stack, 0xffffffffffffff48, 4) , (const, 0x340, 4)
+(stack, 0xffffffffffffffe0, 4) INDIRECT (stack, 0xffffffffffffffe0, 4) , (const, 0x340, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x340, 4)
+(register, 0x206, 1) INT_EQUAL (register, 0x0, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x59d07a, 1) , (register, 0x206, 1)
+(register, 0x0, 4) CALL (ram, 0x706110, 8) , (register, 0x4, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x352, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x352, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x352, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x352, 4)
+(stack, 0xffffffffffffff44, 4) INDIRECT (stack, 0xffffffffffffff44, 4) , (const, 0x352, 4)
+(stack, 0xffffffffffffff48, 4) INDIRECT (stack, 0xffffffffffffff48, 4) , (const, 0x352, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x352, 4)
+(register, 0x206, 1) INT_NOTEQUAL (register, 0x0, 4) , (const, 0x1c, 4)
+(register, 0x4, 4) INT_ZEXT (register, 0x206, 1)
+(register, 0x4, 4) INT_ADD (register, 0x4, 4) , (const, 0x3, 4)
+(ram, 0xb6a3b0, 4) MULTIEQUAL (ram, 0xb6a3b0, 4) , (ram, 0xb6a3b0, 4)
+(ram, 0xb6aa84, 4) MULTIEQUAL (ram, 0xb6aa84, 4) , (ram, 0xb6aa84, 4)
+(ram, 0xb6ae44, 4) MULTIEQUAL (ram, 0xb6ae44, 4) , (ram, 0xb6ae44, 4)
+(ram, 0xbaa3b4, 4) MULTIEQUAL (ram, 0xbaa3b4, 4) , (ram, 0xbaa3b4, 4)
+(stack, 0xffffffffffffff48, 4) MULTIEQUAL (stack, 0xffffffffffffff48, 4) , (stack, 0xffffffffffffff48, 4)
+(stack, 0xffffffffffffffe0, 4) MULTIEQUAL (stack, 0xffffffffffffffe0, 4) , (register, 0x4, 4)
+(stack, 0xfffffffffffffff8, 4) MULTIEQUAL (stack, 0xfffffffffffffff8, 4) , (stack, 0xfffffffffffffff8, 4)
+(unique, 0x6800, 4) PTRSUB (register, 0x10, 4) , (const, 0xffffff4c, 4)
+(stack, 0xffffffffffffff40, 4) COPY (const, 0x41200000, 4)
+(unique, 0x6800, 4) PTRSUB (register, 0x10, 4) , (const, 0xffffff40, 4)
+(stack, 0xffffffffffffff44, 4) COPY (const, 0x0, 4)
+(unique, 0x6800, 4) INT_ADD (register, 0x4, 4) , (const, 0x294, 4)
+ ---  CALL (ram, 0x6a1a20, 8) , (unique, 0x6800, 4) , (unique, 0x6800, 4) , (const, 0x6, 4) , (unique, 0x6800, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x38f, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x38f, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x38f, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x38f, 4)
+(stack, 0xffffffffffffff40, 4) INDIRECT (stack, 0xffffffffffffff40, 4) , (const, 0x38f, 4)
+(stack, 0xffffffffffffff44, 4) INDIRECT (stack, 0xffffffffffffff44, 4) , (const, 0x38f, 4)
+(stack, 0xffffffffffffff48, 4) INDIRECT (stack, 0xffffffffffffff48, 4) , (const, 0x38f, 4)
+(stack, 0xffffffffffffffe0, 4) INDIRECT (stack, 0xffffffffffffffe0, 4) , (const, 0x38f, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x38f, 4)
+(unique, 0x1000026d, 4) INT_ADD (register, 0x4, 4) , (const, 0x70, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) MULTIEQUAL (ram, 0xb6a3b0, 4) , (ram, 0xb6a3b0, 4)
+(ram, 0xb6aa84, 4) MULTIEQUAL (ram, 0xb6aa84, 4) , (ram, 0xb6aa84, 4)
+(ram, 0xb6ae44, 4) MULTIEQUAL (ram, 0xb6ae44, 4) , (ram, 0xb6ae44, 4)
+(ram, 0xbaa3b4, 4) MULTIEQUAL (ram, 0xbaa3b4, 4) , (ram, 0xbaa3b4, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000026d, 4)
+ ---  CBRANCH (ram, 0x59d0bf, 1) , (register, 0x206, 1)
+(unique, 0x10000271, 4) INT_ADD (register, 0x4, 4) , (const, 0x80, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17000, 1) , (const, 0x0, 1)
+(unique, 0x6800, 4) CAST (unique, 0x10000271, 4)
+ ---  CBRANCH (ram, 0x59d248, 1) , (register, 0x206, 1)
+(unique, 0x10000275, 4) INT_ADD (register, 0x4, 4) , (const, 0xb10, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (const, 0x2, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x3ad, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x3ad, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x3ad, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x3ad, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000275, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) COPY (ram, 0xb6a3b0, 4)
+(ram, 0xb6aa84, 4) COPY (ram, 0xb6aa84, 4)
+(ram, 0xb6ae44, 4) COPY (ram, 0xb6ae44, 4)
+(ram, 0xbaa3b4, 4) COPY (ram, 0xbaa3b4, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x2, 4)
+ ---  CBRANCH (ram, 0x59d100, 1) , (register, 0x206, 1)
+(unique, 0x10000241, 4) INT_ADD (unique, 0x1000023d, 4) , (register, 0x0, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x100001d8, 4) PTRSUB (const, 0x0, 4) , (const, 0xb44814, 4)
+(unique, 0x1000023d, 4) CAST (unique, 0x100001d8, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000241, 4)
+ ---  CALL (ram, 0x4054f0, 8) , (unique, 0x17200, 4) , (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x445, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x445, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x445, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x445, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (register, 0x0, 4) , (const, 0x445, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) COPY (ram, 0xb6a3b0, 4)
+(ram, 0xb6aa84, 4) COPY (ram, 0xb6aa84, 4)
+(ram, 0xb6ae44, 4) COPY (ram, 0xb6ae44, 4)
+(ram, 0xbaa3b4, 4) COPY (ram, 0xbaa3b4, 4)
+(unique, 0x10000249, 4) INT_ADD (unique, 0x10000245, 4) , (register, 0x0, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x100001d4, 4) PTRSUB (const, 0x0, 4) , (const, 0xb4480c, 4)
+(unique, 0x10000245, 4) CAST (unique, 0x100001d4, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000249, 4)
+ ---  CALL (ram, 0x4054f0, 8) , (unique, 0x17200, 4) , (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x470, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x470, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x470, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x470, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (register, 0x0, 4) , (const, 0x470, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) COPY (ram, 0xb6a3b0, 4)
+(ram, 0xb6aa84, 4) COPY (ram, 0xb6aa84, 4)
+(ram, 0xb6ae44, 4) COPY (ram, 0xb6ae44, 4)
+(ram, 0xbaa3b4, 4) COPY (ram, 0xbaa3b4, 4)
+ ---  CALL (ram, 0x4054f0, 8) , (unique, 0x100001c8, 4) , (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x15e, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x15e, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x15e, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x15e, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (register, 0x0, 4) , (const, 0x15e, 4)
+(unique, 0x100001c8, 4) COPY (const, 0xb40a88, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) COPY (ram, 0xb6a3b0, 4)
+(ram, 0xb6aa84, 4) COPY (ram, 0xb6aa84, 4)
+(ram, 0xb6ae44, 4) COPY (ram, 0xb6ae44, 4)
+(ram, 0xbaa3b4, 4) COPY (ram, 0xbaa3b4, 4)
+ ---  CALL (ram, 0x4054f0, 8) , (unique, 0x100001d0, 4) , (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x130, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x130, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x130, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x130, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (register, 0x0, 4) , (const, 0x130, 4)
+(unique, 0x100001d0, 4) COPY (const, 0xb40aa0, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) COPY (ram, 0xb6a3b0, 4)
+(ram, 0xb6aa84, 4) COPY (ram, 0xb6aa84, 4)
+(ram, 0xb6ae44, 4) COPY (ram, 0xb6ae44, 4)
+(ram, 0xbaa3b4, 4) COPY (ram, 0xbaa3b4, 4)
+ ---  CALL (ram, 0x4054f0, 8) , (unique, 0x100001cc, 4) , (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x102, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x102, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x102, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x102, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (register, 0x0, 4) , (const, 0x102, 4)
+(unique, 0x100001cc, 4) COPY (const, 0xb40a94, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) COPY (ram, 0xb6a3b0, 4)
+(ram, 0xb6aa84, 4) COPY (ram, 0xb6aa84, 4)
+(ram, 0xb6ae44, 4) COPY (ram, 0xb6ae44, 4)
+(ram, 0xbaa3b4, 4) COPY (ram, 0xbaa3b4, 4)
+ ---  CALL (ram, 0x4054f0, 8) , (unique, 0x100001e8, 4) , (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0xd4, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0xd4, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0xd4, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0xd4, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (register, 0x0, 4) , (const, 0xd4, 4)
+(unique, 0x100001e8, 4) COPY (const, 0xb448b8, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) COPY (ram, 0xb6a3b0, 4)
+(ram, 0xb6aa84, 4) COPY (ram, 0xb6aa84, 4)
+(ram, 0xb6ae44, 4) COPY (ram, 0xb6ae44, 4)
+(ram, 0xbaa3b4, 4) COPY (ram, 0xbaa3b4, 4)
+ ---  CALL (ram, 0x4054f0, 8) , (unique, 0x100001e4, 4) , (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0xa6, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0xa6, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0xa6, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0xa6, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (register, 0x0, 4) , (const, 0xa6, 4)
+(unique, 0x100001e4, 4) COPY (const, 0xb448ac, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) COPY (ram, 0xb6a3b0, 4)
+(ram, 0xb6aa84, 4) COPY (ram, 0xb6aa84, 4)
+(ram, 0xb6ae44, 4) COPY (ram, 0xb6ae44, 4)
+(ram, 0xbaa3b4, 4) COPY (ram, 0xbaa3b4, 4)
+ ---  CALL (ram, 0x4054f0, 8) , (unique, 0x100001e0, 4) , (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x66, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x66, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x66, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x66, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (register, 0x0, 4) , (const, 0x66, 4)
+(unique, 0x100001e0, 4) COPY (const, 0xb448a0, 4)
+(unique, 0x10000215, 4) INT_ADD (register, 0x4, 4) , (const, 0x314, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000215, 4)
+(unique, 0x10000219, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x298, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000219, 4)
+(unique, 0x1000021d, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x2a8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x1200, 4) FLOAT_ADD (unique, 0xa300, 4) , (unique, 0xa300, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000021d, 4)
+(unique, 0x10000221, 4) INT_ADD (register, 0x4, 4) , (const, 0x298, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x1200, 4) FLOAT_SUB (register, 0x1200, 4) , (unique, 0xa300, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000221, 4)
+(unique, 0x10000225, 4) INT_ADD (register, 0x4, 4) , (const, 0x2a8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x1200, 4) FLOAT_SUB (register, 0x1200, 4) , (unique, 0xa300, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000225, 4)
+ ---  CALL (ram, 0x447a80, 8)
+(register, 0x1200, 4) INDIRECT (register, 0x1200, 4) , (const, 0x8a, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x8a, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x8a, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x8a, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x8a, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x8a, 4)
+(register, 0x1200, 4) FLOAT_MULT (register, 0x1200, 4) , (ram, 0xb6aa84, 4)
+(unique, 0x10000229, 4) INT_ADD (register, 0x4, 4) , (const, 0xe0, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x1200, 4) FLOAT_SUB (register, 0x1200, 4) , (unique, 0xa300, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000229, 4)
+ ---  CALL (ram, 0x65a640, 8)
+(register, 0x1200, 4) INDIRECT (register, 0x1200, 4) , (const, 0x91, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x91, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x91, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x91, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x91, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x91, 4)
+(register, 0x1200, 4) FLOAT_MULT (register, 0x1200, 4) , (ram, 0xb6a3b0, 4)
+(unique, 0x1000022d, 4) INT_ADD (register, 0x4, 4) , (const, 0xe0, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x1200, 4) FLOAT_ADD (register, 0x1200, 4) , (unique, 0xa300, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000022d, 4)
+ ---  CALL (ram, 0x65a640, 8)
+(register, 0x1200, 4) INDIRECT (register, 0x1200, 4) , (const, 0x98, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x98, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x98, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x98, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x98, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x98, 4)
+(unique, 0x10000231, 4) INT_ADD (register, 0x4, 4) , (const, 0xe0, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (register, 0x1200, 4)
+(ram, 0xb6a3b0, 4) INDIRECT (ram, 0xb6a3b0, 4) , (const, 0x9b, 4)
+(ram, 0xb6aa84, 4) INDIRECT (ram, 0xb6aa84, 4) , (const, 0x9b, 4)
+(ram, 0xb6ae44, 4) INDIRECT (ram, 0xb6ae44, 4) , (const, 0x9b, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x9b, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000231, 4)
+(ram, 0xb6a3b0, 4) MULTIEQUAL (ram, 0xb6a3b0, 4) , (ram, 0xb6a3b0, 4) , (ram, 0xb6a3b0, 4)
+(ram, 0xb6aa84, 4) MULTIEQUAL (ram, 0xb6aa84, 4) , (ram, 0xb6aa84, 4) , (ram, 0xb6aa84, 4)
+(ram, 0xb6ae44, 4) MULTIEQUAL (ram, 0xb6ae44, 4) , (ram, 0xb6ae44, 4) , (ram, 0xb6ae44, 4)
+(ram, 0xbaa3b4, 4) MULTIEQUAL (ram, 0xbaa3b4, 4) , (ram, 0xbaa3b4, 4) , (ram, 0xbaa3b4, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xb6a3b0, 4) COPY (ram, 0xb6a3b0, 4)
+(ram, 0xb6aa84, 4) COPY (ram, 0xb6aa84, 4)
+(ram, 0xb6ae44, 4) COPY (ram, 0xb6ae44, 4)
+(ram, 0xbaa3b4, 4) COPY (ram, 0xbaa3b4, 4)

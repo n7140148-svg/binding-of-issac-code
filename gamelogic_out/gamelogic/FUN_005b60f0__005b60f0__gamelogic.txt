@@ -1,0 +1,33 @@
+========== FUNCTION FUN_005b60f0@005b60f0 ==========
+
+---- ASSEMBLY ----
+005b60f0  PUSH ESI
+005b60f1  MOV ESI,dword ptr [ECX + 0x4]
+005b60f4  MOV EAX,0x92492493
+005b60f9  SUB ESI,dword ptr [ECX]
+005b60fb  IMUL ESI
+005b60fd  ADD EDX,ESI
+005b60ff  SAR EDX,0x4
+005b6102  MOV EAX,EDX
+005b6104  SHR EAX,0x1f
+005b6107  ADD EAX,EDX
+005b6109  POP ESI
+005b610a  RET
+
+---- DECOMPILED C ----
+
+int __fastcall FUN_005b60f0(int *param_1)
+
+{
+  return (param_1[1] - *param_1) / 0x1c;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(register, 0x18, 4) INT_SUB (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(unique, 0x10000018, 4) INT_SDIV (register, 0x18, 4) , (const, 0x1c, 4)
+(register, 0x0, 4) COPY (unique, 0x10000018, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

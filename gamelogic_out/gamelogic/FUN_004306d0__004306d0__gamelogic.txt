@@ -1,0 +1,100 @@
+========== FUNCTION FUN_004306d0@004306d0 ==========
+
+---- ASSEMBLY ----
+004306d0  PUSH EBP
+004306d1  MOV EBP,ESP
+004306d3  PUSH ESI
+004306d4  MOV ESI,ECX
+004306d6  MOV ECX,dword ptr [EBP + 0x8]
+004306d9  CALL 0x004307e0
+004306de  CMP EAX,dword ptr [ESI + 0x30]
+004306e1  JZ 0x00430723
+004306e3  MOV dword ptr [ESI + 0x30],EAX
+004306e6  MOV ECX,ESI
+004306e8  MOV EAX,dword ptr [ESI]
+004306ea  CALL dword ptr [EAX + 0x5c]
+004306ed  MOV EAX,dword ptr [ESI]
+004306ef  MOV ECX,ESI
+004306f1  CALL dword ptr [EAX + 0x60]
+004306f4  MOVSS XMM0,dword ptr [ESI + 0x2dc]
+004306fc  LEA ECX,[ESI + 0x2d8]
+00430702  COMISS XMM0,dword ptr [ECX]
+00430705  LEA EAX,[ESI + 0x2dc]
+0043070b  CMOVA EAX,ECX
+0043070e  MOV EAX,dword ptr [EAX]
+00430710  MOV dword ptr [ECX],EAX
+00430712  MOV ECX,ESI
+00430714  MOV dword ptr [ESI + 0x17c],0x0
+0043071e  CALL 0x00427a10
+00430723  POP ESI
+00430724  POP EBP
+00430725  RET 0x4
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_004306d0(int *param_1)
+
+{
+  float *pfVar1;
+  int iVar2;
+  float *pfVar3;
+  
+  iVar2 = FUN_004307e0();
+  if (iVar2 != param_1[0xc]) {
+    param_1[0xc] = iVar2;
+    (**(code **)(*param_1 + 0x5c))();
+    (**(code **)(*param_1 + 0x60))();
+    pfVar1 = (float *)(param_1 + 0xb6);
+    pfVar3 = (float *)(param_1 + 0xb7);
+    if (*pfVar1 <= (float)param_1[0xb7] && (float)param_1[0xb7] != *pfVar1) {
+      pfVar3 = pfVar1;
+    }
+    *pfVar1 = *pfVar3;
+    param_1[0x5f] = 0;
+    FUN_00427a10();
+  }
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x0, 4) CALL (ram, 0x4307e0, 8)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_NOTEQUAL (register, 0x0, 4) , (unique, 0xa300, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0xc, 4) , (const, 0x4, 4)
+ ---  CBRANCH (ram, 0x430723, 1) , (register, 0x206, 1)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (register, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0xc, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x10000061, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x5c, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+ ---  CALLIND (unique, 0x17200, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000061, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x10000065, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x60, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+ ---  CALLIND (unique, 0x17200, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000065, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) PTRADD (register, 0x4, 4) , (const, 0xb7, 4) , (const, 0x4, 4)
+(unique, 0x10000069, 4) PTRADD (register, 0x4, 4) , (const, 0xb6, 4) , (const, 0x4, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000069, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x50200, 1) FLOAT_NOTEQUAL (unique, 0x1000006d, 4) , (unique, 0xa300, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x50400, 1) FLOAT_LESSEQUAL (unique, 0xa300, 4) , (unique, 0x10000071, 4)
+(unique, 0x1000006d, 4) CAST (unique, 0xa300, 4)
+(unique, 0x10000071, 4) CAST (unique, 0xa300, 4)
+(unique, 0x6800, 4) PTRADD (register, 0x4, 4) , (const, 0xb7, 4) , (const, 0x4, 4)
+ ---  CBRANCH (ram, 0x43070e, 1) , (unique, 0x1000003e, 1)
+(unique, 0x1000003e, 1) BOOL_AND (unique, 0x50400, 1) , (unique, 0x50200, 1)
+(unique, 0x10000059, 4) COPY (unique, 0x10000075, 4)
+(unique, 0x1000005d, 4) COPY (unique, 0x6800, 4)
+(unique, 0x10000075, 4) CAST (unique, 0x6800, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x0, 4)
+(register, 0x0, 4) MULTIEQUAL (unique, 0x10000059, 4) , (unique, 0x1000005d, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (unique, 0x17200, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (const, 0x0, 4)
+(unique, 0x6800, 4) PTRADD (register, 0x4, 4) , (const, 0x5f, 4) , (const, 0x4, 4)
+ ---  CALL (ram, 0x427a10, 8)
+ ---  RETURN (const, 0x0, 4)

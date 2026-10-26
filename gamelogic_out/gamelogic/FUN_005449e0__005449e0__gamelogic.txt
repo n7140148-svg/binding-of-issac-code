@@ -1,0 +1,27 @@
+========== FUNCTION FUN_005449e0@005449e0 ==========
+
+---- ASSEMBLY ----
+005449e0  PUSH EBP
+005449e1  MOV EBP,ESP
+005449e3  MOV EAX,dword ptr [EBP + 0x8]
+005449e6  AND EAX,0x3fff
+005449eb  MOV dword ptr [ECX],EAX
+005449ed  MOV EAX,ECX
+005449ef  POP EBP
+005449f0  RET 0x8
+
+---- DECOMPILED C ----
+
+uint * __thiscall FUN_005449e0(uint *param_1,uint param_2)
+
+{
+  *param_1 = param_2 & 0x3fff;
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x0, 4) INT_AND (stack, 0x4, 4) , (const, 0x3fff, 4)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

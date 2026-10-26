@@ -1,0 +1,23 @@
+========== FUNCTION FUN_00407910@00407910 ==========
+
+---- ASSEMBLY ----
+00407910  CMP dword ptr [ECX + 0x10],0x0
+00407914  SETZ AL
+00407917  RET
+
+---- DECOMPILED C ----
+
+bool __fastcall FUN_00407910(int param_1)
+
+{
+  return *(int *)(param_1 + 0x10) == 0;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000004, 4) INT_ADD (register, 0x4, 4) , (const, 0x10, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000004, 4)
+(register, 0x0, 1) COPY (register, 0x206, 1)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 1)

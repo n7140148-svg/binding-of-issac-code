@@ -1,0 +1,58 @@
+========== FUNCTION FUN_004bb280@004bb280 ==========
+
+---- ASSEMBLY ----
+004bb280  MOV EAX,[0x00bfd65c]
+004bb285  MOV EAX,dword ptr [EAX + 0x18190]
+004bb28b  CMP ECX,0x1bf
+004bb291  JA 0x004bb2ab
+004bb293  MOV AL,byte ptr [EAX + ECX*0x1 + 0x7350]
+004bb29a  CMP AL,0xff
+004bb29c  JNZ 0x004bb2a4
+004bb29e  MOV EAX,0xffffffff
+004bb2a3  RET
+004bb2a4  MOVZX EAX,AL
+004bb2a7  AND EAX,0xf
+004bb2aa  RET
+004bb2ab  OR EAX,0xffffffff
+004bb2ae  RET
+
+---- DECOMPILED C ----
+
+uint __fastcall FUN_004bb280(uint param_1)
+
+{
+  byte bVar1;
+  
+  if (0x1bf < param_1) {
+    return 0xffffffff;
+  }
+  bVar1 = *(byte *)(*(int *)(DAT_00bfd65c + 0x18190) + 0x7350 + param_1);
+  if (bVar1 == 0xff) {
+    return 0xffffffff;
+  }
+  return bVar1 & 0xf;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000006, 4) INT_ADD (ram, 0xbfd65c, 4) , (const, 0x18190, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000006, 4)
+(unique, 0x17f00, 1) INT_LESS (const, 0x1bf, 4) , (register, 0x4, 4)
+ ---  CBRANCH (ram, 0x4bb2ab, 1) , (unique, 0x17f00, 1)
+(unique, 0x7a00, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x7350, 4)
+(unique, 0x1000000a, 4) INT_ADD (unique, 0x7a00, 4) , (register, 0x4, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x7d00, 4)
+(unique, 0x7d00, 4) CAST (unique, 0x1000000a, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17000, 1) , (const, 0xff, 1)
+ ---  CBRANCH (ram, 0x4bb2a4, 1) , (register, 0x206, 1)
+(register, 0x0, 4) COPY (const, 0xffffffff, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(ram, 0xbfd65c, 4) COPY (ram, 0xbfd65c, 4)
+(register, 0x0, 4) INT_ZEXT (unique, 0x17000, 1)
+(register, 0x0, 4) INT_AND (register, 0x0, 4) , (const, 0xf, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(ram, 0xbfd65c, 4) COPY (ram, 0xbfd65c, 4)
+(register, 0x0, 4) COPY (const, 0xffffffff, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(ram, 0xbfd65c, 4) COPY (ram, 0xbfd65c, 4)

@@ -1,0 +1,57 @@
+========== FUNCTION FUN_004a39c0@004a39c0 ==========
+
+---- ASSEMBLY ----
+004a39c0  PUSH EBP
+004a39c1  MOV EBP,ESP
+004a39c3  MOV EDX,dword ptr [ECX + 0x4]
+004a39c6  CMP EDX,dword ptr [ECX + 0x8]
+004a39c9  JZ 0x004a39da
+004a39cb  MOV EAX,dword ptr [EBP + 0x8]
+004a39ce  MOV EAX,dword ptr [EAX]
+004a39d0  MOV dword ptr [EDX],EAX
+004a39d2  ADD dword ptr [ECX + 0x4],0x4
+004a39d6  POP EBP
+004a39d7  RET 0x4
+004a39da  PUSH dword ptr [EBP + 0x8]
+004a39dd  PUSH EDX
+004a39de  CALL 0x00426fb0
+004a39e3  POP EBP
+004a39e4  RET 0x4
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_004a39c0(int param_1,undefined4 *param_2)
+
+{
+  undefined4 *puVar1;
+  
+  puVar1 = *(undefined4 **)(param_1 + 4);
+  if (puVar1 != *(undefined4 **)(param_1 + 8)) {
+    *puVar1 = *param_2;
+    *(int *)(param_1 + 4) = *(int *)(param_1 + 4) + 4;
+    return;
+  }
+  FUN_00426fb0(puVar1,param_2);
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x1000001a, 4) INT_ADD (register, 0x4, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000001a, 4)
+(unique, 0x1000001e, 4) INT_ADD (register, 0x4, 4) , (const, 0x8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (unique, 0xa300, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000001e, 4)
+ ---  CBRANCH (ram, 0x4a39da, 1) , (register, 0x206, 1)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (stack, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(unique, 0x10000022, 4) INT_ADD (register, 0x4, 4) , (const, 0x4, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0xa300, 4) INT_ADD (unique, 0xa300, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0xa300, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000022, 4)
+ ---  RETURN (const, 0x0, 4)
+ ---  CALL (ram, 0x426fb0, 8) , (unique, 0x17200, 4) , (stack, 0x4, 4)
+ ---  RETURN (const, 0x0, 4)

@@ -1,0 +1,37 @@
+========== FUNCTION FUN_00447b00@00447b00 ==========
+
+---- ASSEMBLY ----
+00447b00  PUSH EBP
+00447b01  MOV EBP,ESP
+00447b03  AND ESP,0xffffffc0
+00447b06  SUB ESP,0x40
+00447b09  CVTSS2SD XMM0,XMM0
+00447b0d  SUB ESP,0x8
+00447b10  MOVSD qword ptr [ESP + 0x40],XMM0
+00447b16  FLD double ptr [ESP + 0x40]
+00447b1a  FSTP double ptr [ESP]
+00447b1d  CALL 0x009ec3b2
+00447b22  FSTP double ptr [ESP + 0x40]
+00447b26  MOVSD XMM0,qword ptr [ESP + 0x40]
+00447b2c  ADD ESP,0x8
+00447b2f  CVTPD2PS XMM0,XMM0
+00447b33  MOV ESP,EBP
+00447b35  POP EBP
+00447b36  RET
+
+---- DECOMPILED C ----
+
+void FUN_00447b00(void)
+
+{
+  float in_XMM0_Da;
+  
+  floor((double)in_XMM0_Da);
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x1200, 8) FLOAT2FLOAT (register, 0x1200, 4)
+ ---  CALL (ram, 0x9ec3b2, 8) , (register, 0x1200, 8)
+ ---  RETURN (const, 0x0, 4)

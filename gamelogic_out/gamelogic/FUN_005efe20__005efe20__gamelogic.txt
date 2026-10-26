@@ -1,0 +1,115 @@
+========== FUNCTION FUN_005efe20@005efe20 ==========
+
+---- ASSEMBLY ----
+005efe20  PUSH EBP
+005efe21  MOV EBP,ESP
+005efe23  AND ESP,0xfffffff8
+005efe26  SUB ESP,0x8
+005efe29  PUSH EBX
+005efe2a  PUSH ESI
+005efe2b  MOV ESI,ECX
+005efe2d  MOV EAX,dword ptr [ESI + 0x288]
+005efe33  MOV ECX,dword ptr [EAX + 0xd8]
+005efe39  MOV EAX,dword ptr [EAX + 0xdc]
+005efe3f  MOV dword ptr [ESP + 0xc],EAX
+005efe43  MOV EAX,ECX
+005efe45  AND EAX,0x1
+005efe48  OR EAX,0x0
+005efe4b  JZ 0x005efe51
+005efe4d  MOV BH,0x1
+005efe4f  JMP 0x005efe53
+005efe51  XOR BH,BH
+005efe53  AND ECX,0x2
+005efe56  OR ECX,0x0
+005efe59  JZ 0x005efe5f
+005efe5b  MOV BL,0x1
+005efe5d  JMP 0x005efe61
+005efe5f  XOR BL,BL
+005efe61  MOV ECX,dword ptr [ESI + 0x360]
+005efe67  PUSH 0x0
+005efe69  PUSH 0xf7
+005efe6e  CALL 0x0073af30
+005efe73  TEST AL,AL
+005efe75  JZ 0x005efe84
+005efe77  MOV EAX,dword ptr [ESI + 0x2c]
+005efe7a  CMP EAX,0x2b
+005efe7d  JZ 0x005efe84
+005efe7f  CMP EAX,0x49
+005efe82  JNZ 0x005efec6
+005efe84  MOV ECX,dword ptr [ESI + 0x360]
+005efe8a  PUSH 0x0
+005efe8c  PUSH 0xf8
+005efe91  CALL 0x0073af30
+005efe96  TEST AL,AL
+005efe98  JNZ 0x005efeb4
+005efe9a  MOV ECX,dword ptr [ESI + 0x360]
+005efea0  PUSH 0xf8
+005efea5  ADD ECX,0x1450
+005efeab  CALL 0x0088b570
+005efeb0  TEST AL,AL
+005efeb2  JZ 0x005efebc
+005efeb4  TEST BH,BH
+005efeb6  JNZ 0x005efec6
+005efeb8  TEST BL,BL
+005efeba  JNZ 0x005efec6
+005efebc  MOVSS XMM0,dword ptr [0x00b6a614]
+005efec4  JMP 0x005efece
+005efec6  MOVSS XMM0,dword ptr [0x00b6a7b0]
+005efece  MOV ECX,dword ptr [ESI + 0x360]
+005efed4  MOV EAX,dword ptr [ECX + 0x130c]
+005efeda  CMP EAX,0x24
+005efedd  JNZ 0x005efee7
+005efedf  MULSS XMM0,dword ptr [0x00b6a53c]
+005efee7  CMP byte ptr [ECX + 0x16a],0x0
+005efeee  JZ 0x005eff1e
+005efef0  CMP EAX,0x1d
+005efef3  JZ 0x005efefa
+005efef5  CMP EAX,0x26
+005efef8  JNZ 0x005eff1e
+005efefa  MOV EDX,dword ptr [ECX + 0x1d80]
+005eff00  TEST EDX,EDX
+005eff02  JZ 0x005eff1e
+005eff04  MOV EAX,dword ptr [EDX + 0x1550]
+005eff0a  CMP EAX,dword ptr [ECX + 0x1550]
+005eff10  JGE 0x005eff1e
+005eff12  CMP EDX,ECX
+005eff14  JZ 0x005eff1e
+005eff16  MULSS XMM0,dword ptr [0x00b6a38c]
+005eff1e  POP ESI
+005eff1f  POP EBX
+005eff20  MOV ESP,EBP
+005eff22  POP EBP
+005eff23  RET
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_005efe20(int param_1)
+
+{
+  char cVar1;
+  
+  cVar1 = FUN_0073af30(0xf7,0);
+  if ((((cVar1 == '\0') || (*(int *)(param_1 + 0x2c) == 0x2b)) || (*(int *)(param_1 + 0x2c) == 0x49)
+      ) && (cVar1 = FUN_0073af30(0xf8,0), cVar1 == '\0')) {
+    FUN_0088b570(0xf8);
+  }
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x0, 1) CALL (ram, 0x73af30, 8) , (const, 0xf7, 4) , (const, 0x0, 4)
+(register, 0x206, 1) INT_EQUAL (register, 0x0, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x5efe84, 1) , (register, 0x206, 1)
+(unique, 0x10000086, 4) INT_ADD (register, 0x4, 4) , (const, 0x2c, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000086, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0x2b, 4)
+ ---  CBRANCH (ram, 0x5efe84, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0x49, 4)
+ ---  CBRANCH (ram, 0x5efec6, 1) , (register, 0x206, 1)
+(register, 0x0, 1) CALL (ram, 0x73af30, 8) , (const, 0xf8, 4) , (const, 0x0, 4)
+(register, 0x206, 1) INT_EQUAL (register, 0x0, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x5efeb4, 1) , (register, 0x206, 1)
+ ---  CALL (ram, 0x88b570, 8) , (const, 0xf8, 4)
+ ---  RETURN (const, 0x0, 4)

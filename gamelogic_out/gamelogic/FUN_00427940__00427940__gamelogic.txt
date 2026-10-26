@@ -1,0 +1,54 @@
+========== FUNCTION FUN_00427940@00427940 ==========
+
+---- ASSEMBLY ----
+00427940  PUSH ECX
+00427941  MOV EAX,dword ptr [ECX + 0x2c]
+00427944  CMP EAX,0xed
+00427949  JNZ 0x00427958
+0042794b  MOV ECX,dword ptr [ECX + 0xe54]
+00427951  CALL 0x00427980
+00427956  POP ECX
+00427957  RET
+00427958  CMP EAX,0xce
+0042795d  JNZ 0x00427969
+0042795f  MOV ECX,dword ptr [ECX + 0x30]
+00427962  CALL 0x00427980
+00427967  POP ECX
+00427968  RET
+00427969  MOV ECX,0x248
+0042796e  CALL 0x00427980
+00427973  POP ECX
+00427974  RET
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_00427940(int param_1)
+
+{
+  if (*(int *)(param_1 + 0x2c) == 0xed) {
+    FUN_00427980(param_1);
+    return;
+  }
+  if (*(int *)(param_1 + 0x2c) == 0xce) {
+    FUN_00427980(param_1);
+    return;
+  }
+  FUN_00427980(param_1);
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000029, 4) INT_ADD (register, 0x4, 4) , (const, 0x2c, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000029, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0xed, 4)
+ ---  CBRANCH (ram, 0x427958, 1) , (register, 0x206, 1)
+ ---  CALL (ram, 0x427980, 8) , (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0xce, 4)
+ ---  CBRANCH (ram, 0x427969, 1) , (register, 0x206, 1)
+ ---  CALL (ram, 0x427980, 8) , (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4)
+ ---  CALL (ram, 0x427980, 8) , (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4)

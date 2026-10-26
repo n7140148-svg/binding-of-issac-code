@@ -1,0 +1,31 @@
+========== FUNCTION FUN_00417c60@00417c60 ==========
+
+---- ASSEMBLY ----
+00417c60  MOV EAX,dword ptr [EDX]
+00417c62  CMP EAX,dword ptr [ECX]
+00417c64  CMOVL ECX,EDX
+00417c67  MOV EAX,ECX
+00417c69  RET
+
+---- DECOMPILED C ----
+
+int * __fastcall FUN_00417c60(int *param_1,int *param_2)
+
+{
+  if (*param_2 < *param_1) {
+    param_1 = param_2;
+  }
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x18700, 1) INT_SLESS (unique, 0x17200, 4) , (unique, 0xa300, 4)
+ ---  CBRANCH (ram, 0x417c67, 1) , (unique, 0x18700, 1)
+(unique, 0x10000005, 4) COPY (register, 0x4, 4)
+(unique, 0x10000009, 4) COPY (register, 0x8, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+(register, 0x4, 4) MULTIEQUAL (unique, 0x10000005, 4) , (unique, 0x10000009, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

@@ -1,0 +1,26 @@
+========== FUNCTION FUN_00412010@00412010 ==========
+
+---- ASSEMBLY ----
+00412010  PUSH EBP
+00412011  MOV EBP,ESP
+00412013  AND ESP,0xfffffff8
+00412016  CVTSS2SD XMM0,XMM0
+0041201a  CALL 0x009ec3a0
+0041201f  CVTSD2SS XMM0,XMM0
+00412023  MOV ESP,EBP
+00412025  POP EBP
+00412026  RET
+
+---- DECOMPILED C ----
+
+void FUN_00412010(void)
+
+{
+  libm_sse2_sin_precise();
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+ ---  CALL (ram, 0x9ec3a0, 8)
+ ---  RETURN (const, 0x0, 4)

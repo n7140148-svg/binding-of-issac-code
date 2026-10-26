@@ -1,0 +1,25 @@
+========== FUNCTION FUN_004424b0@004424b0 ==========
+
+---- ASSEMBLY ----
+004424b0  PUSH EBP
+004424b1  MOV EBP,ESP
+004424b3  MOV EAX,dword ptr [EBP + 0x8]
+004424b6  MOV dword ptr [ECX + 0x34],EAX
+004424b9  POP EBP
+004424ba  RET 0x4
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_004424b0(int param_1,undefined4 param_2)
+
+{
+  *(undefined4 *)(param_1 + 0x34) = param_2;
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000004, 4) INT_ADD (register, 0x4, 4) , (const, 0x34, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (stack, 0x4, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000004, 4)
+ ---  RETURN (const, 0x0, 4)

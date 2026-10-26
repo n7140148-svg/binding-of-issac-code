@@ -1,0 +1,21 @@
+========== FUNCTION FUN_00412220@00412220 ==========
+
+---- ASSEMBLY ----
+00412220  FLD float ptr [ECX + 0x2d8]
+00412226  RET
+
+---- DECOMPILED C ----
+
+float10 __fastcall FUN_00412220(int param_1)
+
+{
+  return (float10)*(float *)(param_1 + 0x2d8);
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000000, 4) INT_ADD (register, 0x4, 4) , (const, 0x2d8, 4)
+(unique, 0xa900, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x1100, 10) FLOAT2FLOAT (unique, 0xa900, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000000, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x1100, 10)

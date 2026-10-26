@@ -1,0 +1,70 @@
+========== FUNCTION FUN_004309f0@004309f0 ==========
+
+---- ASSEMBLY ----
+004309f0  PUSH EBP
+004309f1  MOV EBP,ESP
+004309f3  PUSH ECX
+004309f4  MOV EAX,ECX
+004309f6  PUSH EBX
+004309f7  PUSH ESI
+004309f8  PUSH dword ptr [EBP + 0x8]
+004309fb  MOV EBX,dword ptr [EAX + 0x4]
+004309fe  SUB EBX,dword ptr [EAX]
+00430a00  MOV dword ptr [EBP + -0x4],EAX
+00430a03  SAR EBX,0x2
+00430a06  CALL 0x00418920
+00430a0b  MOV ESI,EAX
+00430a0d  MOV EAX,dword ptr [EBP + -0x4]
+00430a10  MOV EDX,dword ptr [EAX]
+00430a12  MOV ECX,dword ptr [EAX + 0x4]
+00430a15  SUB ECX,EDX
+00430a17  PUSH ECX
+00430a18  PUSH EDX
+00430a19  PUSH ESI
+00430a1a  CALL 0x009ec358
+00430a1f  MOV ECX,dword ptr [EBP + -0x4]
+00430a22  ADD ESP,0xc
+00430a25  PUSH dword ptr [EBP + 0x8]
+00430a28  PUSH EBX
+00430a29  PUSH ESI
+00430a2a  CALL 0x004188c0
+00430a2f  POP ESI
+00430a30  POP EBX
+00430a31  MOV ESP,EBP
+00430a33  POP EBP
+00430a34  RET 0x4
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_004309f0(int *param_1,undefined4 param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  void *_Dst;
+  
+  iVar1 = param_1[1];
+  iVar2 = *param_1;
+  _Dst = (void *)FUN_00418920(param_2);
+  memmove(_Dst,(void *)*param_1,param_1[1] - *param_1);
+  FID_conflict__Change_array(_Dst,iVar1 - iVar2 >> 2,param_2);
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(register, 0xc, 4) INT_SUB (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(register, 0xc, 4) INT_SRIGHT (register, 0xc, 4) , (const, 0x2, 4)
+(unique, 0x1000006a, 4) CALL (ram, 0x418920, 8) , (stack, 0x4, 4)
+(register, 0x0, 4) CAST (unique, 0x1000006a, 4)
+(unique, 0x1000006e, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x17200, 4) CAST (unique, 0x1000006e, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(register, 0x4, 4) INT_SUB (unique, 0x17200, 4) , (unique, 0x1000006e, 4)
+ ---  CALL (ram, 0x9ec358, 8) , (register, 0x0, 4) , (unique, 0x17200, 4) , (register, 0x4, 4)
+ ---  CALL (ram, 0x4188c0, 8) , (register, 0x0, 4) , (register, 0xc, 4) , (stack, 0x4, 4)
+ ---  RETURN (const, 0x0, 4)

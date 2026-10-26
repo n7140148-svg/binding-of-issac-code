@@ -1,0 +1,31 @@
+========== FUNCTION FUN_00407dd0@00407dd0 ==========
+
+---- ASSEMBLY ----
+00407dd0  MOV EAX,dword ptr [ECX]
+00407dd2  CMP EAX,dword ptr [EDX]
+00407dd4  CMOVC ECX,EDX
+00407dd7  MOV EAX,ECX
+00407dd9  RET
+
+---- DECOMPILED C ----
+
+uint * __fastcall FUN_00407dd0(uint *param_1,uint *param_2)
+
+{
+  if (*param_1 < *param_2) {
+    param_1 = param_2;
+  }
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (register, 0x8, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17200, 4) , (unique, 0xa300, 4)
+ ---  CBRANCH (ram, 0x407dd7, 1) , (register, 0x200, 1)
+(unique, 0x10000001, 4) COPY (register, 0x4, 4)
+(unique, 0x10000005, 4) COPY (register, 0x8, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+(register, 0x4, 4) MULTIEQUAL (unique, 0x10000001, 4) , (unique, 0x10000005, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

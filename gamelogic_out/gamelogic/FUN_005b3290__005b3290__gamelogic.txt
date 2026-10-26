@@ -1,0 +1,45 @@
+========== FUNCTION FUN_005b3290@005b3290 ==========
+
+---- ASSEMBLY ----
+005b3290  PUSH EBP
+005b3291  MOV EBP,ESP
+005b3293  MOV EAX,dword ptr [EBP + 0x8]
+005b3296  MOV ECX,dword ptr [EAX + 0x314]
+005b329c  TEST ECX,ECX
+005b329e  JZ 0x005b32ba
+005b32a0  CMP dword ptr [ECX + 0x28],0x1
+005b32a4  JNZ 0x005b32ba
+005b32a6  PUSH 0xb44128
+005b32ab  PUSH 0xb449a0
+005b32b0  PUSH 0x27c
+005b32b5  CALL 0x00770300
+005b32ba  POP EBP
+005b32bb  RET
+
+---- DECOMPILED C ----
+
+void FUN_005b3290(int param_1)
+
+{
+  if ((*(int *)(param_1 + 0x314) != 0) && (*(int *)(*(int *)(param_1 + 0x314) + 0x28) == 1)) {
+    FUN_00770300(0x27c,"UseItem","PlayerPickupSparkle");
+  }
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000027, 4) INT_ADD (stack, 0x4, 4) , (const, 0x314, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000027, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x5b32ba, 1) , (register, 0x206, 1)
+(unique, 0x1000002b, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x28, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0x1, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000002b, 4)
+ ---  CBRANCH (ram, 0x5b32ba, 1) , (register, 0x206, 1)
+ ---  CALL (ram, 0x770300, 8) , (const, 0x27c, 4) , (unique, 0x10000023, 4) , (unique, 0x1000001f, 4)
+(unique, 0x1000001f, 4) COPY (const, 0xb44128, 4)
+(unique, 0x10000023, 4) COPY (const, 0xb449a0, 4)
+ ---  RETURN (const, 0x0, 4)

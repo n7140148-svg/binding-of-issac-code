@@ -1,0 +1,26 @@
+========== FUNCTION FUN_00411fe0@00411fe0 ==========
+
+---- ASSEMBLY ----
+00411fe0  PUSH EBP
+00411fe1  MOV EBP,ESP
+00411fe3  AND ESP,0xfffffff8
+00411fe6  CVTSS2SD XMM0,XMM0
+00411fea  CALL 0x009ec382
+00411fef  CVTSD2SS XMM0,XMM0
+00411ff3  MOV ESP,EBP
+00411ff5  POP EBP
+00411ff6  RET
+
+---- DECOMPILED C ----
+
+void FUN_00411fe0(void)
+
+{
+  libm_sse2_cos_precise();
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+ ---  CALL (ram, 0x9ec382, 8)
+ ---  RETURN (const, 0x0, 4)

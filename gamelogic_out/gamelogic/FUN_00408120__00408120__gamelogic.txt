@@ -1,0 +1,136 @@
+========== FUNCTION FUN_00408120@00408120 ==========
+
+---- ASSEMBLY ----
+00408120  PUSH EBP
+00408121  MOV EBP,ESP
+00408123  PUSH ESI
+00408124  MOV ESI,dword ptr [EBP + 0x8]
+00408127  SUB ESI,0x4
+0040812a  JC 0x00408141
+0040812c  NOP dword ptr [EAX]
+00408130  MOV EAX,dword ptr [ECX]
+00408132  CMP EAX,dword ptr [EDX]
+00408134  JNZ 0x00408146
+00408136  ADD ECX,0x4
+00408139  ADD EDX,0x4
+0040813c  SUB ESI,0x4
+0040813f  JNC 0x00408130
+00408141  CMP ESI,-0x4
+00408144  JZ 0x0040817b
+00408146  MOV AL,byte ptr [ECX]
+00408148  CMP AL,byte ptr [EDX]
+0040814a  JNZ 0x00408173
+0040814c  CMP ESI,-0x3
+0040814f  JZ 0x0040817b
+00408151  MOV AL,byte ptr [ECX + 0x1]
+00408154  CMP AL,byte ptr [EDX + 0x1]
+00408157  JNZ 0x00408173
+00408159  CMP ESI,-0x2
+0040815c  JZ 0x0040817b
+0040815e  MOV AL,byte ptr [ECX + 0x2]
+00408161  CMP AL,byte ptr [EDX + 0x2]
+00408164  JNZ 0x00408173
+00408166  CMP ESI,-0x1
+00408169  JZ 0x0040817b
+0040816b  MOV AL,byte ptr [ECX + 0x3]
+0040816e  CMP AL,byte ptr [EDX + 0x3]
+00408171  JZ 0x0040817b
+00408173  SBB EAX,EAX
+00408175  OR EAX,0x1
+00408178  POP ESI
+00408179  POP EBP
+0040817a  RET
+0040817b  XOR EAX,EAX
+0040817d  POP ESI
+0040817e  POP EBP
+0040817f  RET
+
+---- DECOMPILED C ----
+
+uint __fastcall FUN_00408120(byte *param_1,byte *param_2,uint param_3)
+
+{
+  uint uVar1;
+  bool bVar2;
+  
+  while (uVar1 = param_3 - 4, 3 < param_3) {
+    if (*(int *)param_1 != *(int *)param_2) goto LAB_00408146;
+    param_1 = param_1 + 4;
+    param_2 = param_2 + 4;
+    param_3 = uVar1;
+  }
+  if (uVar1 != 0xfffffffc) {
+LAB_00408146:
+    bVar2 = *param_1 < *param_2;
+    if ((*param_1 != *param_2) ||
+       ((uVar1 != 0xfffffffd &&
+        ((bVar2 = param_1[1] < param_2[1], param_1[1] != param_2[1] ||
+         ((uVar1 != 0xfffffffe &&
+          ((bVar2 = param_1[2] < param_2[2], param_1[2] != param_2[2] ||
+           ((uVar1 != 0xffffffff && (bVar2 = param_1[3] < param_2[3], param_1[3] != param_2[3]))))))
+         )))))) {
+      return -(uint)bVar2 | 1;
+    }
+  }
+  return 0;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000036, 1) INT_LESS (const, 0x3, 4) , (unique, 0x10000043, 4)
+(unique, 0x10000037, 4) INT_SUB (unique, 0x10000043, 4) , (const, 0x4, 4)
+ ---  CBRANCH (ram, 0x408141, 1) , (unique, 0x10000036, 1)
+(unique, 0x1000003b, 4) MULTIEQUAL (register, 0x8, 4) , (register, 0x8, 4)
+(unique, 0x1000003f, 4) MULTIEQUAL (register, 0x4, 4) , (register, 0x4, 4)
+(unique, 0x10000043, 4) MULTIEQUAL (unique, 0x10000047, 4) , (unique, 0x1000004b, 4)
+(unique, 0x10000047, 4) COPY (stack, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x1000004f, 4)
+(unique, 0x1000004f, 4) CAST (unique, 0x1000003f, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x10000053, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (unique, 0xa300, 4)
+(unique, 0x10000053, 4) CAST (unique, 0x1000003b, 4)
+ ---  CBRANCH (ram, 0x408146, 1) , (register, 0x206, 1)
+(register, 0x4, 4) PTRADD (unique, 0x1000003f, 4) , (const, 0x4, 4) , (const, 0x1, 4)
+(register, 0x8, 4) PTRADD (unique, 0x1000003b, 4) , (const, 0x4, 4) , (const, 0x1, 4)
+(unique, 0x1000004b, 4) COPY (unique, 0x10000037, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x10000037, 4) , (const, 0xfffffffc, 4)
+ ---  CBRANCH (ram, 0x40817b, 1) , (register, 0x206, 1)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x1000003f, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x1000003b, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x408173, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x10000037, 4) , (const, 0xfffffffd, 4)
+ ---  CBRANCH (ram, 0x40817b, 1) , (register, 0x206, 1)
+(unique, 0x6600, 4) PTRADD (unique, 0x1000003f, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (unique, 0x1000003b, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x408173, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x10000037, 4) , (const, 0xfffffffe, 4)
+ ---  CBRANCH (ram, 0x40817b, 1) , (register, 0x206, 1)
+(unique, 0x6600, 4) PTRADD (unique, 0x1000003f, 4) , (const, 0x2, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (unique, 0x1000003b, 4) , (const, 0x2, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x408173, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x10000037, 4) , (const, 0xffffffff, 4)
+ ---  CBRANCH (ram, 0x40817b, 1) , (register, 0x206, 1)
+(unique, 0x6600, 4) PTRADD (unique, 0x1000003f, 4) , (const, 0x3, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (unique, 0x1000003b, 4) , (const, 0x3, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x40817b, 1) , (register, 0x206, 1)
+(unique, 0x48c00, 4) INT_ZEXT (register, 0x200, 1)
+(register, 0x200, 1) MULTIEQUAL (register, 0x200, 1) , (register, 0x200, 1) , (register, 0x200, 1) , (register, 0x200, 1)
+(unique, 0x1000002c, 4) INT_2COMP (unique, 0x48c00, 4)
+(register, 0x0, 4) INT_OR (unique, 0x1000002c, 4) , (const, 0x1, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

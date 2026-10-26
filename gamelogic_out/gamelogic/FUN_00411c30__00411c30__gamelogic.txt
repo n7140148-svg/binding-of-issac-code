@@ -1,0 +1,207 @@
+========== FUNCTION FUN_00411c30@00411c30 ==========
+
+---- ASSEMBLY ----
+00411c30  PUSH EBP
+00411c31  MOV EBP,ESP
+00411c33  SUB ESP,0x14
+00411c36  PUSH ESI
+00411c37  MOV ESI,dword ptr [ECX]
+00411c39  CMP EDX,0x80
+00411c3f  JNC 0x00411c4d
+00411c41  LEA EAX,[ESI + 0x1]
+00411c44  MOV byte ptr [ESI],DL
+00411c46  MOV dword ptr [ECX],EAX
+00411c48  POP ESI
+00411c49  MOV ESP,EBP
+00411c4b  POP EBP
+00411c4c  RET
+00411c4d  CMP EDX,0x800
+00411c53  JNC 0x00411c70
+00411c55  MOV AL,DL
+00411c57  SHR EDX,0x6
+00411c5a  AND AL,0x3f
+00411c5c  OR AL,0x80
+00411c5e  OR DL,0xc0
+00411c61  MOV byte ptr [ESI + 0x1],AL
+00411c64  LEA EAX,[ESI + 0x2]
+00411c67  MOV byte ptr [ESI],DL
+00411c69  MOV dword ptr [ECX],EAX
+00411c6b  POP ESI
+00411c6c  MOV ESP,EBP
+00411c6e  POP EBP
+00411c6f  RET
+00411c70  CMP EDX,0x10000
+00411c76  JNC 0x00411c9f
+00411c78  MOV AL,DL
+00411c7a  SHR EDX,0x6
+00411c7d  AND AL,0x3f
+00411c7f  OR AL,0x80
+00411c81  MOV byte ptr [ESI + 0x2],AL
+00411c84  MOV AL,DL
+00411c86  AND AL,0x3f
+00411c88  SHR EDX,0x6
+00411c8b  OR AL,0x80
+00411c8d  OR DL,0xe0
+00411c90  MOV byte ptr [ESI + 0x1],AL
+00411c93  LEA EAX,[ESI + 0x3]
+00411c96  MOV byte ptr [ESI],DL
+00411c98  MOV dword ptr [ECX],EAX
+00411c9a  POP ESI
+00411c9b  MOV ESP,EBP
+00411c9d  POP EBP
+00411c9e  RET
+00411c9f  CMP EDX,0x110000
+00411ca5  JNC 0x00411cda
+00411ca7  MOV AL,DL
+00411ca9  SHR EDX,0x6
+00411cac  AND AL,0x3f
+00411cae  OR AL,0x80
+00411cb0  MOV byte ptr [ESI + 0x3],AL
+00411cb3  MOV AL,DL
+00411cb5  AND AL,0x3f
+00411cb7  SHR EDX,0x6
+00411cba  OR AL,0x80
+00411cbc  MOV byte ptr [ESI + 0x2],AL
+00411cbf  MOV AL,DL
+00411cc1  AND AL,0x3f
+00411cc3  SHR EDX,0x6
+00411cc6  OR AL,0x80
+00411cc8  OR DL,0xf0
+00411ccb  MOV byte ptr [ESI + 0x1],AL
+00411cce  LEA EAX,[ESI + 0x4]
+00411cd1  MOV byte ptr [ESI],DL
+00411cd3  MOV dword ptr [ECX],EAX
+00411cd5  POP ESI
+00411cd6  MOV ESP,EBP
+00411cd8  POP EBP
+00411cd9  RET
+00411cda  PUSH ESI
+00411cdb  PUSH 0xb3f3ec
+00411ce0  LEA ECX,[EBP + -0x14]
+00411ce3  CALL 0x004083a0
+00411ce8  PUSH 0xb88e48
+00411ced  MOV EAX,ECX
+00411cef  PUSH EAX
+00411cf0  CALL 0x009ec158
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_00411c30(int *param_1,uint param_2)
+
+{
+  byte *pbVar1;
+  void *pExceptionObject;
+  byte bVar2;
+  
+  pbVar1 = (byte *)*param_1;
+  bVar2 = (byte)param_2;
+  if (param_2 < 0x80) {
+    *pbVar1 = bVar2;
+    *param_1 = (int)(pbVar1 + 1);
+    return;
+  }
+  if (param_2 < 0x800) {
+    pbVar1[1] = bVar2 & 0x3f | 0x80;
+    *pbVar1 = (byte)(param_2 >> 6) | 0xc0;
+    *param_1 = (int)(pbVar1 + 2);
+    return;
+  }
+  if (param_2 < 0x10000) {
+    pbVar1[2] = bVar2 & 0x3f | 0x80;
+    pbVar1[1] = (byte)(param_2 >> 6) & 0x3f | 0x80;
+    *pbVar1 = (byte)(param_2 >> 0xc) | 0xe0;
+    *param_1 = (int)(pbVar1 + 3);
+    return;
+  }
+  if (param_2 < 0x110000) {
+    pbVar1[3] = bVar2 & 0x3f | 0x80;
+    pbVar1[2] = (byte)(param_2 >> 6) & 0x3f | 0x80;
+    pbVar1[1] = (byte)(param_2 >> 0xc) & 0x3f | 0x80;
+    *pbVar1 = (byte)(param_2 >> 0x12) | 0xf0;
+    *param_1 = (int)(pbVar1 + 4);
+    return;
+  }
+  FUN_004083a0("invalid numeric character entity",pbVar1);
+                    /* WARNING: Subroutine does not return */
+  _CxxThrowException(pExceptionObject,(ThrowInfo *)&DAT_00b88e48);
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000051, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x17200, 4) CAST (unique, 0x10000051, 4)
+(register, 0x200, 1) INT_LESS (register, 0x8, 4) , (const, 0x80, 4)
+ ---  CBRANCH (ram, 0x411c4d, 1) , (register, 0x200, 1)
+(register, 0x8, 1) SUBPIECE (register, 0x8, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (unique, 0x17200, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x17200, 4) , (register, 0x8, 1)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (unique, 0x10000065, 4)
+(unique, 0x10000065, 4) CAST (unique, 0x6600, 4)
+ ---  RETURN (const, 0x0, 4)
+(register, 0x200, 1) INT_LESS (register, 0x8, 4) , (const, 0x800, 4)
+ ---  CBRANCH (ram, 0x411c70, 1) , (register, 0x200, 1)
+(register, 0x8, 4) INT_RIGHT (register, 0x8, 4) , (const, 0x6, 4)
+(register, 0x0, 1) INT_AND (register, 0x8, 1) , (const, 0x3f, 1)
+(register, 0x0, 1) INT_OR (register, 0x0, 1) , (const, 0x80, 1)
+(register, 0x8, 1) INT_OR (register, 0x8, 1) , (const, 0xc0, 1)
+(register, 0x8, 1) SUBPIECE (register, 0x8, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (unique, 0x17200, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (register, 0x0, 1)
+(unique, 0x6600, 4) PTRADD (unique, 0x17200, 4) , (const, 0x2, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x17200, 4) , (register, 0x8, 1)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (unique, 0x10000061, 4)
+(unique, 0x10000061, 4) CAST (unique, 0x6600, 4)
+ ---  RETURN (const, 0x0, 4)
+(register, 0x200, 1) INT_LESS (register, 0x8, 4) , (const, 0x10000, 4)
+ ---  CBRANCH (ram, 0x411c9f, 1) , (register, 0x200, 1)
+(register, 0x8, 4) INT_RIGHT (register, 0x8, 4) , (const, 0x6, 4)
+(register, 0x0, 1) INT_AND (register, 0x8, 1) , (const, 0x3f, 1)
+(register, 0x0, 1) INT_OR (register, 0x0, 1) , (const, 0x80, 1)
+(unique, 0x6600, 4) PTRADD (unique, 0x17200, 4) , (const, 0x2, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (register, 0x0, 1)
+(register, 0x0, 1) INT_AND (unique, 0x10000025, 1) , (const, 0x3f, 1)
+(unique, 0x10000025, 1) SUBPIECE (register, 0x8, 4) , (const, 0x0, 4)
+(register, 0x8, 4) INT_RIGHT (register, 0x8, 4) , (const, 0xc, 4)
+(register, 0x0, 1) INT_OR (register, 0x0, 1) , (const, 0x80, 1)
+(register, 0x8, 1) INT_OR (register, 0x8, 1) , (const, 0xe0, 1)
+(register, 0x8, 1) SUBPIECE (register, 0x8, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (unique, 0x17200, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (register, 0x0, 1)
+(unique, 0x6600, 4) PTRADD (unique, 0x17200, 4) , (const, 0x3, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x17200, 4) , (register, 0x8, 1)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (unique, 0x1000005d, 4)
+(unique, 0x1000005d, 4) CAST (unique, 0x6600, 4)
+ ---  RETURN (const, 0x0, 4)
+(register, 0x200, 1) INT_LESS (register, 0x8, 4) , (const, 0x110000, 4)
+ ---  CBRANCH (ram, 0x411cda, 1) , (register, 0x200, 1)
+(register, 0x8, 4) INT_RIGHT (register, 0x8, 4) , (const, 0x6, 4)
+(register, 0x0, 1) INT_AND (register, 0x8, 1) , (const, 0x3f, 1)
+(register, 0x0, 1) INT_OR (register, 0x0, 1) , (const, 0x80, 1)
+(unique, 0x6600, 4) PTRADD (unique, 0x17200, 4) , (const, 0x3, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (register, 0x0, 1)
+(register, 0x0, 1) INT_AND (unique, 0x10000029, 1) , (const, 0x3f, 1)
+(unique, 0x10000029, 1) SUBPIECE (register, 0x8, 4) , (const, 0x0, 4)
+(register, 0x8, 4) INT_RIGHT (register, 0x8, 4) , (const, 0xc, 4)
+(register, 0x0, 1) INT_OR (register, 0x0, 1) , (const, 0x80, 1)
+(unique, 0x6600, 4) PTRADD (unique, 0x17200, 4) , (const, 0x2, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (register, 0x0, 1)
+(register, 0x0, 1) INT_AND (unique, 0x1000002b, 1) , (const, 0x3f, 1)
+(unique, 0x1000002b, 1) SUBPIECE (register, 0x8, 4) , (const, 0x0, 4)
+(register, 0x8, 4) INT_RIGHT (register, 0x8, 4) , (const, 0x12, 4)
+(register, 0x0, 1) INT_OR (register, 0x0, 1) , (const, 0x80, 1)
+(register, 0x8, 1) INT_OR (register, 0x8, 1) , (const, 0xf0, 1)
+(register, 0x8, 1) SUBPIECE (register, 0x8, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (unique, 0x17200, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (register, 0x0, 1)
+(unique, 0x6600, 4) PTRADD (unique, 0x17200, 4) , (const, 0x4, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x17200, 4) , (register, 0x8, 1)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (unique, 0x10000059, 4)
+(unique, 0x10000059, 4) CAST (unique, 0x6600, 4)
+ ---  RETURN (const, 0x0, 4)
+ ---  CALL (ram, 0x4083a0, 8) , (unique, 0x10000049, 4) , (unique, 0x17200, 4)
+(register, 0x4, 4) INDIRECT (const, 0x0, 4) , (const, 0x229, 4)
+(unique, 0x10000049, 4) COPY (const, 0xb3f3ec, 4)
+ ---  CALL (ram, 0x9ec158, 8) , (register, 0x4, 4) , (unique, 0x1000004d, 4)
+ ---  RETURN (const, 0x1, 4)
+(unique, 0x10000055, 4) PTRSUB (const, 0x0, 4) , (const, 0xb88e48, 4)
+(unique, 0x1000004d, 4) CAST (unique, 0x10000055, 4)

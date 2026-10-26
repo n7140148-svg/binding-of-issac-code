@@ -1,0 +1,37 @@
+========== FUNCTION FUN_0040f4f0@0040f4f0 ==========
+
+---- ASSEMBLY ----
+0040f4f0  PUSH EBP
+0040f4f1  MOV EBP,ESP
+0040f4f3  CMP dword ptr [ECX + 0x14],0x10
+0040f4f7  MOV EAX,dword ptr [EBP + 0x8]
+0040f4fa  JC 0x0040f4fe
+0040f4fc  MOV ECX,dword ptr [ECX]
+0040f4fe  ADD EAX,ECX
+0040f500  POP EBP
+0040f501  RET 0x4
+
+---- DECOMPILED C ----
+
+int __thiscall FUN_0040f4f0(undefined4 *param_1,int param_2)
+
+{
+  if (0xf < (uint)param_1[5]) {
+    param_1 = (undefined4 *)*param_1;
+  }
+  return param_2 + (int)param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (const, 0xf, 4) , (unique, 0x10000009, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x5, 4) , (const, 0x4, 4)
+(unique, 0x10000009, 4) CAST (unique, 0x17200, 4)
+ ---  CBRANCH (ram, 0x40f4fe, 1) , (register, 0x200, 1)
+(unique, 0x1000000d, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x17200, 4) CAST (unique, 0x1000000d, 4)
+(register, 0x0, 4) INT_ADD (stack, 0x4, 4) , (unique, 0x10000011, 4)
+(register, 0x4, 4) MULTIEQUAL (register, 0x4, 4) , (unique, 0x17200, 4)
+(unique, 0x10000011, 4) CAST (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

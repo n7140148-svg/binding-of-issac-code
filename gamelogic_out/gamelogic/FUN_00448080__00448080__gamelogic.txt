@@ -1,0 +1,46 @@
+========== FUNCTION FUN_00448080@00448080 ==========
+
+---- ASSEMBLY ----
+00448080  PUSH EBP
+00448081  MOV EBP,ESP
+00448083  MOV EAX,dword ptr [ECX + 0x7120]
+00448089  LEA EDX,[ECX + 0x7120]
+0044808f  CMP EAX,dword ptr [EBP + 0x8]
+00448092  LEA ECX,[EBP + 0x8]
+00448095  CMOVGE ECX,EDX
+00448098  MOV EAX,dword ptr [ECX]
+0044809a  MOV dword ptr [EDX],EAX
+0044809c  POP EBP
+0044809d  RET 0x4
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_00448080(int param_1,int param_2)
+
+{
+  undefined4 *puVar1;
+  
+  puVar1 = &param_2;
+  if (param_2 <= *(int *)(param_1 + 0x7120)) {
+    puVar1 = (undefined4 *)(param_1 + 0x7120);
+  }
+  *(undefined4 *)(param_1 + 0x7120) = *puVar1;
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000015, 4) INT_ADD (register, 0x4, 4) , (const, 0x7120, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000015, 4)
+(unique, 0x10000019, 4) INT_ADD (register, 0x4, 4) , (const, 0x7120, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000019, 4)
+(unique, 0x6600, 4) PTRSUB (register, 0x10, 4) , (const, 0x4, 4)
+(unique, 0x18900, 1) INT_SLESSEQUAL (stack, 0x4, 4) , (unique, 0x17200, 4)
+ ---  CBRANCH (ram, 0x448098, 1) , (unique, 0x18900, 1)
+(unique, 0x1000000d, 4) COPY (unique, 0x6600, 4)
+(unique, 0x10000011, 4) COPY (unique, 0x6800, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(register, 0x4, 4) MULTIEQUAL (unique, 0x1000000d, 4) , (unique, 0x10000011, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (unique, 0x17200, 4)
+ ---  RETURN (const, 0x0, 4)

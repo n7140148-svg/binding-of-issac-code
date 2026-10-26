@@ -1,0 +1,33 @@
+========== FUNCTION FUN_005b6330@005b6330 ==========
+
+---- ASSEMBLY ----
+005b6330  PUSH EBP
+005b6331  MOV EBP,ESP
+005b6333  MOV EAX,dword ptr [EDX]
+005b6335  MOV dword ptr [ECX],EAX
+005b6337  MOV EAX,dword ptr [EBP + 0x8]
+005b633a  MOV EAX,dword ptr [EAX]
+005b633c  MOV dword ptr [ECX + 0x4],EAX
+005b633f  MOV EAX,ECX
+005b6341  POP EBP
+005b6342  RET
+
+---- DECOMPILED C ----
+
+undefined4 * __fastcall FUN_005b6330(undefined4 *param_1,undefined4 *param_2,undefined4 *param_3)
+
+{
+  *param_1 = *param_2;
+  param_1[1] = *param_3;
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x8, 4)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (unique, 0x17200, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (stack, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

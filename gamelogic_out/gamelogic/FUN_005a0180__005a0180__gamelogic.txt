@@ -1,0 +1,33 @@
+========== FUNCTION FUN_005a0180@005a0180 ==========
+
+---- ASSEMBLY ----
+005a0180  TEST CL,CL
+005a0182  JZ 0x005a018b
+005a0184  INC dword ptr [0x00bfd658]
+005a018a  RET
+005a018b  DEC dword ptr [0x00bfd658]
+005a0191  RET
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_005a0180(char param_1)
+
+{
+  if (param_1 != '\0') {
+    DAT_00bfd658 = DAT_00bfd658 + 1;
+    return;
+  }
+  DAT_00bfd658 = DAT_00bfd658 + -1;
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x206, 1) INT_NOTEQUAL (register, 0x4, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x5a018b, 1) , (register, 0x206, 1)
+(ram, 0xbfd658, 4) INT_ADD (ram, 0xbfd658, 4) , (const, 0x1, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xbfd658, 4) COPY (ram, 0xbfd658, 4)
+(ram, 0xbfd658, 4) INT_ADD (ram, 0xbfd658, 4) , (const, 0xffffffff, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xbfd658, 4) COPY (ram, 0xbfd658, 4)

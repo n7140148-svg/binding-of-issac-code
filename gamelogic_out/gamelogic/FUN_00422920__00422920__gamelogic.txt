@@ -1,0 +1,42 @@
+========== FUNCTION FUN_00422920@00422920 ==========
+
+---- ASSEMBLY ----
+00422920  PUSH EBP
+00422921  MOV EBP,ESP
+00422923  MOV EAX,dword ptr [EBP + 0x8]
+00422926  MOV EDX,dword ptr [EAX]
+00422928  MOV EAX,dword ptr [EAX + 0x4]
+0042292b  MOV dword ptr [ECX + 0x4],EAX
+0042292e  MOV EAX,ECX
+00422930  MOV dword ptr [ECX],EDX
+00422932  MOVSS dword ptr [ECX + 0x8],XMM2
+00422937  POP EBP
+00422938  RET 0x4
+
+---- DECOMPILED C ----
+
+undefined4 * __thiscall FUN_00422920(undefined4 *param_1,undefined4 *param_2)
+
+{
+  undefined4 uVar1;
+  undefined4 in_XMM2_Da;
+  
+  uVar1 = *param_2;
+  param_1[1] = param_2[1];
+  *param_1 = uVar1;
+  param_1[2] = in_XMM2_Da;
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (stack, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (unique, 0x17200, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (register, 0x1280, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x2, 4) , (const, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

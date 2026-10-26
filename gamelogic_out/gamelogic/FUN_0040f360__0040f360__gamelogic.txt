@@ -1,0 +1,37 @@
+========== FUNCTION FUN_0040f360@0040f360 ==========
+
+---- ASSEMBLY ----
+0040f360  PUSH EBP
+0040f361  MOV EBP,ESP
+0040f363  AND ESP,0xfffffff8
+0040f366  SUB ESP,0x8
+0040f369  LEA EAX,[ESP]
+0040f36c  PUSH dword ptr [EBP + 0x8]
+0040f36f  PUSH EAX
+0040f370  CALL 0x00410850
+0040f375  MOV EAX,dword ptr [EAX]
+0040f377  ADD EAX,0x14
+0040f37a  MOV ESP,EBP
+0040f37c  POP EBP
+0040f37d  RET 0x4
+
+---- DECOMPILED C ----
+
+int FUN_0040f360(undefined4 param_1)
+
+{
+  int *piVar1;
+  undefined1 local_10 [12];
+  
+  piVar1 = (int *)FUN_00410850(local_10,param_1);
+  return *piVar1 + 0x14;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x10, 4) PTRSUB (register, 0x10, 4) , (const, 0xfffffff0, 4)
+(unique, 0x1000001d, 4) CALL (ram, 0x410850, 8) , (register, 0x10, 4) , (stack, 0x4, 4)
+(register, 0x0, 4) CAST (unique, 0x1000001d, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x0, 4)
+(register, 0x0, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x14, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

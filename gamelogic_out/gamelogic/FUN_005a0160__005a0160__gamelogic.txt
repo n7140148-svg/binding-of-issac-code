@@ -1,0 +1,30 @@
+========== FUNCTION FUN_005a0160@005a0160 ==========
+
+---- ASSEMBLY ----
+005a0160  PUSH EBP
+005a0161  MOV EBP,ESP
+005a0163  PUSH ESI
+005a0164  PUSH dword ptr [EBP + 0x8]
+005a0167  MOV ESI,ECX
+005a0169  PUSH dword ptr [EBP + 0xc]
+005a016c  CALL 0x006c3450
+005a0171  ADD ESP,0x8
+005a0174  MOV EAX,ESI
+005a0176  POP ESI
+005a0177  POP EBP
+005a0178  RET
+
+---- DECOMPILED C ----
+
+undefined4 __thiscall FUN_005a0160(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  FUN_006c3450(param_3,param_2);
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+ ---  CALL (ram, 0x6c3450, 8) , (stack, 0x8, 4) , (stack, 0x4, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

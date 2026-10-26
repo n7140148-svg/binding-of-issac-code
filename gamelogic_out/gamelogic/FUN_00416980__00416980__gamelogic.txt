@@ -1,0 +1,101 @@
+========== FUNCTION FUN_00416980@00416980 ==========
+
+---- ASSEMBLY ----
+00416980  PUSH EBX
+00416981  PUSH ESI
+00416982  MOV ESI,ECX
+00416984  MOV EAX,0x63e7063f
+00416989  XOR EBX,EBX
+0041698b  MOV EDX,dword ptr [ESI + 0x1c]
+0041698e  SUB EDX,dword ptr [ESI + 0x18]
+00416991  IMUL EDX
+00416993  SAR EDX,0x6
+00416996  MOV EAX,EDX
+00416998  SHR EAX,0x1f
+0041699b  ADD EAX,EDX
+0041699d  JZ 0x004169d0
+0041699f  PUSH EDI
+004169a0  XOR EDI,EDI
+004169a2  MOV EAX,dword ptr [ESI + 0x18]
+004169a5  LEA EDI,[EDI + 0xa4]
+004169ab  INC EBX
+004169ac  MOV dword ptr [EDI + EAX*0x1 + -0x4],0x0
+004169b4  MOV EAX,0x63e7063f
+004169b9  MOV ECX,dword ptr [ESI + 0x1c]
+004169bc  SUB ECX,dword ptr [ESI + 0x18]
+004169bf  IMUL ECX
+004169c1  SAR EDX,0x6
+004169c4  MOV EAX,EDX
+004169c6  SHR EAX,0x1f
+004169c9  ADD EAX,EDX
+004169cb  CMP EBX,EAX
+004169cd  JC 0x004169a2
+004169cf  POP EDI
+004169d0  POP ESI
+004169d1  POP EBX
+004169d2  RET
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_00416980(int param_1)
+
+{
+  int iVar1;
+  uint uVar2;
+  int iVar3;
+  
+  uVar2 = 0;
+  iVar1 = *(int *)(param_1 + 0x1c) - *(int *)(param_1 + 0x18);
+  iVar3 = iVar1 >> 0x1f;
+  if (iVar1 / 0xa4 + iVar3 != iVar3) {
+    iVar3 = 0;
+    do {
+      uVar2 = uVar2 + 1;
+      *(undefined4 *)(iVar3 + 0xa0 + *(int *)(param_1 + 0x18)) = 0;
+      iVar3 = iVar3 + 0xa4;
+    } while (uVar2 < (uint)((*(int *)(param_1 + 0x1c) - *(int *)(param_1 + 0x18)) / 0xa4));
+  }
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0xc, 4) COPY (const, 0x0, 4)
+(unique, 0x10000035, 4) INT_ADD (register, 0x4, 4) , (const, 0x1c, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000035, 4)
+(unique, 0x10000039, 4) INT_ADD (register, 0x4, 4) , (const, 0x18, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x8, 4) INT_SUB (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000039, 4)
+(register, 0x8, 4) INT_ADD (unique, 0x10000014, 4) , (unique, 0x10000018, 4)
+(unique, 0x10000014, 4) INT_SDIV (register, 0x8, 4) , (const, 0xa4, 4)
+(unique, 0x10000018, 4) INT_SRIGHT (register, 0x8, 4) , (const, 0x1f, 4)
+(register, 0x206, 1) INT_NOTEQUAL (register, 0x8, 4) , (unique, 0x10000018, 4)
+ ---  CBRANCH (ram, 0x4169d0, 1) , (register, 0x206, 1)
+(register, 0x1c, 4) COPY (const, 0x0, 4)
+(unique, 0x1000002d, 4) COPY (register, 0x1c, 4)
+(unique, 0x1000003d, 4) INT_ADD (register, 0x4, 4) , (const, 0x18, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0xc, 4) MULTIEQUAL (register, 0xc, 4) , (register, 0xc, 4)
+(register, 0x1c, 4) MULTIEQUAL (unique, 0x1000002d, 4) , (unique, 0x10000031, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000003d, 4)
+(unique, 0x6800, 4) INT_ADD (register, 0x1c, 4) , (const, 0xa4, 4)
+(register, 0xc, 4) INT_ADD (register, 0xc, 4) , (const, 0x1, 4)
+(unique, 0x7100, 4) INT_ADD (register, 0x1c, 4) , (const, 0xa0, 4)
+(unique, 0x10000041, 4) INT_ADD (unique, 0x7100, 4) , (unique, 0x17200, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x7400, 4) , (const, 0x0, 4)
+(unique, 0x7400, 4) CAST (unique, 0x10000041, 4)
+(unique, 0x10000045, 4) INT_ADD (register, 0x4, 4) , (const, 0x1c, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000045, 4)
+(unique, 0x10000049, 4) INT_ADD (register, 0x4, 4) , (const, 0x18, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x4, 4) INT_SUB (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000049, 4)
+(unique, 0x10000020, 4) INT_SDIV (register, 0x4, 4) , (const, 0xa4, 4)
+(register, 0x200, 1) INT_LESS (register, 0xc, 4) , (unique, 0x1000004d, 4)
+(unique, 0x1000004d, 4) CAST (unique, 0x10000020, 4)
+ ---  CBRANCH (ram, 0x4169a2, 1) , (register, 0x200, 1)
+(unique, 0x10000031, 4) COPY (unique, 0x6800, 4)
+ ---  RETURN (const, 0x0, 4)

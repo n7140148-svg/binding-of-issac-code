@@ -1,0 +1,36 @@
+========== FUNCTION FUN_004976b0@004976b0 ==========
+
+---- ASSEMBLY ----
+004976b0  TEST ECX,ECX
+004976b2  JZ 0x004976bd
+004976b4  CMP dword ptr [ECX + 0x28],0x9
+004976b8  JNZ 0x004976bd
+004976ba  MOV EAX,ECX
+004976bc  RET
+004976bd  XOR EAX,EAX
+004976bf  RET
+
+---- DECOMPILED C ----
+
+int __fastcall FUN_004976b0(int param_1)
+
+{
+  if ((param_1 != 0) && (*(int *)(param_1 + 0x28) == 9)) {
+    return param_1;
+  }
+  return 0;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x206, 1) INT_NOTEQUAL (register, 0x4, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x4976bd, 1) , (register, 0x206, 1)
+(unique, 0x10000006, 4) INT_ADD (register, 0x4, 4) , (const, 0x28, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0x9, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000006, 4)
+ ---  CBRANCH (ram, 0x4976bd, 1) , (register, 0x206, 1)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

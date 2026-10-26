@@ -1,0 +1,46 @@
+========== FUNCTION FUN_00426da0@00426da0 ==========
+
+---- ASSEMBLY ----
+00426da0  PUSH EBP
+00426da1  MOV EBP,ESP
+00426da3  MOV EDX,dword ptr [EBP + 0x8]
+00426da6  MOV EAX,0x1
+00426dab  PUSH ESI
+00426dac  MOV ESI,ECX
+00426dae  MOV ECX,EDX
+00426db0  AND ECX,0x1f
+00426db3  SHR EDX,0x5
+00426db6  SHL EAX,CL
+00426db8  TEST dword ptr [ESI + EDX*0x4],EAX
+00426dbb  POP ESI
+00426dbc  SETNZ AL
+00426dbf  POP EBP
+00426dc0  RET 0x4
+
+---- DECOMPILED C ----
+
+undefined4 __thiscall FUN_00426da0(int param_1,uint param_2)
+
+{
+  uint uVar1;
+  
+  uVar1 = 1 << ((byte)param_2 & 0x1f);
+  return CONCAT31((int3)(uVar1 >> 8),(*(uint *)(param_1 + (param_2 >> 5) * 4) & uVar1) != 0);
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x4, 1) INT_AND (unique, 0x10000008, 1) , (const, 0x1f, 1)
+(register, 0x8, 4) INT_RIGHT (stack, 0x4, 4) , (const, 0x5, 4)
+(register, 0x0, 4) INT_LEFT (const, 0x1, 4) , (register, 0x4, 1)
+(unique, 0x10000008, 1) SUBPIECE (stack, 0x4, 4) , (const, 0x0, 4)
+(unique, 0x6a00, 4) INT_MULT (register, 0x8, 4) , (const, 0x4, 4)
+(unique, 0x1000000e, 4) INT_ADD (register, 0x4, 4) , (unique, 0x6a00, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6c00, 4)
+(unique, 0xa4600, 4) INT_AND (unique, 0x17200, 4) , (register, 0x0, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0xa4600, 4) , (const, 0x0, 4)
+(unique, 0x6c00, 4) CAST (unique, 0x1000000e, 4)
+(register, 0x1, 3) SUBPIECE (unique, 0x1000000a, 4) , (const, 0x0, 4)
+(register, 0x0, 4) PIECE (register, 0x1, 3) , (register, 0x206, 1)
+(unique, 0x1000000a, 4) INT_RIGHT (register, 0x0, 4) , (const, 0x8, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

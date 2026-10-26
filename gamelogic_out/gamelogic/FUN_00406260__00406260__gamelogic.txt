@@ -1,0 +1,44 @@
+========== FUNCTION FUN_00406260@00406260 ==========
+
+---- ASSEMBLY ----
+00406260  PUSH EBP
+00406261  MOV EBP,ESP
+00406263  PUSH ECX
+00406264  CMP dword ptr [ECX + 0x34],0x0
+00406268  JNZ 0x00406271
+0040626a  XOR EAX,EAX
+0040626c  POP ECX
+0040626d  POP EBP
+0040626e  RET 0x4
+00406271  PUSH dword ptr [EBP + 0x8]
+00406274  ADD ECX,0x30
+00406277  CALL 0x00405d30
+0040627c  POP ECX
+0040627d  POP EBP
+0040627e  RET 0x4
+
+---- DECOMPILED C ----
+
+undefined4 __thiscall FUN_00406260(int param_1,undefined4 param_2)
+
+{
+  undefined4 uVar1;
+  
+  if (*(int *)(param_1 + 0x34) == 0) {
+    return 0;
+  }
+  uVar1 = FUN_00405d30(param_2);
+  return uVar1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x1000001a, 4) INT_ADD (register, 0x4, 4) , (const, 0x34, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000001a, 4)
+ ---  CBRANCH (ram, 0x406271, 1) , (register, 0x206, 1)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) CALL (ram, 0x405d30, 8) , (stack, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

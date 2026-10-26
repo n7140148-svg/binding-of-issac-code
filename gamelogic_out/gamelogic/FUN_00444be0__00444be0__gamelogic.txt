@@ -1,0 +1,65 @@
+========== FUNCTION FUN_00444be0@00444be0 ==========
+
+---- ASSEMBLY ----
+00444be0  PUSH EBP
+00444be1  MOV EBP,ESP
+00444be3  MOV EAX,dword ptr [ECX + 0x4]
+00444be6  TEST EAX,EAX
+00444be8  JZ 0x00444bfa
+00444bea  MOV ECX,dword ptr [EBP + 0x8]
+00444bed  PUSH EAX
+00444bee  CALL 0x004079f0
+00444bf3  MOV EAX,dword ptr [EBP + 0x8]
+00444bf6  POP EBP
+00444bf7  RET 0x4
+00444bfa  MOV EAX,dword ptr [EBP + 0x8]
+00444bfd  MOV dword ptr [EAX],0x0
+00444c03  MOV dword ptr [EAX + 0x10],0x0
+00444c0a  MOV dword ptr [EAX + 0x14],0xf
+00444c11  MOV byte ptr [EAX],0x0
+00444c14  MOV dword ptr [EAX + 0x10],0x0
+00444c1b  MOV byte ptr [EAX],0x0
+00444c1e  POP EBP
+00444c1f  RET 0x4
+
+---- DECOMPILED C ----
+
+undefined4 * __thiscall FUN_00444be0(int param_1,undefined4 *param_2)
+
+{
+  if (*(int *)(param_1 + 4) != 0) {
+    FUN_004079f0(*(int *)(param_1 + 4));
+    return param_2;
+  }
+  *param_2 = 0;
+  param_2[4] = 0;
+  param_2[5] = 0xf;
+  *(undefined1 *)param_2 = 0;
+  param_2[4] = 0;
+  *(undefined1 *)param_2 = 0;
+  return param_2;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x1000001e, 4) INT_ADD (register, 0x4, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000001e, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x444bfa, 1) , (register, 0x206, 1)
+ ---  CALL (ram, 0x4079f0, 8) , (unique, 0x17200, 4)
+(register, 0x0, 4) COPY (stack, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (stack, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (stack, 0x4, 4) , (const, 0x0, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x4, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (const, 0xf, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x5, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000022, 4) , (const, 0x0, 1)
+(unique, 0x10000022, 4) CAST (stack, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x4, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000026, 4) , (const, 0x0, 1)
+(unique, 0x10000026, 4) CAST (stack, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

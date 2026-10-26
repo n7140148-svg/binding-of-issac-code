@@ -1,0 +1,83 @@
+========== FUNCTION FUN_0041c3d0@0041c3d0 ==========
+
+---- ASSEMBLY ----
+0041c3d0  PUSH EBP
+0041c3d1  MOV EBP,ESP
+0041c3d3  PUSH ESI
+0041c3d4  PUSH EDI
+0041c3d5  MOV EDI,ECX
+0041c3d7  MOV ESI,0x1
+0041c3dc  MOV ECX,dword ptr [EBP + 0x8]
+0041c3df  MOV EDX,ECX
+0041c3e1  SHR EDX,0x5
+0041c3e4  AND ECX,0x1f
+0041c3e7  SHL EDX,0x2
+0041c3ea  MOV EAX,dword ptr [EDI + 0x8ac]
+0041c3f0  SHL ESI,CL
+0041c3f2  TEST dword ptr [EAX + EDX*0x1],ESI
+0041c3f5  JNZ 0x0041c40b
+0041c3f7  MOV EAX,dword ptr [EDI + 0x8bc]
+0041c3fd  ADD EAX,EDX
+0041c3ff  TEST dword ptr [EAX],ESI
+0041c401  JNZ 0x0041c40b
+0041c403  XOR AL,AL
+0041c405  POP EDI
+0041c406  POP ESI
+0041c407  POP EBP
+0041c408  RET 0x4
+0041c40b  POP EDI
+0041c40c  MOV AL,0x1
+0041c40e  POP ESI
+0041c40f  POP EBP
+0041c410  RET 0x4
+
+---- DECOMPILED C ----
+
+uint __thiscall FUN_0041c3d0(int param_1,uint param_2)
+
+{
+  uint *puVar1;
+  uint uVar2;
+  
+  puVar1 = *(uint **)(param_1 + 0x8ac);
+  uVar2 = 1 << ((byte)param_2 & 0x1f);
+  if (((puVar1[param_2 >> 5] & uVar2) == 0) &&
+     (puVar1 = (uint *)(*(int *)(param_1 + 0x8bc) + (param_2 >> 5) * 4), (*puVar1 & uVar2) == 0)) {
+    return (uint)puVar1 & 0xffffff00;
+  }
+  return CONCAT31((int3)((uint)puVar1 >> 8),1);
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x8, 4) INT_RIGHT (stack, 0x4, 4) , (const, 0x5, 4)
+(register, 0x4, 1) INT_AND (unique, 0x1000000c, 1) , (const, 0x1f, 1)
+(register, 0x8, 4) INT_MULT (register, 0x8, 4) , (const, 0x4, 4)
+(unique, 0x10000020, 4) INT_ADD (register, 0x4, 4) , (const, 0x8ac, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000020, 4)
+(register, 0x18, 4) INT_LEFT (const, 0x1, 4) , (register, 0x4, 1)
+(unique, 0x1000000c, 1) SUBPIECE (stack, 0x4, 4) , (const, 0x0, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6c00, 4)
+(unique, 0xa4600, 4) INT_AND (unique, 0x17200, 4) , (register, 0x18, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0xa4600, 4) , (const, 0x0, 4)
+(unique, 0x6c00, 4) PTRADD (unique, 0x17200, 4) , (register, 0x8, 4) , (const, 0x4, 4)
+ ---  CBRANCH (ram, 0x41c40b, 1) , (register, 0x206, 1)
+(unique, 0x10000024, 4) INT_ADD (register, 0x4, 4) , (const, 0x8bc, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000024, 4)
+(unique, 0x10000028, 4) INT_ADD (unique, 0x17200, 4) , (register, 0x8, 4)
+(register, 0x0, 4) CAST (unique, 0x10000028, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x0, 4)
+(unique, 0xa4600, 4) INT_AND (unique, 0x17200, 4) , (register, 0x18, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0xa4600, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x41c40b, 1) , (register, 0x206, 1)
+(register, 0x0, 4) INT_AND (unique, 0x10000030, 4) , (const, 0xffffff00, 4)
+(unique, 0x10000030, 4) CAST (register, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) MULTIEQUAL (unique, 0x17200, 4) , (register, 0x0, 4)
+(register, 0x1, 3) SUBPIECE (unique, 0x1000001c, 4) , (const, 0x0, 4)
+(register, 0x0, 4) PIECE (register, 0x1, 3) , (const, 0x1, 1)
+(unique, 0x1000001c, 4) INT_RIGHT (unique, 0x1000002c, 4) , (const, 0x8, 4)
+(unique, 0x1000002c, 4) CAST (register, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

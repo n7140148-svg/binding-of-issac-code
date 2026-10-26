@@ -1,0 +1,73 @@
+========== FUNCTION FUN_00422b00@00422b00 ==========
+
+---- ASSEMBLY ----
+00422b00  PUSH EBP
+00422b01  MOV EBP,ESP
+00422b03  CMP byte ptr [EBP + 0xc],0x0
+00422b07  JZ 0x00422b13
+00422b09  MOVSS XMM2,dword ptr [0x00b6a614]
+00422b11  JMP 0x00422b1b
+00422b13  MOVSS XMM2,dword ptr [ECX + 0x2f4]
+00422b1b  MOV EAX,dword ptr [EBP + 0x8]
+00422b1e  MOVAPS XMM0,XMM2
+00422b21  MOVSS XMM1,dword ptr [EAX + 0x4]
+00422b26  MULSS XMM0,dword ptr [EAX]
+00422b2a  MULSS XMM1,XMM2
+00422b2e  ADDSS XMM0,dword ptr [ECX + 0x2b8]
+00422b36  ADDSS XMM1,dword ptr [ECX + 0x2bc]
+00422b3e  MOVSS dword ptr [ECX + 0x2b8],XMM0
+00422b46  MOVSS dword ptr [ECX + 0x2bc],XMM1
+00422b4e  POP EBP
+00422b4f  RET 0x8
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_00422b00(int param_1,float *param_2,char param_3)
+
+{
+  float fVar1;
+  float fVar2;
+  
+  fVar2 = DAT_00b6a614;
+  if (param_3 == '\0') {
+    fVar2 = *(float *)(param_1 + 0x2f4);
+  }
+  fVar1 = param_2[1];
+  *(float *)(param_1 + 0x2b8) = fVar2 * *param_2 + *(float *)(param_1 + 0x2b8);
+  *(float *)(param_1 + 700) = fVar1 * fVar2 + *(float *)(param_1 + 700);
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x206, 1) INT_EQUAL (stack, 0x8, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x422b13, 1) , (register, 0x206, 1)
+(unique, 0x1000000d, 4) COPY (ram, 0xb6a614, 4)
+(unique, 0x10000011, 4) INT_ADD (register, 0x4, 4) , (const, 0x2f4, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x10000009, 4) COPY (unique, 0xa300, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000011, 4)
+(register, 0x1280, 4) MULTIEQUAL (unique, 0x10000009, 4) , (unique, 0x1000000d, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (stack, 0x4, 4)
+(register, 0x1200, 4) FLOAT_MULT (register, 0x1280, 4) , (unique, 0xa300, 4)
+(register, 0x1240, 4) FLOAT_MULT (unique, 0xa300, 4) , (register, 0x1280, 4)
+(unique, 0x10000015, 4) INT_ADD (register, 0x4, 4) , (const, 0x2b8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x1200, 4) FLOAT_ADD (register, 0x1200, 4) , (unique, 0xa300, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000015, 4)
+(unique, 0x10000019, 4) INT_ADD (register, 0x4, 4) , (const, 0x2bc, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x1240, 4) FLOAT_ADD (register, 0x1240, 4) , (unique, 0xa300, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000019, 4)
+(unique, 0x1000001d, 4) INT_ADD (register, 0x4, 4) , (const, 0x2b8, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (register, 0x1200, 4)
+(ram, 0xb6a614, 4) INDIRECT (ram, 0xb6a614, 4) , (const, 0x2e, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000001d, 4)
+(unique, 0x10000021, 4) INT_ADD (register, 0x4, 4) , (const, 0x2bc, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (register, 0x1240, 4)
+(ram, 0xb6a614, 4) INDIRECT (ram, 0xb6a614, 4) , (const, 0x31, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000021, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xb6a614, 4) COPY (ram, 0xb6a614, 4)

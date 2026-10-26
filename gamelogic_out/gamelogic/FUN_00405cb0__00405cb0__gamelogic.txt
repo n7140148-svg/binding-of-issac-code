@@ -1,0 +1,50 @@
+========== FUNCTION FUN_00405cb0@00405cb0 ==========
+
+---- ASSEMBLY ----
+00405cb0  PUSH EBP
+00405cb1  MOV EBP,ESP
+00405cb3  PUSH ECX
+00405cb4  PUSH ESI
+00405cb5  PUSH 0x1
+00405cb7  PUSH dword ptr [EBP + 0x8]
+00405cba  MOV ESI,ECX
+00405cbc  CALL 0x00405bb0
+00405cc1  TEST AL,AL
+00405cc3  JZ 0x00405cdb
+00405cc5  CMP dword ptr [ESI + 0x54],0x0
+00405cc9  JZ 0x00405cdb
+00405ccb  MOVD XMM1,dword ptr [EBP + 0xc]
+00405cd0  LEA ECX,[ESI + 0x50]
+00405cd3  CVTDQ2PS XMM1,XMM1
+00405cd6  CALL 0x00403c00
+00405cdb  POP ESI
+00405cdc  POP ECX
+00405cdd  POP EBP
+00405cde  RET 0x8
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_00405cb0(int param_1,undefined4 param_2)
+
+{
+  char cVar1;
+  
+  cVar1 = FUN_00405bb0(param_2,1);
+  if ((cVar1 != '\0') && (*(int *)(param_1 + 0x54) != 0)) {
+    FUN_00403c00();
+  }
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x0, 1) CALL (ram, 0x405bb0, 8) , (stack, 0x4, 4) , (const, 0x1, 4)
+(register, 0x206, 1) INT_NOTEQUAL (register, 0x0, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x405cdb, 1) , (register, 0x206, 1)
+(unique, 0x1000002c, 4) INT_ADD (register, 0x4, 4) , (const, 0x54, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000002c, 4)
+ ---  CBRANCH (ram, 0x405cdb, 1) , (register, 0x206, 1)
+ ---  CALL (ram, 0x403c00, 8)
+ ---  RETURN (const, 0x0, 4)

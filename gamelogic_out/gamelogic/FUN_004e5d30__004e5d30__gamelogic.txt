@@ -1,0 +1,62 @@
+========== FUNCTION FUN_004e5d30@004e5d30 ==========
+
+---- ASSEMBLY ----
+004e5d30  PUSH ESI
+004e5d31  MOV ESI,EDX
+004e5d33  MOV EDX,ECX
+004e5d35  MOV EAX,ESI
+004e5d37  PUSH EDI
+004e5d38  LEA EDI,[EAX + 0x1]
+004e5d3b  NOP dword ptr [EAX + EAX*0x1]
+004e5d40  MOV CL,byte ptr [EAX]
+004e5d42  INC EAX
+004e5d43  TEST CL,CL
+004e5d45  JNZ 0x004e5d40
+004e5d47  SUB EAX,EDI
+004e5d49  MOV ECX,EDX
+004e5d4b  CMP dword ptr [EDX + 0x14],0x10
+004e5d4f  JC 0x004e5d53
+004e5d51  MOV ECX,dword ptr [EDX]
+004e5d53  MOV EDX,dword ptr [EDX + 0x10]
+004e5d56  PUSH EAX
+004e5d57  PUSH ESI
+004e5d58  CALL 0x00408190
+004e5d5d  ADD ESP,0x8
+004e5d60  XOR AL,0x1
+004e5d62  POP EDI
+004e5d63  POP ESI
+004e5d64  RET
+
+---- DECOMPILED C ----
+
+uint __fastcall FUN_004e5d30(undefined4 param_1,char *param_2)
+
+{
+  char cVar1;
+  char *pcVar2;
+  uint uVar3;
+  
+  pcVar2 = param_2;
+  do {
+    cVar1 = *pcVar2;
+    pcVar2 = pcVar2 + 1;
+  } while (cVar1 != '\0');
+  uVar3 = FUN_00408190(param_2,(int)pcVar2 - (int)(param_2 + 1));
+  return uVar3 ^ 1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x6600, 4) PTRADD (register, 0x8, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(unique, 0x10000022, 4) COPY (register, 0x8, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (register, 0x0, 4)
+(register, 0x0, 4) MULTIEQUAL (unique, 0x10000022, 4) , (register, 0x0, 4)
+(register, 0x0, 4) PTRADD (register, 0x0, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x4e5d40, 1) , (register, 0x206, 1)
+(register, 0x0, 4) INT_SUB (unique, 0x10000026, 4) , (unique, 0x1000002a, 4)
+(unique, 0x10000026, 4) CAST (register, 0x0, 4)
+(unique, 0x1000002a, 4) CAST (unique, 0x6600, 4)
+(register, 0x0, 4) CALL (ram, 0x408190, 8) , (register, 0x8, 4) , (register, 0x0, 4)
+(register, 0x0, 4) INT_XOR (register, 0x0, 4) , (const, 0x1, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

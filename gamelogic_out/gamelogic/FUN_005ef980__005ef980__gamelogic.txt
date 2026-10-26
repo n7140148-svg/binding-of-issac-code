@@ -1,0 +1,89 @@
+========== FUNCTION FUN_005ef980@005ef980 ==========
+
+---- ASSEMBLY ----
+005ef980  MOV EAX,dword ptr [ECX + 0x2c]
+005ef983  ADD EAX,-0x2b
+005ef986  CMP EAX,0xc3
+005ef98b  JA 0x005ef9bf
+005ef98d  MOVZX EAX,byte ptr [EAX + 0x5ef9f4]
+005ef994  JMP dword ptr [EAX*0x4 + 0x5ef9d4]
+005ef99b  MOV EAX,0x32
+005ef9a0  RET
+005ef9a1  MOV EAX,0x19
+005ef9a6  RET
+005ef9a7  MOV EAX,0xa
+005ef9ac  RET
+005ef9ad  MOV EAX,0x8
+005ef9b2  RET
+005ef9b3  MOV EAX,0x6
+005ef9b8  RET
+005ef9b9  MOV EAX,0x1
+005ef9be  RET
+005ef9bf  CMP byte ptr [ECX + 0xcc6],0x0
+005ef9c6  JZ 0x005ef9ce
+005ef9c8  MOV EAX,0x64
+005ef9cd  RET
+005ef9ce  OR EAX,0xffffffff
+005ef9d1  RET
+
+---- DECOMPILED C ----
+
+undefined4 __fastcall FUN_005ef980(int param_1)
+
+{
+  switch(*(undefined4 *)(param_1 + 0x2c)) {
+  case 0x2b:
+  case 0x49:
+  case 0xea:
+    goto switchD_005ef994_caseD_2b;
+  default:
+    if (*(char *)(param_1 + 0xcc6) == '\0') {
+      return 0xffffffff;
+    }
+switchD_005ef994_caseD_2b:
+    return 100;
+  case 0x73:
+    return 0x32;
+  case 0x79:
+  case 0x80:
+  case 0xe5:
+    return 0x19;
+  case 0xc9:
+  case 0xe4:
+    return 10;
+  case 0xce:
+    return 8;
+  case 0xed:
+    return 6;
+  case 0xee:
+    return 1;
+  }
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000006, 4) INT_ADD (register, 0x4, 4) , (const, 0x2c, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000006, 4)
+ ---  BRANCHIND (unique, 0x17200, 4)
+(register, 0x0, 4) COPY (const, 0x32, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (const, 0x19, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (const, 0xa, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (const, 0x8, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (const, 0x6, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (const, 0x1, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(unique, 0x1000000a, 4) INT_ADD (register, 0x4, 4) , (const, 0xcc6, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17000, 1) , (const, 0x0, 1)
+(unique, 0x6800, 4) CAST (unique, 0x1000000a, 4)
+ ---  CBRANCH (ram, 0x5ef9ce, 1) , (register, 0x206, 1)
+(register, 0x0, 4) COPY (const, 0x64, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (const, 0xffffffff, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

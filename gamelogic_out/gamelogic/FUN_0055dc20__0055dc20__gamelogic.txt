@@ -1,0 +1,78 @@
+========== FUNCTION FUN_0055dc20@0055dc20 ==========
+
+---- ASSEMBLY ----
+0055dc20  PUSH EBP
+0055dc21  MOV EBP,ESP
+0055dc23  MOV EDX,ECX
+0055dc25  MOV ECX,dword ptr [EBP + 0x8]
+0055dc28  CMP ECX,0x18
+0055dc2b  JNC 0x0055dc65
+0055dc2d  MOV EAX,ECX
+0055dc2f  AND ECX,0x1f
+0055dc32  SHR EAX,0x5
+0055dc35  LEA EDX,[EDX + EAX*0x4]
+0055dc38  MOV EAX,0x1
+0055dc3d  SHL EAX,CL
+0055dc3f  CMP byte ptr [EBP + 0xc],0x0
+0055dc43  MOV ECX,dword ptr [EDX + 0x1822c]
+0055dc49  JZ 0x0055dc57
+0055dc4b  OR ECX,EAX
+0055dc4d  MOV dword ptr [EDX + 0x1822c],ECX
+0055dc53  POP EBP
+0055dc54  RET 0x8
+0055dc57  NOT EAX
+0055dc59  AND EAX,ECX
+0055dc5b  MOV dword ptr [EDX + 0x1822c],EAX
+0055dc61  POP EBP
+0055dc62  RET 0x8
+0055dc65  CALL 0x004c3a90
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_0055dc20(int param_1,uint param_2,char param_3)
+
+{
+  uint uVar1;
+  
+  if (0x17 < param_2) {
+                    /* WARNING: Subroutine does not return */
+    FUN_004c3a90();
+  }
+  param_1 = param_1 + (param_2 >> 5) * 4;
+  uVar1 = 1 << ((byte)param_2 & 0x1f);
+  if (param_3 != '\0') {
+    *(uint *)(param_1 + 0x1822c) = *(uint *)(param_1 + 0x1822c) | uVar1;
+    return;
+  }
+  *(uint *)(param_1 + 0x1822c) = ~uVar1 & *(uint *)(param_1 + 0x1822c);
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x200, 1) INT_LESS (const, 0x17, 4) , (stack, 0x4, 4)
+ ---  CBRANCH (ram, 0x55dc65, 1) , (register, 0x200, 1)
+(register, 0x4, 1) INT_AND (unique, 0x10000009, 1) , (const, 0x1f, 1)
+(register, 0x0, 4) INT_RIGHT (stack, 0x4, 4) , (const, 0x5, 4)
+(unique, 0x6a00, 4) INT_MULT (register, 0x0, 4) , (const, 0x4, 4)
+(unique, 0x6c00, 4) INT_ADD (register, 0x4, 4) , (unique, 0x6a00, 4)
+(register, 0x0, 4) INT_LEFT (const, 0x1, 4) , (register, 0x4, 1)
+(unique, 0x10000009, 1) SUBPIECE (stack, 0x4, 4) , (const, 0x0, 4)
+(register, 0x206, 1) INT_NOTEQUAL (stack, 0x8, 1) , (const, 0x0, 1)
+(unique, 0x10000011, 4) INT_ADD (unique, 0x6c00, 4) , (const, 0x1822c, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000011, 4)
+ ---  CBRANCH (ram, 0x55dc57, 1) , (register, 0x206, 1)
+(register, 0x4, 4) INT_OR (unique, 0x17200, 4) , (register, 0x0, 4)
+(unique, 0x10000019, 4) INT_ADD (unique, 0x6c00, 4) , (const, 0x1822c, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (register, 0x4, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000019, 4)
+ ---  RETURN (const, 0x0, 4)
+(register, 0x0, 4) INT_NEGATE (register, 0x0, 4)
+(register, 0x0, 4) INT_AND (register, 0x0, 4) , (unique, 0x17200, 4)
+(unique, 0x10000015, 4) INT_ADD (unique, 0x6c00, 4) , (const, 0x1822c, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (register, 0x0, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000015, 4)
+ ---  RETURN (const, 0x0, 4)
+ ---  CALL (ram, 0x4c3a90, 8)
+ ---  RETURN (const, 0x1, 4)

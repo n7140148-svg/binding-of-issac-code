@@ -1,0 +1,63 @@
+========== FUNCTION FUN_00412260@00412260 ==========
+
+---- ASSEMBLY ----
+00412260  PUSH EBP
+00412261  MOV EBP,ESP
+00412263  MOV EAX,dword ptr [ECX + 0x28]
+00412266  CMP EAX,dword ptr [EBP + 0x8]
+00412269  JNZ 0x0041228b
+0041226b  MOV EAX,dword ptr [EBP + 0xc]
+0041226e  CMP EAX,-0x1
+00412271  JZ 0x00412278
+00412273  CMP dword ptr [ECX + 0x2c],EAX
+00412276  JNZ 0x0041228b
+00412278  MOV EAX,dword ptr [EBP + 0x10]
+0041227b  CMP EAX,-0x1
+0041227e  JZ 0x00412285
+00412280  CMP dword ptr [ECX + 0x30],EAX
+00412283  JNZ 0x0041228b
+00412285  MOV AL,0x1
+00412287  POP EBP
+00412288  RET 0xc
+0041228b  XOR AL,AL
+0041228d  POP EBP
+0041228e  RET 0xc
+
+---- DECOMPILED C ----
+
+undefined4 __thiscall FUN_00412260(int param_1,int param_2,int param_3,int param_4)
+
+{
+  if (((*(int *)(param_1 + 0x28) == param_2) &&
+      ((param_3 == -1 || (*(int *)(param_1 + 0x2c) == param_3)))) &&
+     ((param_4 == -1 || (*(int *)(param_1 + 0x30) == param_4)))) {
+    return 1;
+  }
+  return 0;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000023, 4) INT_ADD (register, 0x4, 4) , (const, 0x28, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000023, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (stack, 0x4, 4)
+ ---  CBRANCH (ram, 0x41228b, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_EQUAL (stack, 0x8, 4) , (const, 0xffffffff, 4)
+ ---  CBRANCH (ram, 0x412278, 1) , (register, 0x206, 1)
+(unique, 0x10000027, 4) INT_ADD (register, 0x4, 4) , (const, 0x2c, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (stack, 0x8, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000027, 4)
+ ---  CBRANCH (ram, 0x41228b, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_EQUAL (stack, 0xc, 4) , (const, 0xffffffff, 4)
+ ---  CBRANCH (ram, 0x412285, 1) , (register, 0x206, 1)
+(unique, 0x1000002b, 4) INT_ADD (register, 0x4, 4) , (const, 0x30, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (stack, 0xc, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000002b, 4)
+ ---  CBRANCH (ram, 0x41228b, 1) , (register, 0x206, 1)
+(register, 0x0, 4) COPY (const, 0x1, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

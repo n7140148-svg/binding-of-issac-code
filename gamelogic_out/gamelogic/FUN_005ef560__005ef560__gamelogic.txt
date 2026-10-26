@@ -1,0 +1,24 @@
+========== FUNCTION FUN_005ef560@005ef560 ==========
+
+---- ASSEMBLY ----
+005ef560  MOV EAX,dword ptr [ECX + 0xcc0]
+005ef566  SHR EAX,0x1f
+005ef569  XOR AL,0x1
+005ef56b  RET
+
+---- DECOMPILED C ----
+
+uint __fastcall FUN_005ef560(int param_1)
+
+{
+  return *(uint *)(param_1 + 0xcc0) >> 0x1f ^ 1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000004, 4) INT_ADD (register, 0x4, 4) , (const, 0xcc0, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000004, 4)
+(register, 0x0, 4) INT_RIGHT (unique, 0x17200, 4) , (const, 0x1f, 4)
+(register, 0x0, 4) INT_XOR (register, 0x0, 4) , (const, 0x1, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

@@ -1,0 +1,65 @@
+========== FUNCTION thunk_FUN_00421e10@00421d70 ==========
+
+---- ASSEMBLY ----
+00421d70  JMP 0x00421e10
+
+---- DECOMPILED C ----
+
+void __fastcall thunk_FUN_00421e10(int *param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  uint uVar3;
+  
+  iVar1 = *param_1;
+  if (iVar1 != 0) {
+    uVar3 = param_1[2] - iVar1 & 0xfffffff8;
+    iVar2 = iVar1;
+    if (0xfff < uVar3) {
+      iVar2 = *(int *)(iVar1 + -4);
+      uVar3 = uVar3 + 0x23;
+      if (0x1f < (iVar1 - iVar2) - 4U) {
+                    /* WARNING: Subroutine does not return */
+        _invalid_parameter_noinfo_noreturn();
+      }
+    }
+    FUN_009eb08e(iVar2,uVar3);
+    *param_1 = 0;
+    param_1[1] = 0;
+    param_1[2] = 0;
+  }
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x421e59, 1) , (register, 0x206, 1)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x2, 4) , (const, 0x4, 4)
+(register, 0x4, 4) INT_SUB (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(register, 0x4, 4) INT_AND (register, 0x4, 4) , (const, 0xfffffff8, 4)
+(register, 0x200, 1) INT_LESS (const, 0xfff, 4) , (register, 0x4, 4)
+ ---  CBRANCH (ram, 0x421e3b, 1) , (register, 0x200, 1)
+(unique, 0x10000038, 4) COPY (unique, 0x17200, 4)
+(unique, 0x1000003c, 4) INT_ADD (unique, 0x17200, 4) , (const, 0xfffffffc, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000003c, 4)
+(register, 0x4, 4) INT_ADD (register, 0x4, 4) , (const, 0x23, 4)
+(register, 0x0, 4) INT_SUB (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(register, 0x0, 4) INT_SUB (register, 0x0, 4) , (const, 0x4, 4)
+(unique, 0x17f00, 1) INT_LESS (const, 0x1f, 4) , (register, 0x0, 4)
+ ---  CBRANCH (ram, 0x421e5b, 1) , (unique, 0x17f00, 1)
+(register, 0x0, 4) MULTIEQUAL (unique, 0x10000038, 4) , (unique, 0x17200, 4)
+(register, 0x4, 4) MULTIEQUAL (register, 0x4, 4) , (register, 0x4, 4)
+ ---  CALL (ram, 0x9eb08e, 8) , (register, 0x0, 4) , (register, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (const, 0x0, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x2, 4) , (const, 0x4, 4)
+ ---  RETURN (const, 0x0, 4)
+ ---  CALL (ram, 0xa065ac, 8)
+ ---  RETURN (const, 0x1, 4)

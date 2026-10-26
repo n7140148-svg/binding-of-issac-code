@@ -1,0 +1,49 @@
+========== FUNCTION FUN_00427780@00427780 ==========
+
+---- ASSEMBLY ----
+00427780  MOV EAX,dword ptr [ECX + 0x4]
+00427783  CMP EAX,0x4
+00427786  JZ 0x0042779a
+00427788  CMP EAX,0x5
+0042778b  JZ 0x0042779a
+0042778d  MOV ECX,dword ptr [ECX]
+0042778f  XOR DL,DL
+00427791  TEST DL,DL
+00427793  LEA EAX,[ECX + 0x1]
+00427796  CMOVZ EAX,ECX
+00427799  RET
+0042779a  MOV ECX,dword ptr [ECX]
+0042779c  MOV DL,0x1
+0042779e  TEST DL,DL
+004277a0  LEA EAX,[ECX + 0x1]
+004277a3  CMOVZ EAX,ECX
+004277a6  RET
+
+---- DECOMPILED C ----
+
+/* WARNING: Removing unreachable block (ram,0x004277a3) */
+
+int __fastcall FUN_00427780(int *param_1)
+
+{
+  if ((param_1[1] != 4) && (param_1[1] != 5)) {
+    return *param_1;
+  }
+  return *param_1 + 1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x4, 4)
+ ---  CBRANCH (ram, 0x42779a, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x5, 4)
+ ---  CBRANCH (ram, 0x42779a, 1) , (register, 0x206, 1)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (unique, 0x17200, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x6600, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x1, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (unique, 0x6600, 4)

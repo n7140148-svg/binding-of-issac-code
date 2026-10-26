@@ -1,0 +1,404 @@
+========== FUNCTION FUN_00596210@00596210 ==========
+
+---- ASSEMBLY ----
+00596210  PUSH EBX
+00596211  MOV EBX,ESP
+00596213  SUB ESP,0x8
+00596216  AND ESP,0xfffffff8
+00596219  ADD ESP,0x4
+0059621c  PUSH EBP
+0059621d  MOV EBP,dword ptr [EBX + 0x4]
+00596220  MOV dword ptr [ESP + 0x4],EBP
+00596224  MOV EBP,ESP
+00596226  SUB ESP,0x20
+00596229  PUSH ESI
+0059622a  PUSH EDI
+0059622b  MOV EDI,ECX
+0059622d  CALL 0x00695680
+00596232  MOV ESI,dword ptr [EDI + 0x318]
+00596238  MOV ECX,EAX
+0059623a  MOV dword ptr [EBP + -0x8],ECX
+0059623d  TEST ESI,ESI
+0059623f  JNZ 0x00596292
+00596241  MOV EAX,dword ptr [EBX + 0x8]
+00596244  MOVSS XMM1,dword ptr [EAX]
+00596248  MOVSS XMM0,dword ptr [EAX + 0x4]
+0059624d  SUBSS XMM0,dword ptr [ECX + 0x298]
+00596255  SUBSS XMM1,dword ptr [ECX + 0x294]
+0059625d  MULSS XMM0,XMM0
+00596261  MULSS XMM1,XMM1
+00596265  ADDSS XMM0,XMM1
+00596269  CALL 0x004228c0
+0059626e  MOVAPS XMM1,XMM0
+00596271  XORPS XMM0,XMM0
+00596274  SUBSS XMM1,dword ptr [0x00b6ab20]
+0059627c  ANDPS XMM1,xmmword ptr [0x00b6c980]
+00596283  SUBSS XMM0,XMM1
+00596287  POP EDI
+00596288  POP ESI
+00596289  MOV ESP,EBP
+0059628b  POP EBP
+0059628c  MOV ESP,EBX
+0059628e  POP EBX
+0059628f  RET 0x4
+00596292  MOV EAX,dword ptr [EDI + 0xab4]
+00596298  CMP EAX,0x71
+0059629b  JC 0x00596448
+005962a1  MOV EDI,dword ptr [EBX + 0x8]
+005962a4  MOVSS XMM0,dword ptr [EDI]
+005962a8  MOVAPS XMM1,XMM0
+005962ab  MOVSS dword ptr [EBP + -0x14],XMM0
+005962b0  MOVSS XMM0,dword ptr [EDI + 0x4]
+005962b5  SUBSS XMM0,dword ptr [ESI + 0x298]
+005962bd  SUBSS XMM1,dword ptr [ESI + 0x294]
+005962c5  MULSS XMM0,XMM0
+005962c9  MULSS XMM1,XMM1
+005962cd  ADDSS XMM0,XMM1
+005962d1  CALL 0x004228c0
+005962d6  MULSS XMM0,dword ptr [0x00b6a38c]
+005962de  XORPS XMM1,XMM1
+005962e1  MOV ECX,dword ptr [EBP + -0x8]
+005962e4  ADDSS XMM0,XMM1
+005962e8  MOVSS XMM2,dword ptr [ECX + 0x298]
+005962f0  MOVSS dword ptr [EBP + -0x1c],XMM2
+005962f5  SUBSS XMM2,dword ptr [EDI + 0x4]
+005962fa  MOVSS dword ptr [EBP + -0x20],XMM0
+005962ff  MOVSS XMM0,dword ptr [ECX + 0x294]
+00596307  MOVAPS XMM1,XMM0
+0059630a  MOVSS dword ptr [EBP + -0x18],XMM0
+0059630f  SUBSS XMM1,dword ptr [EDI]
+00596313  MOVSS dword ptr [EBP + -0x8],XMM2
+00596318  MOVAPS XMM0,XMM1
+0059631b  MOVSS dword ptr [EBP + -0x4],XMM1
+00596320  MULSS XMM0,XMM1
+00596324  MOVAPS XMM1,XMM2
+00596327  MULSS XMM1,XMM2
+0059632b  ADDSS XMM0,XMM1
+0059632f  CALL 0x004228c0
+00596334  XORPS XMM1,XMM1
+00596337  COMISS XMM0,XMM1
+0059633a  JBE 0x00596367
+0059633c  MOVSS XMM1,dword ptr [0x00b6a614]
+00596344  DIVSS XMM1,XMM0
+00596348  MOVSS XMM2,dword ptr [EBP + -0x4]
+0059634d  MOVAPS XMM0,XMM1
+00596350  MULSS XMM2,XMM0
+00596354  MOVSS XMM0,dword ptr [EBP + -0x8]
+00596359  MULSS XMM0,XMM1
+0059635d  MOVSS dword ptr [EBP + -0x4],XMM2
+00596362  MOVSS dword ptr [EBP + -0x8],XMM0
+00596367  MOVSS XMM1,dword ptr [ESI + 0x294]
+0059636f  SUBSS XMM1,dword ptr [EBP + -0x14]
+00596374  MOVSS XMM2,dword ptr [ESI + 0x298]
+0059637c  SUBSS XMM2,dword ptr [EDI + 0x4]
+00596381  MOVAPS XMM0,XMM1
+00596384  MOVSS dword ptr [EBP + -0x10],XMM1
+00596389  MULSS XMM0,XMM1
+0059638d  MOVAPS XMM1,XMM2
+00596390  MOVSS dword ptr [EBP + -0xc],XMM2
+00596395  MULSS XMM1,XMM2
+00596399  ADDSS XMM0,XMM1
+0059639d  CALL 0x004228c0
+005963a2  MOVSS XMM2,dword ptr [EBP + -0x10]
+005963a7  XORPS XMM1,XMM1
+005963aa  COMISS XMM0,XMM1
+005963ad  MOVSS XMM3,dword ptr [EBP + -0xc]
+005963b2  JBE 0x005963cb
+005963b4  MOVSS XMM1,dword ptr [0x00b6a614]
+005963bc  DIVSS XMM1,XMM0
+005963c0  MOVAPS XMM0,XMM1
+005963c3  MULSS XMM3,XMM1
+005963c7  MULSS XMM2,XMM0
+005963cb  MOVSS XMM0,dword ptr [EBP + -0x4]
+005963d0  MOVSS XMM1,dword ptr [EDI + 0x4]
+005963d5  MOVSS XMM4,dword ptr [EDI]
+005963d9  SUBSS XMM1,dword ptr [EBP + -0x1c]
+005963de  SUBSS XMM4,dword ptr [EBP + -0x18]
+005963e3  MULSS XMM0,XMM2
+005963e7  MOVSS XMM2,dword ptr [EBP + -0x8]
+005963ec  MULSS XMM2,XMM3
+005963f0  MULSS XMM1,XMM1
+005963f4  ADDSS XMM0,XMM2
+005963f8  MULSS XMM4,XMM4
+005963fc  ADDSS XMM1,XMM4
+00596400  MULSS XMM0,dword ptr [0x00b6a350]
+00596408  MULSS XMM0,dword ptr [0x00b6ac14]
+00596410  ADDSS XMM0,dword ptr [EBP + -0x20]
+00596415  MOVSS dword ptr [EBP + -0x4],XMM0
+0059641a  MOVAPS XMM0,XMM1
+0059641d  CALL 0x004228c0
+00596422  SUBSS XMM0,dword ptr [0x00b6ab20]
+0059642a  MOVSS XMM2,dword ptr [EBP + -0x4]
+0059642f  ANDPS XMM0,xmmword ptr [0x00b6c980]
+00596436  SUBSS XMM2,XMM0
+0059643a  MOVAPS XMM0,XMM2
+0059643d  POP EDI
+0059643e  POP ESI
+0059643f  MOV ESP,EBP
+00596441  POP EBP
+00596442  MOV ESP,EBX
+00596444  POP EBX
+00596445  RET 0x4
+00596448  MOVSS XMM4,dword ptr [ESI + 0x298]
+00596450  CMP EAX,0x68
+00596453  MOVSS XMM3,dword ptr [ESI + 0x294]
+0059645b  LEA EAX,[ESI + 0x298]
+00596461  MOV dword ptr [EBP + -0x14],EAX
+00596464  MOV EAX,dword ptr [EBX + 0x8]
+00596467  MOVSS XMM0,dword ptr [EAX]
+0059646b  MOVAPS XMM1,XMM0
+0059646e  MOVSS dword ptr [EBP + -0x10],XMM0
+00596473  MOVSS XMM0,dword ptr [EAX + 0x4]
+00596478  SUBSS XMM1,XMM3
+0059647c  SUBSS XMM0,XMM4
+00596480  MULSS XMM1,XMM1
+00596484  MULSS XMM0,XMM0
+00596488  ADDSS XMM0,XMM1
+0059648c  CALL 0x004228c0
+00596491  MULSS XMM0,dword ptr [0x00b6a480]
+00596499  XORPS XMM1,XMM1
+0059649c  MOV ECX,dword ptr [EBP + -0x8]
+0059649f  MOV EAX,dword ptr [EBX + 0x8]
+005964a2  ADDSS XMM0,XMM1
+005964a6  MOVSS XMM1,dword ptr [ECX + 0x294]
+005964ae  SUBSS XMM1,dword ptr [EAX]
+005964b2  MOVSS XMM2,dword ptr [ECX + 0x298]
+005964ba  SUBSS XMM2,dword ptr [EAX + 0x4]
+005964bf  MOVSS dword ptr [EBP + -0x20],XMM0
+005964c4  MOVAPS XMM0,XMM1
+005964c7  MOVSS dword ptr [EBP + -0x4],XMM1
+005964cc  MULSS XMM0,XMM1
+005964d0  MOVAPS XMM1,XMM2
+005964d3  MOVSS dword ptr [EBP + -0xc],XMM2
+005964d8  MULSS XMM1,XMM2
+005964dc  ADDSS XMM0,XMM1
+005964e0  CALL 0x004228c0
+005964e5  XORPS XMM1,XMM1
+005964e8  COMISS XMM0,XMM1
+005964eb  JBE 0x00596518
+005964ed  MOVSS XMM1,dword ptr [0x00b6a614]
+005964f5  DIVSS XMM1,XMM0
+005964f9  MOVSS XMM2,dword ptr [EBP + -0x4]
+005964fe  MOVAPS XMM0,XMM1
+00596501  MULSS XMM2,XMM0
+00596505  MOVSS XMM0,dword ptr [EBP + -0xc]
+0059650a  MULSS XMM0,XMM1
+0059650e  MOVSS dword ptr [EBP + -0x4],XMM2
+00596513  MOVSS dword ptr [EBP + -0xc],XMM0
+00596518  MOVSS XMM1,dword ptr [ESI + 0x294]
+00596520  MOV EAX,dword ptr [EBP + -0x14]
+00596523  SUBSS XMM1,dword ptr [EBP + -0x10]
+00596528  MOV ESI,dword ptr [EBX + 0x8]
+0059652b  MOVSS XMM2,dword ptr [EAX]
+0059652f  SUBSS XMM2,dword ptr [ESI + 0x4]
+00596534  MOVAPS XMM0,XMM1
+00596537  MOVSS dword ptr [EBP + -0x10],XMM1
+0059653c  MULSS XMM0,XMM1
+00596540  MOVAPS XMM1,XMM2
+00596543  MOVSS dword ptr [EBP + -0x14],XMM2
+00596548  MULSS XMM1,XMM2
+0059654c  ADDSS XMM0,XMM1
+00596550  CALL 0x004228c0
+00596555  MOVSS XMM3,dword ptr [EBP + -0x10]
+0059655a  XORPS XMM1,XMM1
+0059655d  COMISS XMM0,XMM1
+00596560  MOVSS XMM4,dword ptr [EBP + -0x14]
+00596565  JBE 0x0059657e
+00596567  MOVSS XMM1,dword ptr [0x00b6a614]
+0059656f  DIVSS XMM1,XMM0
+00596573  MOVAPS XMM0,XMM1
+00596576  MULSS XMM4,XMM1
+0059657a  MULSS XMM3,XMM0
+0059657e  MOVSS XMM2,dword ptr [ESI + 0x4]
+00596583  MOV EAX,dword ptr [EBP + -0x8]
+00596586  MOVAPS XMM0,XMM2
+00596589  SUBSS XMM2,dword ptr [EDI + 0x298]
+00596591  MOVSS XMM5,dword ptr [ESI]
+00596595  MOVAPS XMM1,XMM5
+00596598  SUBSS XMM0,dword ptr [EAX + 0x298]
+005965a0  SUBSS XMM1,dword ptr [EAX + 0x294]
+005965a8  SUBSS XMM5,dword ptr [EDI + 0x294]
+005965b0  MOVSS dword ptr [EBP + -0x1c],XMM2
+005965b5  MOVSS XMM2,dword ptr [EBP + -0x4]
+005965ba  MULSS XMM2,XMM3
+005965be  MOVSS XMM3,dword ptr [EBP + -0xc]
+005965c3  MULSS XMM3,XMM4
+005965c7  MULSS XMM0,XMM0
+005965cb  ADDSS XMM2,XMM3
+005965cf  MULSS XMM1,XMM1
+005965d3  MOVSS dword ptr [EBP + -0x10],XMM5
+005965d8  ADDSS XMM0,XMM1
+005965dc  MULSS XMM2,dword ptr [0x00b6ac14]
+005965e4  ADDSS XMM2,dword ptr [EBP + -0x20]
+005965e9  MOVSS dword ptr [EBP + -0x4],XMM2
+005965ee  CALL 0x004228c0
+005965f3  SUBSS XMM0,dword ptr [0x00b6ab20]
+005965fb  MOVSS XMM2,dword ptr [EBP + -0x4]
+00596600  MOVSS XMM1,dword ptr [EBP + -0x10]
+00596605  MULSS XMM1,XMM1
+00596609  ANDPS XMM0,xmmword ptr [0x00b6c980]
+00596610  SUBSS XMM2,XMM0
+00596614  MOVSS XMM0,dword ptr [EBP + -0x1c]
+00596619  MULSS XMM0,XMM0
+0059661d  ADDSS XMM0,XMM1
+00596621  MOVSS dword ptr [EBP + -0x4],XMM2
+00596626  CALL 0x004228c0
+0059662b  MULSS XMM0,dword ptr [0x00b6a670]
+00596633  POP EDI
+00596634  POP ESI
+00596635  ADDSS XMM0,dword ptr [EBP + -0x4]
+0059663a  MOV ESP,EBP
+0059663c  POP EBP
+0059663d  MOV ESP,EBX
+0059663f  POP EBX
+00596640  RET 0x4
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_00596210(int param_1)
+
+{
+  FUN_00695680();
+  if (*(int *)(param_1 + 0x318) == 0) {
+    FUN_004228c0();
+    return;
+  }
+  if (0x70 < *(uint *)(param_1 + 0xab4)) {
+    FUN_004228c0();
+    FUN_004228c0();
+    FUN_004228c0();
+    FUN_004228c0();
+    return;
+  }
+  FUN_004228c0();
+  FUN_004228c0();
+  FUN_004228c0();
+  FUN_004228c0();
+  FUN_004228c0();
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+ ---  CALL (ram, 0x695680, 8)
+(ram, 0xb6a350, 4) INDIRECT (ram, 0xb6a350, 4) , (const, 0x3b, 4)
+(ram, 0xb6a38c, 4) INDIRECT (ram, 0xb6a38c, 4) , (const, 0x3b, 4)
+(ram, 0xb6a480, 4) INDIRECT (ram, 0xb6a480, 4) , (const, 0x3b, 4)
+(ram, 0xb6a614, 4) INDIRECT (ram, 0xb6a614, 4) , (const, 0x3b, 4)
+(ram, 0xb6ab20, 4) INDIRECT (ram, 0xb6ab20, 4) , (const, 0x3b, 4)
+(ram, 0xb6ac14, 4) INDIRECT (ram, 0xb6ac14, 4) , (const, 0x3b, 4)
+(ram, 0xb6c980, 4) INDIRECT (ram, 0xb6c980, 4) , (const, 0x3b, 4)
+(unique, 0x100000a7, 4) INT_ADD (register, 0x4, 4) , (const, 0x318, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x100000a7, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x596292, 1) , (register, 0x206, 1)
+ ---  CALL (ram, 0x4228c0, 8)
+(ram, 0xb6a350, 4) INDIRECT (ram, 0xb6a350, 4) , (const, 0x67, 4)
+(ram, 0xb6a38c, 4) INDIRECT (ram, 0xb6a38c, 4) , (const, 0x67, 4)
+(ram, 0xb6a480, 4) INDIRECT (ram, 0xb6a480, 4) , (const, 0x67, 4)
+(ram, 0xb6a614, 4) INDIRECT (ram, 0xb6a614, 4) , (const, 0x67, 4)
+(ram, 0xb6ab20, 4) INDIRECT (ram, 0xb6ab20, 4) , (const, 0x67, 4)
+(ram, 0xb6ac14, 4) INDIRECT (ram, 0xb6ac14, 4) , (const, 0x67, 4)
+(ram, 0xb6c980, 4) INDIRECT (ram, 0xb6c980, 4) , (const, 0x67, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xb6a350, 4) COPY (ram, 0xb6a350, 4)
+(ram, 0xb6a38c, 4) COPY (ram, 0xb6a38c, 4)
+(ram, 0xb6a480, 4) COPY (ram, 0xb6a480, 4)
+(ram, 0xb6a614, 4) COPY (ram, 0xb6a614, 4)
+(ram, 0xb6ab20, 4) COPY (ram, 0xb6ab20, 4)
+(ram, 0xb6ac14, 4) COPY (ram, 0xb6ac14, 4)
+(ram, 0xb6c980, 4) COPY (ram, 0xb6c980, 4)
+(unique, 0x100000ab, 4) INT_ADD (register, 0x4, 4) , (const, 0xab4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x100000ab, 4)
+(register, 0x200, 1) INT_LESS (const, 0x70, 4) , (unique, 0x17200, 4)
+ ---  CBRANCH (ram, 0x596448, 1) , (register, 0x200, 1)
+ ---  CALL (ram, 0x4228c0, 8)
+(ram, 0xb6a350, 4) INDIRECT (ram, 0xb6a350, 4) , (const, 0xbb, 4)
+(ram, 0xb6a38c, 4) INDIRECT (ram, 0xb6a38c, 4) , (const, 0xbb, 4)
+(ram, 0xb6a480, 4) INDIRECT (ram, 0xb6a480, 4) , (const, 0xbb, 4)
+(ram, 0xb6a614, 4) INDIRECT (ram, 0xb6a614, 4) , (const, 0xbb, 4)
+(ram, 0xb6ab20, 4) INDIRECT (ram, 0xb6ab20, 4) , (const, 0xbb, 4)
+(ram, 0xb6ac14, 4) INDIRECT (ram, 0xb6ac14, 4) , (const, 0xbb, 4)
+(ram, 0xb6c980, 4) INDIRECT (ram, 0xb6c980, 4) , (const, 0xbb, 4)
+ ---  CALL (ram, 0x4228c0, 8)
+(ram, 0xb6a350, 4) INDIRECT (ram, 0xb6a350, 4) , (const, 0xf6, 4)
+(ram, 0xb6a38c, 4) INDIRECT (ram, 0xb6a38c, 4) , (const, 0xf6, 4)
+(ram, 0xb6a480, 4) INDIRECT (ram, 0xb6a480, 4) , (const, 0xf6, 4)
+(ram, 0xb6a614, 4) INDIRECT (ram, 0xb6a614, 4) , (const, 0xf6, 4)
+(ram, 0xb6ab20, 4) INDIRECT (ram, 0xb6ab20, 4) , (const, 0xf6, 4)
+(ram, 0xb6ac14, 4) INDIRECT (ram, 0xb6ac14, 4) , (const, 0xf6, 4)
+(ram, 0xb6c980, 4) INDIRECT (ram, 0xb6c980, 4) , (const, 0xf6, 4)
+ ---  CALL (ram, 0x4228c0, 8)
+(ram, 0xb6a350, 4) INDIRECT (ram, 0xb6a350, 4) , (const, 0x149, 4)
+(ram, 0xb6a38c, 4) INDIRECT (ram, 0xb6a38c, 4) , (const, 0x149, 4)
+(ram, 0xb6a480, 4) INDIRECT (ram, 0xb6a480, 4) , (const, 0x149, 4)
+(ram, 0xb6a614, 4) INDIRECT (ram, 0xb6a614, 4) , (const, 0x149, 4)
+(ram, 0xb6ab20, 4) INDIRECT (ram, 0xb6ab20, 4) , (const, 0x149, 4)
+(ram, 0xb6ac14, 4) INDIRECT (ram, 0xb6ac14, 4) , (const, 0x149, 4)
+(ram, 0xb6c980, 4) INDIRECT (ram, 0xb6c980, 4) , (const, 0x149, 4)
+ ---  CALL (ram, 0x4228c0, 8)
+(ram, 0xb6a350, 4) INDIRECT (ram, 0xb6a350, 4) , (const, 0x1a2, 4)
+(ram, 0xb6a38c, 4) INDIRECT (ram, 0xb6a38c, 4) , (const, 0x1a2, 4)
+(ram, 0xb6a480, 4) INDIRECT (ram, 0xb6a480, 4) , (const, 0x1a2, 4)
+(ram, 0xb6a614, 4) INDIRECT (ram, 0xb6a614, 4) , (const, 0x1a2, 4)
+(ram, 0xb6ab20, 4) INDIRECT (ram, 0xb6ab20, 4) , (const, 0x1a2, 4)
+(ram, 0xb6ac14, 4) INDIRECT (ram, 0xb6ac14, 4) , (const, 0x1a2, 4)
+(ram, 0xb6c980, 4) INDIRECT (ram, 0xb6c980, 4) , (const, 0x1a2, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xb6a350, 4) COPY (ram, 0xb6a350, 4)
+(ram, 0xb6a38c, 4) COPY (ram, 0xb6a38c, 4)
+(ram, 0xb6a480, 4) COPY (ram, 0xb6a480, 4)
+(ram, 0xb6a614, 4) COPY (ram, 0xb6a614, 4)
+(ram, 0xb6ab20, 4) COPY (ram, 0xb6ab20, 4)
+(ram, 0xb6ac14, 4) COPY (ram, 0xb6ac14, 4)
+(ram, 0xb6c980, 4) COPY (ram, 0xb6c980, 4)
+ ---  CALL (ram, 0x4228c0, 8)
+(ram, 0xb6a350, 4) INDIRECT (ram, 0xb6a350, 4) , (const, 0x201, 4)
+(ram, 0xb6a38c, 4) INDIRECT (ram, 0xb6a38c, 4) , (const, 0x201, 4)
+(ram, 0xb6a480, 4) INDIRECT (ram, 0xb6a480, 4) , (const, 0x201, 4)
+(ram, 0xb6a614, 4) INDIRECT (ram, 0xb6a614, 4) , (const, 0x201, 4)
+(ram, 0xb6ab20, 4) INDIRECT (ram, 0xb6ab20, 4) , (const, 0x201, 4)
+(ram, 0xb6ac14, 4) INDIRECT (ram, 0xb6ac14, 4) , (const, 0x201, 4)
+(ram, 0xb6c980, 4) INDIRECT (ram, 0xb6c980, 4) , (const, 0x201, 4)
+ ---  CALL (ram, 0x4228c0, 8)
+(ram, 0xb6a350, 4) INDIRECT (ram, 0xb6a350, 4) , (const, 0x235, 4)
+(ram, 0xb6a38c, 4) INDIRECT (ram, 0xb6a38c, 4) , (const, 0x235, 4)
+(ram, 0xb6a480, 4) INDIRECT (ram, 0xb6a480, 4) , (const, 0x235, 4)
+(ram, 0xb6a614, 4) INDIRECT (ram, 0xb6a614, 4) , (const, 0x235, 4)
+(ram, 0xb6ab20, 4) INDIRECT (ram, 0xb6ab20, 4) , (const, 0x235, 4)
+(ram, 0xb6ac14, 4) INDIRECT (ram, 0xb6ac14, 4) , (const, 0x235, 4)
+(ram, 0xb6c980, 4) INDIRECT (ram, 0xb6c980, 4) , (const, 0x235, 4)
+ ---  CALL (ram, 0x4228c0, 8)
+(ram, 0xb6a350, 4) INDIRECT (ram, 0xb6a350, 4) , (const, 0x28d, 4)
+(ram, 0xb6a38c, 4) INDIRECT (ram, 0xb6a38c, 4) , (const, 0x28d, 4)
+(ram, 0xb6a480, 4) INDIRECT (ram, 0xb6a480, 4) , (const, 0x28d, 4)
+(ram, 0xb6a614, 4) INDIRECT (ram, 0xb6a614, 4) , (const, 0x28d, 4)
+(ram, 0xb6ab20, 4) INDIRECT (ram, 0xb6ab20, 4) , (const, 0x28d, 4)
+(ram, 0xb6ac14, 4) INDIRECT (ram, 0xb6ac14, 4) , (const, 0x28d, 4)
+(ram, 0xb6c980, 4) INDIRECT (ram, 0xb6c980, 4) , (const, 0x28d, 4)
+ ---  CALL (ram, 0x4228c0, 8)
+(ram, 0xb6a350, 4) INDIRECT (ram, 0xb6a350, 4) , (const, 0x2f8, 4)
+(ram, 0xb6a38c, 4) INDIRECT (ram, 0xb6a38c, 4) , (const, 0x2f8, 4)
+(ram, 0xb6a480, 4) INDIRECT (ram, 0xb6a480, 4) , (const, 0x2f8, 4)
+(ram, 0xb6a614, 4) INDIRECT (ram, 0xb6a614, 4) , (const, 0x2f8, 4)
+(ram, 0xb6ab20, 4) INDIRECT (ram, 0xb6ab20, 4) , (const, 0x2f8, 4)
+(ram, 0xb6ac14, 4) INDIRECT (ram, 0xb6ac14, 4) , (const, 0x2f8, 4)
+(ram, 0xb6c980, 4) INDIRECT (ram, 0xb6c980, 4) , (const, 0x2f8, 4)
+ ---  CALL (ram, 0x4228c0, 8)
+(ram, 0xb6a350, 4) INDIRECT (ram, 0xb6a350, 4) , (const, 0x31a, 4)
+(ram, 0xb6a38c, 4) INDIRECT (ram, 0xb6a38c, 4) , (const, 0x31a, 4)
+(ram, 0xb6a480, 4) INDIRECT (ram, 0xb6a480, 4) , (const, 0x31a, 4)
+(ram, 0xb6a614, 4) INDIRECT (ram, 0xb6a614, 4) , (const, 0x31a, 4)
+(ram, 0xb6ab20, 4) INDIRECT (ram, 0xb6ab20, 4) , (const, 0x31a, 4)
+(ram, 0xb6ac14, 4) INDIRECT (ram, 0xb6ac14, 4) , (const, 0x31a, 4)
+(ram, 0xb6c980, 4) INDIRECT (ram, 0xb6c980, 4) , (const, 0x31a, 4)
+ ---  RETURN (const, 0x0, 4)
+(ram, 0xb6a350, 4) COPY (ram, 0xb6a350, 4)
+(ram, 0xb6a38c, 4) COPY (ram, 0xb6a38c, 4)
+(ram, 0xb6a480, 4) COPY (ram, 0xb6a480, 4)
+(ram, 0xb6a614, 4) COPY (ram, 0xb6a614, 4)
+(ram, 0xb6ab20, 4) COPY (ram, 0xb6ab20, 4)
+(ram, 0xb6ac14, 4) COPY (ram, 0xb6ac14, 4)
+(ram, 0xb6c980, 4) COPY (ram, 0xb6c980, 4)

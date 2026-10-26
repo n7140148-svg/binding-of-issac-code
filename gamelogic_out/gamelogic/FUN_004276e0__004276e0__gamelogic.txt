@@ -1,0 +1,39 @@
+========== FUNCTION FUN_004276e0@004276e0 ==========
+
+---- ASSEMBLY ----
+004276e0  PUSH EBP
+004276e1  MOV EBP,ESP
+004276e3  MOV EAX,dword ptr [EBP + 0x8]
+004276e6  CMP EAX,0x1bf
+004276eb  JA 0x004276f5
+004276ed  MOV EAX,dword ptr [ECX + EAX*0x4 + 0x24]
+004276f1  POP EBP
+004276f2  RET 0x4
+004276f5  XOR EAX,EAX
+004276f7  POP EBP
+004276f8  RET 0x4
+
+---- DECOMPILED C ----
+
+undefined4 __thiscall FUN_004276e0(int param_1,uint param_2)
+
+{
+  if (param_2 < 0x1c0) {
+    return *(undefined4 *)(param_1 + 0x24 + param_2 * 4);
+  }
+  return 0;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17f00, 1) INT_LESS (stack, 0x4, 4) , (const, 0x1c0, 4)
+ ---  CBRANCH (ram, 0x4276f5, 1) , (unique, 0x17f00, 1)
+(unique, 0x7100, 4) INT_ADD (register, 0x4, 4) , (const, 0x24, 4)
+(unique, 0x7200, 4) INT_MULT (stack, 0x4, 4) , (const, 0x4, 4)
+(unique, 0x10000009, 4) INT_ADD (unique, 0x7100, 4) , (unique, 0x7200, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x7400, 4)
+(register, 0x0, 4) COPY (unique, 0x17200, 4)
+(unique, 0x7400, 4) CAST (unique, 0x10000009, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

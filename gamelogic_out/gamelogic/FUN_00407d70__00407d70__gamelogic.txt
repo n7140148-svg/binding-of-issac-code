@@ -1,0 +1,46 @@
+========== FUNCTION FUN_00407d70@00407d70 ==========
+
+---- ASSEMBLY ----
+00407d70  PUSH EBP
+00407d71  MOV EBP,ESP
+00407d73  MOV EAX,dword ptr [EBP + 0x8]
+00407d76  MOV EDX,EAX
+00407d78  CMP dword ptr [EAX + 0x14],0x10
+00407d7c  JC 0x00407d80
+00407d7e  MOV EDX,dword ptr [EAX]
+00407d80  PUSH dword ptr [EAX + 0x10]
+00407d83  PUSH EDX
+00407d84  CALL 0x00407c80
+00407d89  POP EBP
+00407d8a  RET 0x8
+
+---- DECOMPILED C ----
+
+void FUN_00407d70(undefined4 *param_1)
+
+{
+  undefined4 *puVar1;
+  
+  puVar1 = param_1;
+  if (0xf < (uint)param_1[5]) {
+    puVar1 = (undefined4 *)*param_1;
+  }
+  FUN_00407c80(puVar1,param_1[4]);
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (const, 0xf, 4) , (unique, 0x10000022, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x5, 4) , (const, 0x4, 4)
+(unique, 0x10000022, 4) CAST (unique, 0x17200, 4)
+ ---  CBRANCH (ram, 0x407d80, 1) , (register, 0x200, 1)
+(unique, 0x1000001e, 4) COPY (stack, 0x4, 4)
+(unique, 0x10000026, 4) LOAD (const, 0x1a1, 4) , (stack, 0x4, 4)
+(unique, 0x17200, 4) CAST (unique, 0x10000026, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x8, 4) MULTIEQUAL (unique, 0x1000001e, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x4, 4) , (const, 0x4, 4)
+ ---  CALL (ram, 0x407c80, 8) , (register, 0x8, 4) , (unique, 0x17200, 4)
+ ---  RETURN (const, 0x0, 4)

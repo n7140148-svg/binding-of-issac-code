@@ -1,0 +1,56 @@
+========== FUNCTION FUN_00570620@00570620 ==========
+
+---- ASSEMBLY ----
+00570620  MOV EAX,dword ptr [ECX + 0x318]
+00570626  TEST EAX,EAX
+00570628  JZ 0x0057063d
+0057062a  CMP dword ptr [EAX + 0x28],0x38d
+00570631  JNZ 0x0057063d
+00570633  CMP dword ptr [EAX + 0x2c],0xa
+00570637  JNZ 0x0057063d
+00570639  MOV ECX,EAX
+0057063b  JMP 0x00570620
+0057063d  MOV dword ptr [ECX + 0xb14],0x0
+00570647  RET
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_00570620(int param_1)
+
+{
+  int iVar1;
+  
+  do {
+    iVar1 = param_1;
+    param_1 = *(int *)(iVar1 + 0x318);
+    if ((param_1 == 0) || (*(int *)(param_1 + 0x28) != 0x38d)) break;
+  } while (*(int *)(param_1 + 0x2c) == 10);
+  *(undefined4 *)(iVar1 + 0xb14) = 0;
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000019, 4) INT_ADD (register, 0x4, 4) , (const, 0x318, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x10000015, 4) MULTIEQUAL (unique, 0x1000000d, 4) , (unique, 0x10000011, 4)
+(unique, 0x1000000d, 4) COPY (register, 0x4, 4)
+(register, 0x4, 4) COPY (unique, 0x10000015, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000019, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x57063d, 1) , (register, 0x206, 1)
+(unique, 0x1000001d, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x28, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x38d, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000001d, 4)
+ ---  CBRANCH (ram, 0x57063d, 1) , (register, 0x206, 1)
+(unique, 0x10000021, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x2c, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0xa, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000021, 4)
+ ---  CBRANCH (ram, 0x57063d, 1) , (register, 0x206, 1)
+(unique, 0x10000011, 4) COPY (unique, 0x17200, 4)
+(unique, 0x10000025, 4) INT_ADD (register, 0x4, 4) , (const, 0xb14, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (const, 0x0, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000025, 4)
+ ---  RETURN (const, 0x0, 4)

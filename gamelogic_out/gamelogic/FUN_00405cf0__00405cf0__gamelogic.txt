@@ -1,0 +1,36 @@
+========== FUNCTION FUN_00405cf0@00405cf0 ==========
+
+---- ASSEMBLY ----
+00405cf0  PUSH EBP
+00405cf1  MOV EBP,ESP
+00405cf3  PUSH ECX
+00405cf4  CMP dword ptr [ECX + 0x54],0x0
+00405cf8  JZ 0x00405d0a
+00405cfa  MOVD XMM1,dword ptr [EBP + 0x8]
+00405cff  ADD ECX,0x50
+00405d02  CVTDQ2PS XMM1,XMM1
+00405d05  CALL 0x00403c00
+00405d0a  POP ECX
+00405d0b  POP EBP
+00405d0c  RET 0x4
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_00405cf0(int param_1)
+
+{
+  if (*(int *)(param_1 + 0x54) != 0) {
+    FUN_00403c00(param_1);
+  }
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000016, 4) INT_ADD (register, 0x4, 4) , (const, 0x54, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000016, 4)
+ ---  CBRANCH (ram, 0x405d0a, 1) , (register, 0x206, 1)
+ ---  CALL (ram, 0x403c00, 8) , (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4)

@@ -1,0 +1,33 @@
+========== FUNCTION FUN_00444bd0@00444bd0 ==========
+
+---- ASSEMBLY ----
+00444bd0  MOV EAX,dword ptr [ECX]
+00444bd2  TEST EAX,EAX
+00444bd4  JZ 0x00444bd9
+00444bd6  MOV EAX,dword ptr [EAX]
+00444bd8  RET
+00444bd9  OR EAX,0xffffffff
+00444bdc  RET
+
+---- DECOMPILED C ----
+
+undefined4 __fastcall FUN_00444bd0(int *param_1)
+
+{
+  if ((undefined4 *)*param_1 != (undefined4 *)0x0) {
+    return *(undefined4 *)*param_1;
+  }
+  return 0xffffffff;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000001, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x17200, 4) CAST (unique, 0x10000001, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x444bd9, 1) , (register, 0x206, 1)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x17200, 4)
+(register, 0x0, 4) COPY (unique, 0x17200, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (const, 0xffffffff, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

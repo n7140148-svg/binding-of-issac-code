@@ -1,0 +1,39 @@
+========== FUNCTION FUN_004f3f70@004f3f70 ==========
+
+---- ASSEMBLY ----
+004f3f70  CMP byte ptr [ECX + 0x360],0x0
+004f3f77  JZ 0x004f3f85
+004f3f79  CMP dword ptr [ECX + 0x364],0x0
+004f3f80  JG 0x004f3f85
+004f3f82  MOV AL,0x1
+004f3f84  RET
+004f3f85  XOR AL,AL
+004f3f87  RET
+
+---- DECOMPILED C ----
+
+undefined1 __fastcall FUN_004f3f70(int param_1)
+
+{
+  if ((*(char *)(param_1 + 0x360) != '\0') && (*(int *)(param_1 + 0x364) < 1)) {
+    return 1;
+  }
+  return 0;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000007, 4) INT_ADD (register, 0x4, 4) , (const, 0x360, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (const, 0x0, 1)
+(unique, 0x6800, 4) CAST (unique, 0x10000007, 4)
+ ---  CBRANCH (ram, 0x4f3f85, 1) , (register, 0x206, 1)
+(unique, 0x1000000b, 4) INT_ADD (register, 0x4, 4) , (const, 0x364, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000000b, 4)
+(unique, 0x19000, 1) INT_SLESS (unique, 0x17200, 4) , (const, 0x1, 4)
+ ---  CBRANCH (ram, 0x4f3f85, 1) , (unique, 0x19000, 1)
+(register, 0x0, 1) COPY (const, 0x1, 1)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 1)
+(register, 0x0, 1) COPY (const, 0x0, 1)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 1)

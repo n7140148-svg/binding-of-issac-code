@@ -1,0 +1,57 @@
+========== FUNCTION FUN_0059ff20@0059ff20 ==========
+
+---- ASSEMBLY ----
+0059ff20  PUSH EBP
+0059ff21  MOV EBP,ESP
+0059ff23  MOV EDX,dword ptr [EBP + 0x8]
+0059ff26  XOR EAX,EAX
+0059ff28  ADD ECX,0x14c4
+0059ff2e  NOP
+0059ff30  CMP dword ptr [ECX],EDX
+0059ff32  JZ 0x0059ff40
+0059ff34  INC EAX
+0059ff35  ADD ECX,0x1c
+0059ff38  CMP EAX,0x4
+0059ff3b  JC 0x0059ff30
+0059ff3d  OR EAX,0xffffffff
+0059ff40  POP EBP
+0059ff41  RET 0x4
+
+---- DECOMPILED C ----
+
+uint __thiscall FUN_0059ff20(int param_1,int param_2)
+
+{
+  uint uVar1;
+  int *piVar2;
+  
+  uVar1 = 0;
+  piVar2 = (int *)(param_1 + 0x14c4);
+  do {
+    if (*piVar2 == param_2) {
+      return uVar1;
+    }
+    uVar1 = uVar1 + 1;
+    piVar2 = piVar2 + 7;
+  } while (uVar1 < 4);
+  return 0xffffffff;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x0, 4) COPY (const, 0x0, 4)
+(unique, 0x1000000c, 4) INT_ADD (register, 0x4, 4) , (const, 0x14c4, 4)
+(register, 0x4, 4) CAST (unique, 0x1000000c, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (stack, 0x4, 4)
+(register, 0x0, 4) MULTIEQUAL (register, 0x0, 4) , (register, 0x0, 4)
+(register, 0x4, 4) MULTIEQUAL (register, 0x4, 4) , (register, 0x4, 4)
+ ---  CBRANCH (ram, 0x59ff40, 1) , (register, 0x206, 1)
+(register, 0x0, 4) INT_ADD (register, 0x0, 4) , (const, 0x1, 4)
+(register, 0x4, 4) PTRADD (register, 0x4, 4) , (const, 0x7, 4) , (const, 0x4, 4)
+(register, 0x200, 1) INT_LESS (register, 0x0, 4) , (const, 0x4, 4)
+ ---  CBRANCH (ram, 0x59ff30, 1) , (register, 0x200, 1)
+(register, 0x0, 4) COPY (const, 0xffffffff, 4)
+(register, 0x0, 4) COPY (register, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

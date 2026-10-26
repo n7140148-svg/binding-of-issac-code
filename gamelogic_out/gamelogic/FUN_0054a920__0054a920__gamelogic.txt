@@ -1,0 +1,63 @@
+========== FUNCTION FUN_0054a920@0054a920 ==========
+
+---- ASSEMBLY ----
+0054a920  PUSH EBP
+0054a921  MOV EBP,ESP
+0054a923  MOV EDX,dword ptr [EBP + 0x8]
+0054a926  TEST EDX,EDX
+0054a928  JS 0x0054a950
+0054a92a  CMP EDX,0x1c0
+0054a930  JGE 0x0054a950
+0054a932  MOV EAX,[0x00bfd65c]
+0054a937  MOV EAX,dword ptr [EAX + 0x18190]
+0054a93d  MOVZX EAX,word ptr [EAX + EDX*0x2 + 0xe6c]
+0054a945  TEST AX,AX
+0054a948  JLE 0x0054a950
+0054a94a  XOR AL,AL
+0054a94c  POP EBP
+0054a94d  RET 0x4
+0054a950  MOV dword ptr [ECX + 0xb14],EDX
+0054a956  MOV AL,0x1
+0054a958  POP EBP
+0054a959  RET 0x4
+
+---- DECOMPILED C ----
+
+undefined4 __thiscall FUN_0054a920(int param_1,int param_2)
+
+{
+  if ((-1 < param_2) && (param_2 < 0x1c0)) {
+    if (0 < *(short *)(*(int *)(DAT_00bfd65c + 0x18190) + 0xe6c + param_2 * 2)) {
+      return 0;
+    }
+  }
+  *(int *)(param_1 + 0xb14) = param_2;
+  return 1;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x207, 1) INT_SLESS (const, 0xffffffff, 4) , (stack, 0x4, 4)
+ ---  CBRANCH (ram, 0x54a950, 1) , (register, 0x207, 1)
+(unique, 0x18900, 1) INT_SLESS (stack, 0x4, 4) , (const, 0x1c0, 4)
+ ---  CBRANCH (ram, 0x54a950, 1) , (unique, 0x18900, 1)
+(unique, 0x10000010, 4) INT_ADD (ram, 0xbfd65c, 4) , (const, 0x18190, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000010, 4)
+(unique, 0x7a00, 4) INT_ADD (unique, 0x17200, 4) , (const, 0xe6c, 4)
+(unique, 0x7b00, 4) INT_MULT (stack, 0x4, 4) , (const, 0x2, 4)
+(unique, 0x10000014, 4) INT_ADD (unique, 0x7a00, 4) , (unique, 0x7b00, 4)
+(unique, 0x17100, 2) LOAD (const, 0x1a1, 4) , (unique, 0x7d00, 4)
+(unique, 0x7d00, 4) CAST (unique, 0x10000014, 4)
+(unique, 0x18c00, 1) INT_SLESS (const, 0x0, 2) , (unique, 0x17100, 2)
+ ---  CBRANCH (ram, 0x54a950, 1) , (unique, 0x18c00, 1)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(ram, 0xbfd65c, 4) COPY (ram, 0xbfd65c, 4)
+(unique, 0x10000018, 4) INT_ADD (register, 0x4, 4) , (const, 0xb14, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (stack, 0x4, 4)
+(ram, 0xbfd65c, 4) INDIRECT (ram, 0xbfd65c, 4) , (const, 0x45, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000018, 4)
+(register, 0x0, 4) COPY (const, 0x1, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(ram, 0xbfd65c, 4) COPY (ram, 0xbfd65c, 4)

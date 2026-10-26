@@ -1,0 +1,24 @@
+========== FUNCTION FUN_004174c0@004174c0 ==========
+
+---- ASSEMBLY ----
+004174c0  MOV EAX,dword ptr [ECX + 0x4]
+004174c3  SUB EAX,dword ptr [ECX]
+004174c5  SAR EAX,0x2
+004174c8  RET
+
+---- DECOMPILED C ----
+
+int __fastcall FUN_004174c0(int *param_1)
+
+{
+  return param_1[1] - *param_1 >> 2;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(register, 0x0, 4) INT_SUB (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(register, 0x0, 4) INT_SRIGHT (register, 0x0, 4) , (const, 0x2, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

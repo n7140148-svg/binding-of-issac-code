@@ -1,0 +1,33 @@
+========== FUNCTION FUN_00422ce0@00422ce0 ==========
+
+---- ASSEMBLY ----
+00422ce0  PUSH EBP
+00422ce1  MOV EBP,ESP
+00422ce3  PUSH ESI
+00422ce4  MOV ESI,ECX
+00422ce6  MOV ECX,dword ptr [EBP + 0x8]
+00422ce9  CALL 0x0068d5a0
+00422cee  PUSH EAX
+00422cef  MOV ECX,ESI
+00422cf1  CALL 0x00422c30
+00422cf6  POP ESI
+00422cf7  POP EBP
+00422cf8  RET 0x4
+
+---- DECOMPILED C ----
+
+void FUN_00422ce0(void)
+
+{
+  undefined4 uVar1;
+  
+  uVar1 = FUN_0068d5a0();
+  FUN_00422c30(uVar1);
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x0, 4) CALL (ram, 0x68d5a0, 8)
+ ---  CALL (ram, 0x422c30, 8) , (register, 0x0, 4)
+ ---  RETURN (const, 0x0, 4)

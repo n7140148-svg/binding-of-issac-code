@@ -1,0 +1,43 @@
+========== FUNCTION FUN_00448000@00448000 ==========
+
+---- ASSEMBLY ----
+00448000  MOV EDX,dword ptr [ECX + 0x12c4]
+00448006  XOR EAX,EAX
+00448008  MOV ECX,dword ptr [ECX + 0x12c0]
+0044800e  ADD ECX,EDX
+00448010  TEST ECX,ECX
+00448012  CMOVG EAX,ECX
+00448015  RET
+
+---- DECOMPILED C ----
+
+int __fastcall FUN_00448000(int param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  iVar2 = *(int *)(param_1 + 0x12c0) + *(int *)(param_1 + 0x12c4);
+  iVar1 = 0;
+  if (0 < iVar2) {
+    iVar1 = iVar2;
+  }
+  return iVar1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x1000000b, 4) INT_ADD (register, 0x4, 4) , (const, 0x12c4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000000b, 4)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+(unique, 0x1000000f, 4) INT_ADD (register, 0x4, 4) , (const, 0x12c0, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000000f, 4)
+(register, 0x4, 4) INT_ADD (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(unique, 0x60800, 1) INT_SLESS (const, 0x0, 4) , (register, 0x4, 4)
+ ---  CBRANCH (ram, 0x448015, 1) , (unique, 0x60800, 1)
+(unique, 0x10000003, 4) COPY (register, 0x0, 4)
+(unique, 0x10000007, 4) COPY (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) MULTIEQUAL (unique, 0x10000003, 4) , (unique, 0x10000007, 4)

@@ -1,0 +1,69 @@
+========== FUNCTION FUN_00407990@00407990 ==========
+
+---- ASSEMBLY ----
+00407990  PUSH EBP
+00407991  MOV EBP,ESP
+00407993  MOV EDX,dword ptr [EBP + 0x8]
+00407996  MOV EAX,EDX
+00407998  PUSH ESI
+00407999  MOV ESI,ECX
+0040799b  PUSH EDI
+0040799c  LEA EDI,[EAX + 0x1]
+0040799f  MOV dword ptr [ESI],0x0
+004079a5  MOV dword ptr [ESI + 0x10],0x0
+004079ac  MOV dword ptr [ESI + 0x14],0xf
+004079b3  MOV CL,byte ptr [EAX]
+004079b5  INC EAX
+004079b6  TEST CL,CL
+004079b8  JNZ 0x004079b3
+004079ba  SUB EAX,EDI
+004079bc  MOV ECX,ESI
+004079be  PUSH EAX
+004079bf  PUSH EDX
+004079c0  CALL 0x00407c80
+004079c5  POP EDI
+004079c6  MOV EAX,ESI
+004079c8  POP ESI
+004079c9  POP EBP
+004079ca  RET 0x4
+
+---- DECOMPILED C ----
+
+undefined4 * __thiscall FUN_00407990(undefined4 *param_1,char *param_2)
+
+{
+  char cVar1;
+  char *pcVar2;
+  
+  *param_1 = 0;
+  param_1[4] = 0;
+  param_1[5] = 0xf;
+  pcVar2 = param_2;
+  do {
+    cVar1 = *pcVar2;
+    pcVar2 = pcVar2 + 1;
+  } while (cVar1 != '\0');
+  FUN_00407c80(param_2,(int)pcVar2 - (int)(param_2 + 1));
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (const, 0x0, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x4, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (const, 0xf, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x5, 4) , (const, 0x4, 4)
+(unique, 0x10000029, 4) COPY (stack, 0x4, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (register, 0x0, 4)
+(register, 0x0, 4) MULTIEQUAL (unique, 0x10000029, 4) , (register, 0x0, 4)
+(register, 0x0, 4) PTRADD (register, 0x0, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17000, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x4079b3, 1) , (register, 0x206, 1)
+(register, 0x0, 4) INT_SUB (unique, 0x1000002d, 4) , (unique, 0x10000031, 4)
+(unique, 0x1000002d, 4) CAST (register, 0x0, 4)
+(unique, 0x10000031, 4) CAST (unique, 0x6600, 4)
+ ---  CALL (ram, 0x407c80, 8) , (stack, 0x4, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

@@ -1,0 +1,63 @@
+========== FUNCTION erase@005b6230 ==========
+
+---- ASSEMBLY ----
+005b6230  PUSH EBP
+005b6231  MOV EBP,ESP
+005b6233  PUSH ESI
+005b6234  PUSH EDI
+005b6235  MOV EDI,dword ptr [EBP + 0xc]
+005b6238  MOV ESI,ECX
+005b623a  MOV EAX,dword ptr [ESI + 0x4]
+005b623d  LEA EDX,[EDI + 0x4]
+005b6240  SUB EAX,EDX
+005b6242  PUSH EAX
+005b6243  PUSH EDX
+005b6244  PUSH EDI
+005b6245  CALL 0x009ec358
+005b624a  MOV EAX,dword ptr [EBP + 0x8]
+005b624d  ADD ESP,0xc
+005b6250  ADD dword ptr [ESI + 0x4],-0x4
+005b6254  MOV dword ptr [EAX],EDI
+005b6256  POP EDI
+005b6257  POP ESI
+005b6258  POP EBP
+005b6259  RET 0x8
+
+---- DECOMPILED C ----
+
+/* Library Function - Single Match
+    public: class std::_Vector_iterator<class std::_Vector_val<struct std::_Simple_types<struct CHN
+   *> > > __thiscall std::vector<struct CHN *,class std::allocator<struct CHN *> >::erase(class
+   std::_Vector_const_iterator<class std::_Vector_val<struct std::_Simple_types<struct CHN *> > >)
+   
+   Library: Visual Studio 2019 Release */
+
+void __thiscall
+std::vector<CHN*,std::allocator<CHN*>_>::erase
+          (vector<CHN*,std::allocator<CHN*>_> *this,undefined4 *param_2,void *param_3)
+
+{
+  memmove(param_3,(void *)((int)param_3 + 4),*(int *)(this + 4) - ((int)param_3 + 4));
+  *(int *)(this + 4) = *(int *)(this + 4) + -4;
+  *param_2 = param_3;
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x4, 4) , (const, 0x1, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x10000038, 4)
+(unique, 0x10000038, 4) CAST (unique, 0x6600, 4)
+(unique, 0x10000040, 4) INT_ADD (unique, 0x1000003c, 4) , (const, 0x4, 4)
+(unique, 0x1000003c, 4) CAST (stack, 0x8, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000040, 4)
+(register, 0x0, 4) INT_SUB (unique, 0x17200, 4) , (unique, 0x10000040, 4)
+ ---  CALL (ram, 0x9ec358, 8) , (stack, 0x8, 4) , (unique, 0x6600, 4) , (register, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x4, 4) , (const, 0x1, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x10000044, 4)
+(unique, 0xa300, 4) INT_ADD (unique, 0xa300, 4) , (const, 0xfffffffc, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000048, 4) , (unique, 0xa300, 4)
+(unique, 0x10000044, 4) CAST (unique, 0x6600, 4)
+(unique, 0x10000048, 4) CAST (unique, 0x6600, 4)
+ ---  STORE (const, 0x1a1, 4) , (stack, 0x4, 4) , (stack, 0x8, 4)
+ ---  RETURN (const, 0x0, 4)

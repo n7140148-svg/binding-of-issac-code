@@ -1,0 +1,27 @@
+========== FUNCTION FUN_0040f2f0@0040f2f0 ==========
+
+---- ASSEMBLY ----
+0040f2f0  PUSH EBP
+0040f2f1  MOV EBP,ESP
+0040f2f3  MOV EAX,dword ptr [EBP + 0x8]
+0040f2f6  LEA EDX,[EAX + EAX*0x2]
+0040f2f9  MOV EAX,dword ptr [ECX]
+0040f2fb  LEA EAX,[EAX + EDX*0x8]
+0040f2fe  POP EBP
+0040f2ff  RET 0x4
+
+---- DECOMPILED C ----
+
+int __thiscall FUN_0040f2f0(int *param_1,int param_2)
+
+{
+  return *param_1 + param_2 * 0x18;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x6a00, 4) INT_MULT (stack, 0x4, 4) , (const, 0x18, 4)
+(unique, 0x6c00, 4) INT_ADD (unique, 0x17200, 4) , (unique, 0x6a00, 4)
+(register, 0x0, 4) COPY (unique, 0x6c00, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

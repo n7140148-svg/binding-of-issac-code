@@ -1,0 +1,54 @@
+========== FUNCTION FUN_004122f0@004122f0 ==========
+
+---- ASSEMBLY ----
+004122f0  PUSH EBP
+004122f1  MOV EBP,ESP
+004122f3  MOV EDX,dword ptr [EBP + 0x8]
+004122f6  MOV EAX,dword ptr [ECX + 0x164]
+004122fc  AND EDX,dword ptr [ECX + 0x160]
+00412302  AND EAX,dword ptr [EBP + 0xc]
+00412305  OR EDX,EAX
+00412307  JZ 0x0041230f
+00412309  MOV AL,0x1
+0041230b  POP EBP
+0041230c  RET 0x8
+0041230f  XOR AL,AL
+00412311  POP EBP
+00412312  RET 0x8
+
+---- DECOMPILED C ----
+
+int __thiscall FUN_004122f0(int param_1,uint param_2,uint param_3)
+
+{
+  uint3 uVar1;
+  
+  param_3 = *(uint *)(param_1 + 0x164) & param_3;
+  uVar1 = (uint3)(param_3 >> 8);
+  if ((param_2 & *(uint *)(param_1 + 0x160)) != 0 || param_3 != 0) {
+    return CONCAT31(uVar1,1);
+  }
+  return (uint)uVar1 << 8;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000011, 4) INT_ADD (register, 0x4, 4) , (const, 0x164, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000011, 4)
+(unique, 0x10000015, 4) INT_ADD (register, 0x4, 4) , (const, 0x160, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x8, 4) INT_AND (stack, 0x4, 4) , (unique, 0x17200, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000015, 4)
+(register, 0x0, 4) INT_AND (unique, 0x17200, 4) , (stack, 0x8, 4)
+(unique, 0x10000004, 1) INT_NOTEQUAL (register, 0x8, 4) , (const, 0x0, 4)
+(unique, 0x10000005, 1) INT_NOTEQUAL (register, 0x0, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x41230f, 1) , (unique, 0x1000000a, 1)
+(register, 0x1, 3) SUBPIECE (unique, 0x1000000d, 4) , (const, 0x0, 4)
+(unique, 0x1000000a, 1) BOOL_OR (unique, 0x10000004, 1) , (unique, 0x10000005, 1)
+(unique, 0x1000000d, 4) INT_RIGHT (register, 0x0, 4) , (const, 0x8, 4)
+(register, 0x0, 4) PIECE (register, 0x1, 3) , (const, 0x1, 1)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) INT_LEFT (unique, 0x10000006, 4) , (const, 0x8, 4)
+(unique, 0x10000006, 4) INT_ZEXT (register, 0x1, 3)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

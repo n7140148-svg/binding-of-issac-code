@@ -1,0 +1,24 @@
+========== FUNCTION FUN_005b60c0@005b60c0 ==========
+
+---- ASSEMBLY ----
+005b60c0  PUSH EBP
+005b60c1  MOV EBP,ESP
+005b60c3  IMUL EAX,dword ptr [EBP + 0x8],0x130
+005b60ca  ADD EAX,dword ptr [ECX]
+005b60cc  POP EBP
+005b60cd  RET 0x4
+
+---- DECOMPILED C ----
+
+int __thiscall FUN_005b60c0(int *param_1,int param_2)
+
+{
+  return param_2 * 0x130 + *param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x0, 4) INT_MULT (stack, 0x4, 4) , (const, 0x130, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(register, 0x0, 4) INT_ADD (register, 0x0, 4) , (unique, 0x17200, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

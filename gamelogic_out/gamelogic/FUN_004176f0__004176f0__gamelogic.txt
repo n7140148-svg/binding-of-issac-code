@@ -1,0 +1,65 @@
+========== FUNCTION FUN_004176f0@004176f0 ==========
+
+---- ASSEMBLY ----
+004176f0  PUSH EBX
+004176f1  MOV EBX,ECX
+004176f3  MOV EAX,0x88888889
+004176f8  PUSH ESI
+004176f9  PUSH EDI
+004176fa  PUSH 0x200
+004176ff  MOV ESI,dword ptr [EBX + 0x4]
+00417702  SUB ESI,dword ptr [EBX]
+00417704  IMUL ESI
+00417706  ADD EDX,ESI
+00417708  SAR EDX,0x5
+0041770b  MOV EDI,EDX
+0041770d  SHR EDI,0x1f
+00417710  ADD EDI,EDX
+00417712  CALL 0x00417ab0
+00417717  MOV EDX,dword ptr [EBX + 0x4]
+0041771a  MOV ESI,EAX
+0041771c  PUSH ECX
+0041771d  MOV ECX,dword ptr [EBX]
+0041771f  PUSH ESI
+00417720  CALL 0x004182b0
+00417725  ADD ESP,0x8
+00417728  MOV ECX,EBX
+0041772a  PUSH 0x200
+0041772f  PUSH EDI
+00417730  PUSH ESI
+00417731  CALL 0x00417a20
+00417736  POP EDI
+00417737  POP ESI
+00417738  POP EBX
+00417739  RET 0x4
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_004176f0(int *param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  undefined4 uVar3;
+  undefined4 extraout_ECX;
+  
+  iVar1 = param_1[1];
+  iVar2 = *param_1;
+  uVar3 = FUN_00417ab0(0x200);
+  FUN_004182b0(uVar3,extraout_ECX);
+  FUN_00417a20(uVar3,(iVar1 - iVar2) / 0x3c,0x200);
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(register, 0x18, 4) INT_SUB (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(unique, 0x10000053, 4) INT_SDIV (register, 0x18, 4) , (const, 0x3c, 4)
+(register, 0x0, 4) CALL (ram, 0x417ab0, 8) , (const, 0x200, 4)
+(register, 0x4, 4) INDIRECT (const, 0x0, 4) , (const, 0x8b, 4)
+ ---  CALL (ram, 0x4182b0, 8) , (register, 0x0, 4) , (register, 0x4, 4)
+ ---  CALL (ram, 0x417a20, 8) , (register, 0x0, 4) , (unique, 0x10000053, 4) , (const, 0x200, 4)
+ ---  RETURN (const, 0x0, 4)

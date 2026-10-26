@@ -1,0 +1,31 @@
+========== FUNCTION FUN_00427700@00427700 ==========
+
+---- ASSEMBLY ----
+00427700  MOV EAX,dword ptr [ECX + 0x4]
+00427703  MOV AL,byte ptr [EAX + 0x44]
+00427706  AND AL,0x1
+00427708  RET
+
+---- DECOMPILED C ----
+
+uint __fastcall FUN_00427700(int param_1)
+
+{
+  return CONCAT31((int3)((uint)*(int *)(param_1 + 4) >> 8),
+                  *(undefined1 *)(*(int *)(param_1 + 4) + 0x44)) & 0xffffff01;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000008, 4) INT_ADD (register, 0x4, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000008, 4)
+(unique, 0x1000000c, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x44, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x1, 3) SUBPIECE (unique, 0x10000004, 4) , (const, 0x0, 4)
+(unique, 0x10000004, 4) INT_RIGHT (unique, 0x10000010, 4) , (const, 0x8, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000000c, 4)
+(unique, 0x10000010, 4) CAST (unique, 0x17200, 4)
+(register, 0x0, 4) INT_AND (unique, 0x10000000, 4) , (const, 0xffffff01, 4)
+(unique, 0x10000000, 4) PIECE (register, 0x1, 3) , (unique, 0x17000, 1)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

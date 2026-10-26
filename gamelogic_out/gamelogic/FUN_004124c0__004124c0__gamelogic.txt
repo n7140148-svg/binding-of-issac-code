@@ -1,0 +1,63 @@
+========== FUNCTION FUN_004124c0@004124c0 ==========
+
+---- ASSEMBLY ----
+004124c0  PUSH EBP
+004124c1  MOV EBP,ESP
+004124c3  PUSH ESI
+004124c4  MOV ESI,ECX
+004124c6  MOV EDX,dword ptr [ESI + 0xc]
+004124c9  LEA EAX,[EDX + 0x1]
+004124cc  CMP EAX,dword ptr [ESI + 0x8]
+004124cf  JBE 0x004124e3
+004124d1  PUSH 0xb3f428
+004124d6  PUSH 0x3
+004124d8  CALL 0x0095e330
+004124e3  MOV ECX,dword ptr [ESI + 0x4]
+004124e6  MOV EAX,dword ptr [EBP + 0x8]
+004124e9  MOV dword ptr [ECX + EDX*0x4],EAX
+004124ec  INC dword ptr [ESI + 0xc]
+004124ef  POP ESI
+004124f0  POP EBP
+004124f1  RET 0x4
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_004124c0(int param_1,undefined4 param_2)
+
+{
+  if (*(uint *)(param_1 + 8) < *(int *)(param_1 + 0xc) + 1U) {
+                    /* WARNING: Subroutine does not return */
+    FUN_0095e330(3,"EL: not enough space for push_back\n");
+  }
+  *(undefined4 *)(*(int *)(param_1 + 4) + *(int *)(param_1 + 0xc) * 4) = param_2;
+  *(int *)(param_1 + 0xc) = *(int *)(param_1 + 0xc) + 1;
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000022, 4) INT_ADD (register, 0x4, 4) , (const, 0xc, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000022, 4)
+(unique, 0x6600, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x1, 4)
+(unique, 0x10000026, 4) INT_ADD (register, 0x4, 4) , (const, 0x8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000026, 4)
+(unique, 0x17e00, 1) INT_LESS (unique, 0xa300, 4) , (unique, 0x6600, 4)
+ ---  CBRANCH (ram, 0x4124e3, 1) , (unique, 0x17e00, 1)
+ ---  CALL (ram, 0x95e330, 8) , (const, 0x3, 4) , (unique, 0x1000001e, 4)
+ ---  RETURN (const, 0x1, 4)
+(unique, 0x1000001e, 4) COPY (const, 0xb3f428, 4)
+(unique, 0x1000002a, 4) INT_ADD (register, 0x4, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000002a, 4)
+(unique, 0x6a00, 4) INT_MULT (unique, 0x17200, 4) , (const, 0x4, 4)
+(unique, 0x1000002e, 4) INT_ADD (unique, 0x17200, 4) , (unique, 0x6a00, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6c00, 4) , (stack, 0x4, 4)
+(unique, 0x6c00, 4) CAST (unique, 0x1000002e, 4)
+(unique, 0x10000032, 4) INT_ADD (register, 0x4, 4) , (const, 0xc, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0xa300, 4) INT_ADD (unique, 0xa300, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0xa300, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000032, 4)
+ ---  RETURN (const, 0x0, 4)

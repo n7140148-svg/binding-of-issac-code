@@ -1,0 +1,60 @@
+========== FUNCTION FUN_004060c0@004060c0 ==========
+
+---- ASSEMBLY ----
+004060c0  PUSH EBP
+004060c1  MOV EBP,ESP
+004060c3  PUSH ECX
+004060c4  MOV EAX,dword ptr [EBP + 0x8]
+004060c7  CMP dword ptr [EAX + 0x14],0x10
+004060cb  JC 0x004060cf
+004060cd  MOV EAX,dword ptr [EAX]
+004060cf  CMP dword ptr [ECX + 0x34],0x0
+004060d3  JNZ 0x004060dc
+004060d5  XOR AL,AL
+004060d7  POP ECX
+004060d8  POP EBP
+004060d9  RET 0x4
+004060dc  PUSH EAX
+004060dd  ADD ECX,0x30
+004060e0  CALL 0x00405e90
+004060e5  POP ECX
+004060e6  POP EBP
+004060e7  RET 0x4
+
+---- DECOMPILED C ----
+
+uint __thiscall FUN_004060c0(int param_1,undefined4 *param_2)
+
+{
+  uint uVar1;
+  
+  if (0xf < (uint)param_2[5]) {
+    param_2 = (undefined4 *)*param_2;
+  }
+  if (*(int *)(param_1 + 0x34) == 0) {
+    return (uint)param_2 & 0xffffff00;
+  }
+  uVar1 = FUN_00405e90(param_2);
+  return uVar1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (const, 0xf, 4) , (unique, 0x10000027, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x5, 4) , (const, 0x4, 4)
+(unique, 0x10000027, 4) CAST (unique, 0x17200, 4)
+ ---  CBRANCH (ram, 0x4060cf, 1) , (register, 0x200, 1)
+(unique, 0x1000002b, 4) LOAD (const, 0x1a1, 4) , (stack, 0x4, 4)
+(unique, 0x17200, 4) CAST (unique, 0x1000002b, 4)
+(unique, 0x1000002f, 4) INT_ADD (register, 0x4, 4) , (const, 0x34, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+(register, 0x0, 4) MULTIEQUAL (stack, 0x4, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000002f, 4)
+ ---  CBRANCH (ram, 0x4060dc, 1) , (register, 0x206, 1)
+(register, 0x0, 4) INT_AND (unique, 0x10000033, 4) , (const, 0xffffff00, 4)
+(unique, 0x10000033, 4) CAST (register, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) CALL (ram, 0x405e90, 8) , (register, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

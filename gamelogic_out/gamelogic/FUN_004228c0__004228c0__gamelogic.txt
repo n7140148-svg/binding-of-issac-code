@@ -1,0 +1,42 @@
+========== FUNCTION FUN_004228c0@004228c0 ==========
+
+---- ASSEMBLY ----
+004228c0  PUSH EBP
+004228c1  MOV EBP,ESP
+004228c3  AND ESP,0xfffffff8
+004228c6  CVTSS2SD XMM0,XMM0
+004228ca  XORPS XMM1,XMM1
+004228cd  UCOMISD XMM1,XMM0
+004228d1  JA 0x004228df
+004228d3  SQRTSD XMM0,XMM0
+004228d7  CVTSD2SS XMM0,XMM0
+004228db  MOV ESP,EBP
+004228dd  POP EBP
+004228de  RET
+004228df  CALL 0x009ec3a6
+004228e4  CVTSD2SS XMM0,XMM0
+004228e8  MOV ESP,EBP
+004228ea  POP EBP
+004228eb  RET
+
+---- DECOMPILED C ----
+
+void FUN_004228c0(void)
+
+{
+  float in_XMM0_Da;
+  
+  if (0.0 <= in_XMM0_Da) {
+    return;
+  }
+  libm_sse2_sqrt_precise();
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+ ---  CBRANCH (ram, 0x4228df, 1) , (unique, 0x1000002b, 1)
+(unique, 0x1000002b, 1) FLOAT_LESSEQUAL (const, 0x0, 4) , (register, 0x1200, 4)
+ ---  RETURN (const, 0x0, 4)
+ ---  CALL (ram, 0x9ec3a6, 8)
+ ---  RETURN (const, 0x0, 4)

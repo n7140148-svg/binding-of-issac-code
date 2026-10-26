@@ -1,0 +1,56 @@
+========== FUNCTION FUN_004c38e0@004c38e0 ==========
+
+---- ASSEMBLY ----
+004c38e0  PUSH EBP
+004c38e1  MOV EBP,ESP
+004c38e3  PUSH ESI
+004c38e4  PUSH dword ptr [EBP + 0x8]
+004c38e7  MOV ESI,ECX
+004c38e9  MOV EAX,dword ptr [ESI + 0x4]
+004c38ec  CMP EAX,dword ptr [ESI + 0x8]
+004c38ef  JZ 0x004c3901
+004c38f1  MOV ECX,EAX
+004c38f3  CALL 0x004c0300
+004c38f8  ADD dword ptr [ESI + 0x4],0x68
+004c38fc  POP ESI
+004c38fd  POP EBP
+004c38fe  RET 0x4
+004c3901  PUSH EAX
+004c3902  CALL 0x004c3d60
+004c3907  POP ESI
+004c3908  POP EBP
+004c3909  RET 0x4
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_004c38e0(int param_1,undefined4 param_2)
+
+{
+  if (*(int *)(param_1 + 4) != *(int *)(param_1 + 8)) {
+    FUN_004c0300(param_2);
+    *(int *)(param_1 + 4) = *(int *)(param_1 + 4) + 0x68;
+    return;
+  }
+  FUN_004c3d60(*(int *)(param_1 + 4),param_2);
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000027, 4) INT_ADD (register, 0x4, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000027, 4)
+(unique, 0x1000002b, 4) INT_ADD (register, 0x4, 4) , (const, 0x8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (unique, 0xa300, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000002b, 4)
+ ---  CBRANCH (ram, 0x4c3901, 1) , (register, 0x206, 1)
+ ---  CALL (ram, 0x4c0300, 8) , (stack, 0x4, 4)
+(unique, 0x1000002f, 4) INT_ADD (register, 0x4, 4) , (const, 0x4, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0xa300, 4) INT_ADD (unique, 0xa300, 4) , (const, 0x68, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0xa300, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000002f, 4)
+ ---  RETURN (const, 0x0, 4)
+ ---  CALL (ram, 0x4c3d60, 8) , (unique, 0x17200, 4) , (stack, 0x4, 4)
+ ---  RETURN (const, 0x0, 4)

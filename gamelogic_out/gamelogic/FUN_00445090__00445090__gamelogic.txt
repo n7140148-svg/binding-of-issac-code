@@ -1,0 +1,99 @@
+========== FUNCTION FUN_00445090@00445090 ==========
+
+---- ASSEMBLY ----
+00445090  PUSH ESI
+00445091  MOV ESI,ECX
+00445093  MOV EDX,dword ptr [ESI + 0x318]
+00445099  TEST EDX,EDX
+0044509b  JZ 0x004450ee
+0044509d  NOP dword ptr [EAX]
+004450a0  CMP dword ptr [EDX + 0x354],0x2
+004450a7  MOV dword ptr [EDX + 0x180],0x0
+004450b1  JNZ 0x004450d5
+004450b3  MOV EAX,dword ptr [ESI + 0x294]
+004450b9  MOV dword ptr [EDX + 0x294],EAX
+004450bf  MOV EAX,dword ptr [ESI + 0x298]
+004450c5  MOV dword ptr [EDX + 0x298],EAX
+004450cb  MOV dword ptr [EDX + 0x2b0],0xc2ca0000
+004450d5  MOV EAX,dword ptr [ESI + 0x318]
+004450db  XOR ECX,ECX
+004450dd  MOV EAX,dword ptr [EAX + 0x318]
+004450e3  CMP EAX,EDX
+004450e5  CMOVNZ ECX,EAX
+004450e8  MOV EDX,ECX
+004450ea  TEST EDX,EDX
+004450ec  JNZ 0x004450a0
+004450ee  POP ESI
+004450ef  RET
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_00445090(int param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  bool bVar3;
+  
+  iVar2 = *(int *)(param_1 + 0x318);
+  while (iVar2 != 0) {
+    *(undefined4 *)(iVar2 + 0x180) = 0;
+    if (*(int *)(iVar2 + 0x354) == 2) {
+      *(undefined4 *)(iVar2 + 0x294) = *(undefined4 *)(param_1 + 0x294);
+      *(undefined4 *)(iVar2 + 0x298) = *(undefined4 *)(param_1 + 0x298);
+      *(undefined4 *)(iVar2 + 0x2b0) = 0xc2ca0000;
+    }
+    iVar1 = *(int *)(*(int *)(param_1 + 0x318) + 0x318);
+    bVar3 = iVar1 != iVar2;
+    iVar2 = 0;
+    if (bVar3) {
+      iVar2 = iVar1;
+    }
+  }
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000020, 4) INT_ADD (register, 0x4, 4) , (const, 0x318, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000020, 4)
+(unique, 0x10000013, 1) INT_NOTEQUAL (unique, 0x1000000f, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x4450ee, 1) , (unique, 0x10000013, 1)
+(unique, 0x1000000f, 4) MULTIEQUAL (unique, 0x10000014, 4) , (unique, 0x10000018, 4) , (unique, 0x1000001c, 4)
+(unique, 0x10000014, 4) COPY (unique, 0x17200, 4)
+(unique, 0x10000024, 4) INT_ADD (unique, 0x1000000f, 4) , (const, 0x354, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0x2, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000024, 4)
+(unique, 0x10000028, 4) INT_ADD (unique, 0x1000000f, 4) , (const, 0x180, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (const, 0x0, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000028, 4)
+ ---  CBRANCH (ram, 0x4450d5, 1) , (register, 0x206, 1)
+(unique, 0x1000002c, 4) INT_ADD (register, 0x4, 4) , (const, 0x294, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000002c, 4)
+(unique, 0x10000030, 4) INT_ADD (unique, 0x1000000f, 4) , (const, 0x294, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (unique, 0x17200, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000030, 4)
+(unique, 0x10000034, 4) INT_ADD (register, 0x4, 4) , (const, 0x298, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000034, 4)
+(unique, 0x10000038, 4) INT_ADD (unique, 0x1000000f, 4) , (const, 0x298, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (unique, 0x17200, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000038, 4)
+(unique, 0x1000003c, 4) INT_ADD (unique, 0x1000000f, 4) , (const, 0x2b0, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (const, 0xc2ca0000, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000003c, 4)
+(unique, 0x10000040, 4) INT_ADD (register, 0x4, 4) , (const, 0x318, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000040, 4)
+(register, 0x4, 4) COPY (const, 0x0, 4)
+(unique, 0x10000044, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x318, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000044, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (unique, 0x1000000f, 4)
+ ---  CBRANCH (ram, 0x4450e8, 1) , (register, 0x206, 1)
+(unique, 0x10000018, 4) COPY (register, 0x4, 4)
+(unique, 0x1000001c, 4) COPY (unique, 0x17200, 4)
+ ---  RETURN (const, 0x0, 4)

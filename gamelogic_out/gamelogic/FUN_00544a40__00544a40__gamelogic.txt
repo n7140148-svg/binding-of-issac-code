@@ -1,0 +1,27 @@
+========== FUNCTION FUN_00544a40@00544a40 ==========
+
+---- ASSEMBLY ----
+00544a40  PUSH EBP
+00544a41  MOV EBP,ESP
+00544a43  MOV EAX,dword ptr [EBP + 0x8]
+00544a46  MOV ECX,dword ptr [ECX]
+00544a48  CMP ECX,dword ptr [EAX]
+00544a4a  SETZ AL
+00544a4d  POP EBP
+00544a4e  RET 0x4
+
+---- DECOMPILED C ----
+
+bool __thiscall FUN_00544a40(int *param_1,int *param_2)
+
+{
+  return *param_1 == *param_2;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (stack, 0x4, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (unique, 0xa300, 4)
+(register, 0x0, 1) COPY (register, 0x206, 1)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 1)

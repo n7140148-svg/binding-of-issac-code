@@ -1,0 +1,42 @@
+========== FUNCTION FUN_00407940@00407940 ==========
+
+---- ASSEMBLY ----
+00407940  MOV dword ptr [ECX + 0x10],0x0
+00407947  CMP dword ptr [ECX + 0x14],0x10
+0040794b  JC 0x00407953
+0040794d  MOV EAX,dword ptr [ECX]
+0040794f  MOV byte ptr [EAX],0x0
+00407952  RET
+00407953  MOV byte ptr [ECX],0x0
+00407956  RET
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_00407940(undefined4 *param_1)
+
+{
+  param_1[4] = 0;
+  if (0xf < (uint)param_1[5]) {
+    *(undefined1 *)*param_1 = 0;
+    return;
+  }
+  *(undefined1 *)param_1 = 0;
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x4, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (const, 0xf, 4) , (unique, 0x10000009, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x5, 4) , (const, 0x4, 4)
+(unique, 0x10000009, 4) CAST (unique, 0x17200, 4)
+ ---  CBRANCH (ram, 0x407953, 1) , (register, 0x200, 1)
+(unique, 0x10000011, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x17200, 4) CAST (unique, 0x10000011, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x17200, 4) , (const, 0x0, 1)
+ ---  RETURN (const, 0x0, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x1000000d, 4) , (const, 0x0, 1)
+(unique, 0x1000000d, 4) CAST (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4)

@@ -1,0 +1,29 @@
+========== FUNCTION FUN_00407c30@00407c30 ==========
+
+---- ASSEMBLY ----
+00407c30  MOV dword ptr [ECX + 0x10],0x0
+00407c37  MOV dword ptr [ECX + 0x14],0xf
+00407c3e  MOV byte ptr [ECX],0x0
+00407c41  RET
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_00407c30(undefined1 *param_1)
+
+{
+  *(undefined4 *)(param_1 + 0x10) = 0;
+  *(undefined4 *)(param_1 + 0x14) = 0xf;
+  *param_1 = 0;
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x10, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000000, 4) , (const, 0x0, 4)
+(unique, 0x10000000, 4) CAST (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x14, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000004, 4) , (const, 0xf, 4)
+(unique, 0x10000004, 4) CAST (unique, 0x6600, 4)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (const, 0x0, 1)
+ ---  RETURN (const, 0x0, 4)

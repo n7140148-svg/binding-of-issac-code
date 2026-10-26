@@ -1,0 +1,34 @@
+========== FUNCTION FUN_00407930@00407930 ==========
+
+---- ASSEMBLY ----
+00407930  CMP dword ptr [ECX + 0x14],0x10
+00407934  JC 0x00407939
+00407936  MOV EAX,dword ptr [ECX]
+00407938  RET
+00407939  MOV EAX,ECX
+0040793b  RET
+
+---- DECOMPILED C ----
+
+undefined4 * __fastcall FUN_00407930(undefined4 *param_1)
+
+{
+  if (0xf < (uint)param_1[5]) {
+    return (undefined4 *)*param_1;
+  }
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (const, 0xf, 4) , (unique, 0x10000005, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x5, 4) , (const, 0x4, 4)
+(unique, 0x10000005, 4) CAST (unique, 0x17200, 4)
+ ---  CBRANCH (ram, 0x407939, 1) , (register, 0x200, 1)
+(unique, 0x10000009, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(register, 0x0, 4) COPY (unique, 0x17200, 4)
+(unique, 0x17200, 4) CAST (unique, 0x10000009, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

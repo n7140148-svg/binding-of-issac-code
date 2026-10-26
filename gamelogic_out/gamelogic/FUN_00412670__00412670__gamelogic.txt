@@ -1,0 +1,28 @@
+========== FUNCTION FUN_00412670@00412670 ==========
+
+---- ASSEMBLY ----
+00412670  PUSH EBP
+00412671  MOV EBP,ESP
+00412673  LEA EAX,[ECX + 0x1d34]
+00412679  MOV ECX,dword ptr [EBP + 0x8]
+0041267c  PUSH EAX
+0041267d  CALL 0x004078a0
+00412682  MOV EAX,dword ptr [EBP + 0x8]
+00412685  POP EBP
+00412686  RET 0x4
+
+---- DECOMPILED C ----
+
+undefined4 __thiscall FUN_00412670(int param_1,undefined4 param_2)
+
+{
+  FUN_004078a0(param_1 + 0x1d34);
+  return param_2;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x6800, 4) INT_ADD (register, 0x4, 4) , (const, 0x1d34, 4)
+ ---  CALL (ram, 0x4078a0, 8) , (unique, 0x6800, 4)
+(register, 0x0, 4) COPY (stack, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

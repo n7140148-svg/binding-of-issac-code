@@ -1,0 +1,92 @@
+========== FUNCTION FUN_005b7790@005b7790 ==========
+
+---- ASSEMBLY ----
+005b7790  PUSH EBP
+005b7791  MOV EBP,ESP
+005b7793  PUSH -0x1
+005b7795  PUSH 0x9f0d08
+005b779a  MOV EAX,FS:[0x0]
+005b77a0  PUSH EAX
+005b77a1  PUSH ECX
+005b77a2  PUSH ESI
+005b77a3  PUSH EDI
+005b77a4  MOV EAX,[0x00baa3b4]
+005b77a9  XOR EAX,EBP
+005b77ab  PUSH EAX
+005b77ac  LEA EAX,[EBP + -0xc]
+005b77af  MOV FS:[0x0],EAX
+005b77b5  MOV EDI,ECX
+005b77b7  MOV dword ptr [EBP + -0x10],EDI
+005b77ba  MOV dword ptr [EBP + -0x4],0x0
+005b77c1  LEA ECX,[EDI + 0x8]
+005b77c4  MOV dword ptr [EDI],0xb459cc
+005b77ca  CALL 0x004024b0
+005b77cf  LEA ECX,[EDI + 0x8]
+005b77d2  MOV byte ptr [EBP + -0x4],0x1
+005b77d6  CALL 0x00402ed0
+005b77db  MOV EAX,EDI
+005b77dd  MOV ECX,dword ptr [EBP + -0xc]
+005b77e0  MOV dword ptr FS:[0x0],ECX
+005b77e7  POP ECX
+005b77e8  POP EDI
+005b77e9  POP ESI
+005b77ea  MOV ESP,EBP
+005b77ec  POP EBP
+005b77ed  RET
+
+---- DECOMPILED C ----
+
+undefined4 * __fastcall FUN_005b7790(undefined4 *param_1)
+
+{
+  uint uVar1;
+  int *unaff_FS_OFFSET;
+  int local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  puStack_c = &LAB_009f0d08;
+  local_10 = *unaff_FS_OFFSET;
+  uVar1 = DAT_00baa3b4 ^ (uint)&stack0xfffffffc;
+  *unaff_FS_OFFSET = (int)&local_10;
+  local_8 = 0;
+  *param_1 = &PTR_FUN_00b459cc;
+  FUN_004024b0(uVar1);
+  local_8 = CONCAT31(local_8._1_3_,1);
+  FUN_00402ed0();
+  *unaff_FS_OFFSET = local_10;
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x10, 4) PTRSUB (register, 0x10, 4) , (const, 0xfffffffc, 4)
+(stack, 0xfffffffffffffff4, 4) PTRSUB (const, 0x0, 4) , (const, 0x9f0d08, 4)
+(unique, 0x12100, 4) LOAD (const, 0x1a1, 4) , (register, 0x110, 4)
+(register, 0x0, 4) INT_XOR (ram, 0xbaa3b4, 4) , (unique, 0x1000003e, 4)
+(unique, 0x1000003e, 4) CAST (register, 0x10, 4)
+(unique, 0x6600, 4) PTRSUB (register, 0x10, 4) , (const, 0xfffffff0, 4)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x110, 4) , (unique, 0x10000042, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x2a, 4)
+(unique, 0x10000042, 4) CAST (unique, 0x6600, 4)
+(stack, 0xfffffffffffffff8, 4) COPY (const, 0x0, 4)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (unique, 0x10000032, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x35, 4)
+(unique, 0x10000032, 4) PTRSUB (const, 0x0, 4) , (const, 0xb459cc, 4)
+ ---  CALL (ram, 0x4024b0, 8) , (register, 0x0, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x38, 4)
+(stack, 0xfffffffffffffff0, 4) INDIRECT (unique, 0x12100, 4) , (const, 0x38, 4)
+(stack, 0xfffffffffffffff4, 4) INDIRECT (stack, 0xfffffffffffffff4, 4) , (const, 0x38, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x38, 4)
+(stack, 0xfffffffffffffff9, 3) SUBPIECE (stack, 0xfffffffffffffff8, 4) , (const, 0x1, 4)
+(stack, 0xfffffffffffffff8, 4) PIECE (stack, 0xfffffffffffffff9, 3) , (const, 0x1, 1)
+ ---  CALL (ram, 0x402ed0, 8)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x40, 4)
+(stack, 0xfffffffffffffff0, 4) INDIRECT (stack, 0xfffffffffffffff0, 4) , (const, 0x40, 4)
+(stack, 0xfffffffffffffff4, 4) INDIRECT (stack, 0xfffffffffffffff4, 4) , (const, 0x40, 4)
+(stack, 0xfffffffffffffff8, 4) INDIRECT (stack, 0xfffffffffffffff8, 4) , (const, 0x40, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x110, 4) , (stack, 0xfffffffffffffff0, 4)
+(ram, 0xbaa3b4, 4) INDIRECT (ram, 0xbaa3b4, 4) , (const, 0x47, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(ram, 0xbaa3b4, 4) COPY (ram, 0xbaa3b4, 4)

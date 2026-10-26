@@ -1,0 +1,188 @@
+========== FUNCTION FUN_005e9790@005e9790 ==========
+
+---- ASSEMBLY ----
+005e9790  PUSH EBP
+005e9791  MOV EBP,ESP
+005e9793  MOV EDX,dword ptr [EBP + 0x8]
+005e9796  PUSH ESI
+005e9797  LEA ESI,[ECX + 0x8]
+005e979a  MOV EAX,dword ptr [EDX]
+005e979c  MOV dword ptr [ECX],EAX
+005e979e  MOV EAX,dword ptr [EDX + 0x4]
+005e97a1  MOV dword ptr [ECX + 0x4],EAX
+005e97a4  LEA EAX,[EDX + 0x8]
+005e97a7  CMP ESI,EAX
+005e97a9  JZ 0x005e97c9
+005e97ab  MOVUPS XMM0,xmmword ptr [EAX]
+005e97ae  MOVUPS xmmword ptr [ESI],XMM0
+005e97b1  MOVUPS XMM0,xmmword ptr [EAX + 0x10]
+005e97b5  MOVUPS xmmword ptr [ESI + 0x10],XMM0
+005e97b9  MOVQ XMM0,qword ptr [EAX + 0x20]
+005e97be  MOVQ qword ptr [ESI + 0x20],XMM0
+005e97c3  MOV EAX,dword ptr [EAX + 0x28]
+005e97c6  MOV dword ptr [ESI + 0x28],EAX
+005e97c9  MOVUPS XMM0,xmmword ptr [EDX + 0x38]
+005e97cd  POP ESI
+005e97ce  MOVUPS xmmword ptr [ECX + 0x38],XMM0
+005e97d2  MOV EAX,dword ptr [EDX + 0x48]
+005e97d5  MOV dword ptr [ECX + 0x48],EAX
+005e97d8  MOV EAX,dword ptr [EDX + 0x4c]
+005e97db  MOV dword ptr [ECX + 0x4c],EAX
+005e97de  MOV EAX,dword ptr [EDX + 0x50]
+005e97e1  MOV dword ptr [ECX + 0x50],EAX
+005e97e4  MOV EAX,dword ptr [EDX + 0x54]
+005e97e7  MOV dword ptr [ECX + 0x54],EAX
+005e97ea  MOV EAX,dword ptr [EDX + 0x58]
+005e97ed  MOV dword ptr [ECX + 0x58],EAX
+005e97f0  MOV EAX,dword ptr [EDX + 0x5c]
+005e97f3  MOV dword ptr [ECX + 0x5c],EAX
+005e97f6  MOV EAX,dword ptr [EDX + 0x60]
+005e97f9  MOV dword ptr [ECX + 0x60],EAX
+005e97fc  MOV EAX,ECX
+005e97fe  POP EBP
+005e97ff  RET 0x4
+
+---- DECOMPILED C ----
+
+undefined4 * __thiscall FUN_005e9790(undefined4 *param_1,undefined4 *param_2)
+
+{
+  undefined4 uVar1;
+  undefined4 uVar2;
+  undefined4 uVar3;
+  
+  *param_1 = *param_2;
+  param_1[1] = param_2[1];
+  if (param_1 + 2 != param_2 + 2) {
+    uVar1 = param_2[3];
+    uVar2 = param_2[4];
+    uVar3 = param_2[5];
+    param_1[2] = param_2[2];
+    param_1[3] = uVar1;
+    param_1[4] = uVar2;
+    param_1[5] = uVar3;
+    uVar1 = param_2[7];
+    uVar2 = param_2[8];
+    uVar3 = param_2[9];
+    param_1[6] = param_2[6];
+    param_1[7] = uVar1;
+    param_1[8] = uVar2;
+    param_1[9] = uVar3;
+    *(undefined8 *)(param_1 + 10) = *(undefined8 *)(param_2 + 10);
+    param_1[0xc] = param_2[0xc];
+  }
+  uVar1 = param_2[0xf];
+  uVar2 = param_2[0x10];
+  uVar3 = param_2[0x11];
+  param_1[0xe] = param_2[0xe];
+  param_1[0xf] = uVar1;
+  param_1[0x10] = uVar2;
+  param_1[0x11] = uVar3;
+  param_1[0x12] = param_2[0x12];
+  param_1[0x13] = param_2[0x13];
+  param_1[0x14] = param_2[0x14];
+  param_1[0x15] = param_2[0x15];
+  param_1[0x16] = param_2[0x16];
+  param_1[0x17] = param_2[0x17];
+  param_1[0x18] = param_2[0x18];
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x2, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (stack, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (unique, 0x17200, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x2, 4) , (const, 0x4, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x6600, 4) , (unique, 0x6600, 4)
+ ---  CBRANCH (ram, 0x5e97c9, 1) , (register, 0x206, 1)
+(unique, 0x1000000c, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x10000010, 4) LOAD (const, 0x1a1, 4) , (unique, 0x10000014, 4)
+(unique, 0x10000018, 4) LOAD (const, 0x1a1, 4) , (unique, 0x1000001c, 4)
+(unique, 0x10000020, 4) LOAD (const, 0x1a1, 4) , (unique, 0x10000024, 4)
+(unique, 0x10000014, 4) PTRADD (stack, 0x4, 4) , (const, 0x3, 4) , (const, 0x4, 4)
+(unique, 0x1000001c, 4) PTRADD (stack, 0x4, 4) , (const, 0x4, 4) , (const, 0x4, 4)
+(unique, 0x10000024, 4) PTRADD (stack, 0x4, 4) , (const, 0x5, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x1000000c, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000028, 4) , (unique, 0x10000010, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x1000002c, 4) , (unique, 0x10000018, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000030, 4) , (unique, 0x10000020, 4)
+(unique, 0x10000028, 4) PTRADD (register, 0x4, 4) , (const, 0x3, 4) , (const, 0x4, 4)
+(unique, 0x1000002c, 4) PTRADD (register, 0x4, 4) , (const, 0x4, 4) , (const, 0x4, 4)
+(unique, 0x10000030, 4) PTRADD (register, 0x4, 4) , (const, 0x5, 4) , (const, 0x4, 4)
+(unique, 0x10000034, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x10000038, 4) LOAD (const, 0x1a1, 4) , (unique, 0x1000003c, 4)
+(unique, 0x10000040, 4) LOAD (const, 0x1a1, 4) , (unique, 0x10000044, 4)
+(unique, 0x10000048, 4) LOAD (const, 0x1a1, 4) , (unique, 0x1000004c, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x6, 4) , (const, 0x4, 4)
+(unique, 0x1000003c, 4) PTRADD (stack, 0x4, 4) , (const, 0x7, 4) , (const, 0x4, 4)
+(unique, 0x10000044, 4) PTRADD (stack, 0x4, 4) , (const, 0x8, 4) , (const, 0x4, 4)
+(unique, 0x1000004c, 4) PTRADD (stack, 0x4, 4) , (const, 0x9, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x10000034, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000050, 4) , (unique, 0x10000038, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000054, 4) , (unique, 0x10000040, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000058, 4) , (unique, 0x10000048, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x6, 4) , (const, 0x4, 4)
+(unique, 0x10000050, 4) PTRADD (register, 0x4, 4) , (const, 0x7, 4) , (const, 0x4, 4)
+(unique, 0x10000054, 4) PTRADD (register, 0x4, 4) , (const, 0x8, 4) , (const, 0x4, 4)
+(unique, 0x10000058, 4) PTRADD (register, 0x4, 4) , (const, 0x9, 4) , (const, 0x4, 4)
+(unique, 0xa400, 8) LOAD (const, 0x1a1, 4) , (unique, 0x10000135, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0xa, 4) , (const, 0x4, 4)
+(unique, 0x10000135, 4) CAST (unique, 0x6600, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000139, 4) , (unique, 0xa400, 8)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0xa, 4) , (const, 0x4, 4)
+(unique, 0x10000139, 4) CAST (unique, 0x6600, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0xc, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0xc, 4) , (const, 0x4, 4)
+(unique, 0x1000005c, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x10000060, 4) LOAD (const, 0x1a1, 4) , (unique, 0x10000064, 4)
+(unique, 0x10000068, 4) LOAD (const, 0x1a1, 4) , (unique, 0x1000006c, 4)
+(unique, 0x10000070, 4) LOAD (const, 0x1a1, 4) , (unique, 0x10000074, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0xe, 4) , (const, 0x4, 4)
+(unique, 0x10000064, 4) PTRADD (stack, 0x4, 4) , (const, 0xf, 4) , (const, 0x4, 4)
+(unique, 0x1000006c, 4) PTRADD (stack, 0x4, 4) , (const, 0x10, 4) , (const, 0x4, 4)
+(unique, 0x10000074, 4) PTRADD (stack, 0x4, 4) , (const, 0x11, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x1000005c, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000078, 4) , (unique, 0x10000060, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x1000007c, 4) , (unique, 0x10000068, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000080, 4) , (unique, 0x10000070, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0xe, 4) , (const, 0x4, 4)
+(unique, 0x10000078, 4) PTRADD (register, 0x4, 4) , (const, 0xf, 4) , (const, 0x4, 4)
+(unique, 0x1000007c, 4) PTRADD (register, 0x4, 4) , (const, 0x10, 4) , (const, 0x4, 4)
+(unique, 0x10000080, 4) PTRADD (register, 0x4, 4) , (const, 0x11, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x12, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x12, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x13, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x13, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x14, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x14, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x15, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x15, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x16, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x16, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x17, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x17, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x18, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x18, 4) , (const, 0x4, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

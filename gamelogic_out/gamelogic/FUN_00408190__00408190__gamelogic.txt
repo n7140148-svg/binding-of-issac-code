@@ -1,0 +1,158 @@
+========== FUNCTION FUN_00408190@00408190 ==========
+
+---- ASSEMBLY ----
+00408190  PUSH EBP
+00408191  MOV EBP,ESP
+00408193  CMP EDX,dword ptr [EBP + 0xc]
+00408196  JNZ 0x004081f6
+00408198  PUSH ESI
+00408199  MOV ESI,dword ptr [EBP + 0x8]
+0040819c  SUB EDX,0x4
+0040819f  JC 0x004081b2
+004081a1  MOV EAX,dword ptr [ECX]
+004081a3  CMP EAX,dword ptr [ESI]
+004081a5  JNZ 0x004081b7
+004081a7  ADD ECX,0x4
+004081aa  ADD ESI,0x4
+004081ad  SUB EDX,0x4
+004081b0  JNC 0x004081a1
+004081b2  CMP EDX,-0x4
+004081b5  JZ 0x004081eb
+004081b7  MOV AL,byte ptr [ECX]
+004081b9  CMP AL,byte ptr [ESI]
+004081bb  JNZ 0x004081e4
+004081bd  CMP EDX,-0x3
+004081c0  JZ 0x004081eb
+004081c2  MOV AL,byte ptr [ECX + 0x1]
+004081c5  CMP AL,byte ptr [ESI + 0x1]
+004081c8  JNZ 0x004081e4
+004081ca  CMP EDX,-0x2
+004081cd  JZ 0x004081eb
+004081cf  MOV AL,byte ptr [ECX + 0x2]
+004081d2  CMP AL,byte ptr [ESI + 0x2]
+004081d5  JNZ 0x004081e4
+004081d7  CMP EDX,-0x1
+004081da  JZ 0x004081eb
+004081dc  MOV AL,byte ptr [ECX + 0x3]
+004081df  CMP AL,byte ptr [ESI + 0x3]
+004081e2  JZ 0x004081eb
+004081e4  SBB EAX,EAX
+004081e6  OR EAX,0x1
+004081e9  JMP 0x004081ed
+004081eb  XOR EAX,EAX
+004081ed  POP ESI
+004081ee  TEST EAX,EAX
+004081f0  JNZ 0x004081f6
+004081f2  MOV AL,0x1
+004081f4  POP EBP
+004081f5  RET
+004081f6  XOR AL,AL
+004081f8  POP EBP
+004081f9  RET
+
+---- DECOMPILED C ----
+
+uint __fastcall FUN_00408190(byte *param_1,uint param_2,byte *param_3,uint param_4)
+
+{
+  uint uVar1;
+  uint in_EAX;
+  bool bVar2;
+  
+  if (param_2 != param_4) goto LAB_004081f6;
+  while (uVar1 = param_2 - 4, 3 < param_2) {
+    if (*(int *)param_1 != *(int *)param_3) goto LAB_004081b7;
+    param_1 = param_1 + 4;
+    param_3 = param_3 + 4;
+    param_2 = uVar1;
+  }
+  if (uVar1 == 0xfffffffc) {
+LAB_004081eb:
+    in_EAX = 0;
+  }
+  else {
+LAB_004081b7:
+    bVar2 = *param_1 < *param_3;
+    if ((*param_1 == *param_3) &&
+       ((uVar1 == 0xfffffffd ||
+        ((bVar2 = param_1[1] < param_3[1], param_1[1] == param_3[1] &&
+         ((uVar1 == 0xfffffffe ||
+          ((bVar2 = param_1[2] < param_3[2], param_1[2] == param_3[2] &&
+           ((uVar1 == 0xffffffff || (bVar2 = param_1[3] < param_3[3], param_1[3] == param_3[3]))))))
+         )))))) goto LAB_004081eb;
+    in_EAX = -(uint)bVar2 | 1;
+  }
+  if (in_EAX == 0) {
+    return 1;
+  }
+LAB_004081f6:
+  return in_EAX & 0xffffff00;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x206, 1) INT_NOTEQUAL (register, 0x8, 4) , (stack, 0x8, 4)
+ ---  CBRANCH (ram, 0x4081f6, 1) , (register, 0x206, 1)
+(unique, 0x10000041, 1) INT_LESS (const, 0x3, 4) , (register, 0x8, 4)
+(unique, 0x10000042, 4) INT_SUB (register, 0x8, 4) , (const, 0x4, 4)
+ ---  CBRANCH (ram, 0x4081b2, 1) , (unique, 0x10000041, 1)
+(unique, 0x10000046, 4) MULTIEQUAL (register, 0x4, 4) , (register, 0x4, 4)
+(unique, 0x1000004a, 4) MULTIEQUAL (register, 0x18, 4) , (stack, 0x4, 4)
+(register, 0x8, 4) MULTIEQUAL (unique, 0x1000004e, 4) , (register, 0x8, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x10000052, 4)
+(unique, 0x10000052, 4) CAST (unique, 0x10000046, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x10000056, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (unique, 0xa300, 4)
+(unique, 0x10000056, 4) CAST (unique, 0x1000004a, 4)
+ ---  CBRANCH (ram, 0x4081b7, 1) , (register, 0x206, 1)
+(register, 0x4, 4) PTRADD (unique, 0x10000046, 4) , (const, 0x4, 4) , (const, 0x1, 4)
+(register, 0x18, 4) PTRADD (unique, 0x1000004a, 4) , (const, 0x4, 4) , (const, 0x1, 4)
+(unique, 0x1000004e, 4) COPY (unique, 0x10000042, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x10000042, 4) , (const, 0xfffffffc, 4)
+ ---  CBRANCH (ram, 0x4081eb, 1) , (register, 0x206, 1)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x10000046, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x1000004a, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x4081e4, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_EQUAL (unique, 0x10000042, 4) , (const, 0xfffffffd, 4)
+ ---  CBRANCH (ram, 0x4081eb, 1) , (register, 0x206, 1)
+(unique, 0x6600, 4) PTRADD (unique, 0x10000046, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (unique, 0x1000004a, 4) , (const, 0x1, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x4081e4, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_EQUAL (unique, 0x10000042, 4) , (const, 0xfffffffe, 4)
+ ---  CBRANCH (ram, 0x4081eb, 1) , (register, 0x206, 1)
+(unique, 0x6600, 4) PTRADD (unique, 0x10000046, 4) , (const, 0x2, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (unique, 0x1000004a, 4) , (const, 0x2, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x4081e4, 1) , (register, 0x206, 1)
+(register, 0x206, 1) INT_EQUAL (unique, 0x10000042, 4) , (const, 0xffffffff, 4)
+ ---  CBRANCH (ram, 0x4081eb, 1) , (register, 0x206, 1)
+(unique, 0x6600, 4) PTRADD (unique, 0x10000046, 4) , (const, 0x3, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (unique, 0x1000004a, 4) , (const, 0x3, 4) , (const, 0x1, 4)
+(unique, 0x17000, 1) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (unique, 0x17000, 1) , (unique, 0x17000, 1)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17000, 1) , (unique, 0x17000, 1)
+ ---  CBRANCH (ram, 0x4081eb, 1) , (register, 0x206, 1)
+(unique, 0x48c00, 4) INT_ZEXT (register, 0x200, 1)
+(register, 0x200, 1) MULTIEQUAL (register, 0x200, 1) , (register, 0x200, 1) , (register, 0x200, 1) , (register, 0x200, 1)
+(unique, 0x10000030, 4) INT_2COMP (unique, 0x48c00, 4)
+(register, 0x0, 4) INT_OR (unique, 0x10000030, 4) , (const, 0x1, 4)
+ ---  BRANCH (ram, 0x4081ed, 1)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+(register, 0x0, 4) MULTIEQUAL (register, 0x0, 4) , (register, 0x0, 4)
+(register, 0x206, 1) INT_EQUAL (register, 0x0, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x4081f6, 1) , (register, 0x206, 1)
+(register, 0x0, 4) COPY (const, 0x1, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) INT_AND (register, 0x0, 4) , (const, 0xffffff00, 4)
+(register, 0x0, 4) MULTIEQUAL (register, 0x0, 4) , (register, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

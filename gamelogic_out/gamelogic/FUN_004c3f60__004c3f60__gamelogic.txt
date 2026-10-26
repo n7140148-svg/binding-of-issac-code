@@ -1,0 +1,27 @@
+========== FUNCTION FUN_004c3f60@004c3f60 ==========
+
+---- ASSEMBLY ----
+004c3f60  PUSH EBP
+004c3f61  MOV EBP,ESP
+004c3f63  AND ESP,0xfffffff8
+004c3f66  CVTSS2SD XMM0,XMM0
+004c3f6a  CVTSS2SD XMM1,XMM1
+004c3f6e  CALL 0x009ec39a
+004c3f73  CVTSD2SS XMM0,XMM0
+004c3f77  MOV ESP,EBP
+004c3f79  POP EBP
+004c3f7a  RET
+
+---- DECOMPILED C ----
+
+void FUN_004c3f60(void)
+
+{
+  libm_sse2_pow_precise();
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+ ---  CALL (ram, 0x9ec39a, 8)
+ ---  RETURN (const, 0x0, 4)

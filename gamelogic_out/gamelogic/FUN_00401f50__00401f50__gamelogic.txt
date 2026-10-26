@@ -1,0 +1,33 @@
+========== FUNCTION FUN_00401f50@00401f50 ==========
+
+---- ASSEMBLY ----
+00401f50  PUSH EBP
+00401f51  MOV EBP,ESP
+00401f53  SUB ESP,0xc
+00401f56  LEA ECX,[EBP + -0xc]
+00401f59  CALL 0x00401f30
+00401f5e  PUSH 0xb88e1c
+00401f63  LEA EAX,[EBP + -0xc]
+00401f66  PUSH EAX
+00401f67  CALL 0x009ec158
+
+---- DECOMPILED C ----
+
+void FUN_00401f50(void)
+
+{
+  undefined1 local_10 [12];
+  
+  FUN_00401f30();
+                    /* WARNING: Subroutine does not return */
+  _CxxThrowException(local_10,(ThrowInfo *)&DAT_00b88e1c);
+}
+
+
+---- PCODE (high-level ops) ----
+ ---  CALL (ram, 0x401f30, 8)
+(unique, 0x6600, 4) PTRSUB (register, 0x10, 4) , (const, 0xfffffff0, 4)
+ ---  CALL (ram, 0x9ec158, 8) , (unique, 0x6600, 4) , (unique, 0x1000002d, 4)
+ ---  RETURN (const, 0x1, 4)
+(unique, 0x10000035, 4) PTRSUB (const, 0x0, 4) , (const, 0xb88e1c, 4)
+(unique, 0x1000002d, 4) CAST (unique, 0x10000035, 4)

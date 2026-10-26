@@ -1,0 +1,31 @@
+========== FUNCTION FUN_00427710@00427710 ==========
+
+---- ASSEMBLY ----
+00427710  PUSH EBP
+00427711  MOV EBP,ESP
+00427713  MOVSS XMM3,dword ptr [EBP + 0x10]
+00427718  SUB ESP,0xc
+0042771b  MOVSS dword ptr [ESP + 0x8],XMM3
+00427721  MOVSS dword ptr [ESP + 0x4],XMM3
+00427727  MOVSS dword ptr [ESP],XMM3
+0042772c  PUSH dword ptr [EBP + 0xc]
+0042772f  PUSH dword ptr [EBP + 0x8]
+00427732  CALL 0x007cec10
+00427737  MOV EAX,dword ptr [EBP + 0x8]
+0042773a  POP EBP
+0042773b  RET 0xc
+
+---- DECOMPILED C ----
+
+undefined4 FUN_00427710(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  FUN_007cec10(param_1,param_2,param_3,param_3,param_3);
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+ ---  CALL (ram, 0x7cec10, 8) , (stack, 0x4, 4) , (stack, 0x8, 4) , (stack, 0xc, 4) , (stack, 0xc, 4) , (stack, 0xc, 4)
+(register, 0x0, 4) COPY (stack, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

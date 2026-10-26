@@ -1,0 +1,130 @@
+========== FUNCTION FUN_005efcd0@005efcd0 ==========
+
+---- ASSEMBLY ----
+005efcd0  MOV EAX,dword ptr [ECX + 0x2c]
+005efcd3  CMP EAX,0x384
+005efcd8  JA 0x005efd15
+005efcda  JZ 0x005efd12
+005efcdc  SUB EAX,0xc
+005efcdf  CMP EAX,0xe7
+005efce4  JA 0x005efd15
+005efce6  MOVZX EAX,byte ptr [EAX + 0x5efd2c]
+005efced  JMP dword ptr [EAX*0x4 + 0x5efd18]
+005efcf4  CMP dword ptr [ECX + 0x30],0x0
+005efcf8  SETZ AL
+005efcfb  RET
+005efcfc  CMP dword ptr [ECX + 0xcd4],0x0
+005efd03  SETNZ AL
+005efd06  RET
+005efd07  CMP dword ptr [ECX + 0xcd4],0x0
+005efd0e  SETLE AL
+005efd11  RET
+005efd12  XOR AL,AL
+005efd14  RET
+005efd15  MOV AL,0x1
+005efd17  RET
+
+---- DECOMPILED C ----
+
+uint __fastcall FUN_005efcd0(int param_1)
+
+{
+  uint uVar1;
+  uint uVar2;
+  
+  uVar1 = *(uint *)(param_1 + 0x2c);
+  uVar2 = uVar1;
+  if (900 < uVar1) {
+switchD_005efced_caseD_d:
+    return CONCAT31((int3)(uVar2 >> 8),1);
+  }
+  if (uVar1 != 900) {
+    uVar2 = 0;
+    switch(uVar1) {
+    case 0xc:
+    case 0x14:
+    case 0x15:
+    case 0x16:
+    case 0x17:
+    case 0x18:
+    case 0x1a:
+    case 0x1b:
+    case 0x1c:
+    case 0x2b:
+    case 0x39:
+    case 0x40:
+    case 0x43:
+    case 0x44:
+    case 0x49:
+    case 0x6d:
+    case 0x78:
+    case 0x80:
+    case 0xc9:
+    case 0xca:
+    case 0xcb:
+    case 0xce:
+    case 0xd3:
+    case 0xd5:
+    case 0xd6:
+    case 0xd7:
+    case 0xe4:
+    case 0xec:
+    case 0xed:
+    case 0xee:
+    case 0xf0:
+    case 0xf3:
+      break;
+    default:
+      goto switchD_005efced_caseD_d;
+    case 0x19:
+    case 0x3a:
+    case 0x3b:
+    case 0x6a:
+      return (uint)(*(int *)(param_1 + 0x30) == 0);
+    case 200:
+      return (uint)(*(int *)(param_1 + 0xcd4) != 0);
+    case 0xd8:
+      return (uint)(*(int *)(param_1 + 0xcd4) < 1);
+    }
+  }
+  return uVar2 & 0xffffff00;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000030, 4) INT_ADD (register, 0x4, 4) , (const, 0x2c, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000030, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x384, 4)
+(unique, 0x17f00, 1) INT_LESS (const, 0x384, 4) , (unique, 0x17200, 4)
+ ---  CBRANCH (ram, 0x5efd15, 1) , (unique, 0x17f00, 1)
+(unique, 0x10000028, 4) COPY (unique, 0x17200, 4)
+ ---  CBRANCH (ram, 0x5efd12, 1) , (register, 0x206, 1)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+ ---  BRANCHIND (unique, 0x17200, 4)
+(unique, 0x1000003c, 4) INT_ADD (register, 0x4, 4) , (const, 0x30, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000003c, 4)
+(register, 0x0, 4) INT_ZEXT (register, 0x206, 1)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(unique, 0x10000038, 4) INT_ADD (register, 0x4, 4) , (const, 0xcd4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000038, 4)
+(register, 0x0, 4) INT_ZEXT (register, 0x206, 1)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(unique, 0x10000034, 4) INT_ADD (register, 0x4, 4) , (const, 0xcd4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000034, 4)
+(unique, 0x18c00, 1) INT_SLESS (unique, 0x17200, 4) , (const, 0x1, 4)
+(register, 0x0, 4) INT_ZEXT (unique, 0x18c00, 1)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) INT_AND (register, 0x0, 4) , (const, 0xffffff00, 4)
+(register, 0x0, 4) MULTIEQUAL (unique, 0x10000028, 4) , (register, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x1, 3) SUBPIECE (unique, 0x10000024, 4) , (const, 0x0, 4)
+(register, 0x0, 4) PIECE (register, 0x1, 3) , (const, 0x1, 1)
+(register, 0x0, 4) MULTIEQUAL (unique, 0x10000028, 4) , (register, 0x0, 4)
+(unique, 0x10000024, 4) INT_RIGHT (register, 0x0, 4) , (const, 0x8, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

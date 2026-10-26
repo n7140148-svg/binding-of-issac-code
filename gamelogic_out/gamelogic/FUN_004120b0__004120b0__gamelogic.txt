@@ -1,0 +1,44 @@
+========== FUNCTION FUN_004120b0@004120b0 ==========
+
+---- ASSEMBLY ----
+004120b0  PUSH EBP
+004120b1  MOV EBP,ESP
+004120b3  MOV EAX,dword ptr [EBP + 0x8]
+004120b6  MOVSS XMM1,dword ptr [EDX]
+004120ba  MOVAPS XMM0,XMM1
+004120bd  MULSS XMM0,dword ptr [EAX]
+004120c1  MULSS XMM1,dword ptr [EAX + 0x4]
+004120c6  MOV EAX,ECX
+004120c8  MOVSS dword ptr [ECX],XMM0
+004120cc  MOVSS dword ptr [ECX + 0x4],XMM1
+004120d1  POP EBP
+004120d2  RET
+
+---- DECOMPILED C ----
+
+float * __fastcall FUN_004120b0(float *param_1,float *param_2,float *param_3)
+
+{
+  float fVar1;
+  float fVar2;
+  
+  fVar1 = *param_2;
+  fVar2 = param_3[1];
+  *param_1 = fVar1 * *param_3;
+  param_1[1] = fVar1 * fVar2;
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (register, 0x8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (stack, 0x4, 4)
+(register, 0x1200, 4) FLOAT_MULT (unique, 0xa300, 4) , (unique, 0xa300, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x1240, 4) FLOAT_MULT (unique, 0xa300, 4) , (unique, 0xa300, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (register, 0x1200, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (register, 0x1240, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

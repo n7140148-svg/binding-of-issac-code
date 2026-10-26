@@ -1,0 +1,35 @@
+========== FUNCTION FUN_00405d10@00405d10 ==========
+
+---- ASSEMBLY ----
+00405d10  CMP dword ptr [ECX + 0x54],0x0
+00405d14  JNZ 0x00405d1a
+00405d16  OR EAX,0xffffffff
+00405d19  RET
+00405d1a  CVTTSS2SI EAX,dword ptr [ECX + 0x60]
+00405d1f  RET
+
+---- DECOMPILED C ----
+
+int __fastcall FUN_00405d10(int param_1)
+
+{
+  if (*(int *)(param_1 + 0x54) == 0) {
+    return -1;
+  }
+  return (int)*(float *)(param_1 + 0x60);
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000005, 4) INT_ADD (register, 0x4, 4) , (const, 0x54, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_EQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000005, 4)
+ ---  CBRANCH (ram, 0x405d1a, 1) , (register, 0x206, 1)
+(register, 0x0, 4) COPY (const, 0xffffffff, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(unique, 0x10000009, 4) INT_ADD (register, 0x4, 4) , (const, 0x60, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x0, 4) TRUNC (unique, 0xa300, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000009, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

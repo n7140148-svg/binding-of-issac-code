@@ -1,0 +1,84 @@
+========== FUNCTION FUN_004123a0@004123a0 ==========
+
+---- ASSEMBLY ----
+004123a0  PUSH EBP
+004123a1  MOV EBP,ESP
+004123a3  MOV EAX,dword ptr [EBP + 0x8]
+004123a6  PUSH ESI
+004123a7  MOV ESI,ECX
+004123a9  MOV byte ptr [ESI],0x0
+004123ac  MOV dword ptr [ESI + 0x8],EAX
+004123af  MOV dword ptr [ESI + 0xc],0x0
+004123b6  TEST EAX,EAX
+004123b8  JZ 0x004123dd
+004123ba  XOR ECX,ECX
+004123bc  MOV EDX,0x4
+004123c1  MUL EDX
+004123c3  SETO CL
+004123c6  NEG ECX
+004123c8  OR ECX,EAX
+004123ca  PUSH ECX
+004123cb  CALL 0x009eb09c
+004123d0  ADD ESP,0x4
+004123d3  MOV dword ptr [ESI + 0x4],EAX
+004123d6  MOV EAX,ESI
+004123d8  POP ESI
+004123d9  POP EBP
+004123da  RET 0x4
+004123dd  MOV dword ptr [ESI + 0x4],0x0
+004123e4  MOV EAX,ESI
+004123e6  POP ESI
+004123e7  POP EBP
+004123e8  RET 0x4
+
+---- DECOMPILED C ----
+
+undefined1 * __thiscall FUN_004123a0(undefined1 *param_1,uint param_2)
+
+{
+  undefined4 uVar1;
+  
+  *param_1 = 0;
+  *(uint *)(param_1 + 8) = param_2;
+  *(undefined4 *)(param_1 + 0xc) = 0;
+  if (param_2 != 0) {
+    uVar1 = FUN_009eb09c(-(uint)((int)((ulonglong)param_2 * 4 >> 0x20) != 0) |
+                         (uint)((ulonglong)param_2 * 4));
+    *(undefined4 *)(param_1 + 4) = uVar1;
+    return param_1;
+  }
+  *(undefined4 *)(param_1 + 4) = 0;
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (const, 0x0, 1)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x8, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x1000001e, 4) , (stack, 0x4, 4)
+(unique, 0x1000001e, 4) CAST (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0xc, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000022, 4) , (const, 0x0, 4)
+(unique, 0x10000022, 4) CAST (unique, 0x6600, 4)
+(register, 0x206, 1) INT_NOTEQUAL (stack, 0x4, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x4123dd, 1) , (register, 0x206, 1)
+(unique, 0x81d00, 8) INT_ZEXT (stack, 0x4, 4)
+(unique, 0x82000, 8) INT_MULT (unique, 0x81d00, 8) , (const, 0x4, 8)
+(register, 0x8, 4) SUBPIECE (unique, 0x10000016, 8) , (const, 0x0, 4)
+(register, 0x200, 1) INT_NOTEQUAL (register, 0x8, 4) , (const, 0x0, 4)
+(register, 0x0, 4) SUBPIECE (unique, 0x82000, 8) , (const, 0x0, 4)
+(unique, 0x10000016, 8) INT_RIGHT (unique, 0x82000, 8) , (const, 0x20, 4)
+(register, 0x4, 4) INT_ZEXT (register, 0x200, 1)
+(register, 0x4, 4) INT_2COMP (register, 0x4, 4)
+(register, 0x4, 4) INT_OR (register, 0x4, 4) , (register, 0x0, 4)
+(register, 0x0, 4) CALL (ram, 0x9eb09c, 8) , (register, 0x4, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x4, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x1000002a, 4) , (register, 0x0, 4)
+(unique, 0x1000002a, 4) CAST (unique, 0x6600, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x4, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000026, 4) , (const, 0x0, 4)
+(unique, 0x10000026, 4) CAST (unique, 0x6600, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

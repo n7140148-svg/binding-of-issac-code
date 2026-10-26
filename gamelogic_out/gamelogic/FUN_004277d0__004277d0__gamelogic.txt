@@ -1,0 +1,23 @@
+========== FUNCTION FUN_004277d0@004277d0 ==========
+
+---- ASSEMBLY ----
+004277d0  CMP dword ptr [ECX + 0x4],0x0
+004277d4  SETNZ AL
+004277d7  RET
+
+---- DECOMPILED C ----
+
+bool __fastcall FUN_004277d0(int param_1)
+
+{
+  return *(int *)(param_1 + 4) != 0;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000004, 4) INT_ADD (register, 0x4, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000004, 4)
+(register, 0x0, 1) COPY (register, 0x206, 1)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 1)

@@ -1,0 +1,31 @@
+========== FUNCTION FUN_005ee8d0@005ee8d0 ==========
+
+---- ASSEMBLY ----
+005ee8d0  PUSH EBP
+005ee8d1  MOV EBP,ESP
+005ee8d3  MOV EAX,dword ptr [EBP + 0x8]
+005ee8d6  MOV ECX,dword ptr [ECX + 0x8]
+005ee8d9  CMP ECX,dword ptr [EAX + 0x8]
+005ee8dc  SETNZ AL
+005ee8df  POP EBP
+005ee8e0  RET 0x4
+
+---- DECOMPILED C ----
+
+bool __thiscall FUN_005ee8d0(int param_1,int param_2)
+
+{
+  return *(int *)(param_1 + 8) != *(int *)(param_2 + 8);
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000008, 4) INT_ADD (register, 0x4, 4) , (const, 0x8, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000008, 4)
+(unique, 0x1000000c, 4) INT_ADD (stack, 0x4, 4) , (const, 0x8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (unique, 0xa300, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000000c, 4)
+(register, 0x0, 1) COPY (register, 0x206, 1)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 1)

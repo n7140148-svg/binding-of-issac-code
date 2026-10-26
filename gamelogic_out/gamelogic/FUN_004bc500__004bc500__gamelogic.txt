@@ -1,0 +1,53 @@
+========== FUNCTION FUN_004bc500@004bc500 ==========
+
+---- ASSEMBLY ----
+004bc500  PUSH ESI
+004bc501  PUSH EDI
+004bc502  MOV EDI,ECX
+004bc504  MOV ESI,dword ptr [EDI]
+004bc506  PUSH dword ptr [ESI + 0x4]
+004bc509  PUSH EDI
+004bc50a  CALL 0x00420480
+004bc50f  MOV dword ptr [ESI + 0x4],ESI
+004bc512  MOV dword ptr [ESI],ESI
+004bc514  MOV dword ptr [ESI + 0x8],ESI
+004bc517  MOV dword ptr [EDI + 0x4],0x0
+004bc51e  POP EDI
+004bc51f  POP ESI
+004bc520  RET
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_004bc500(int *param_1)
+
+{
+  int iVar1;
+  
+  iVar1 = *param_1;
+  FID_conflict__Erase_tree<fuzzer::fuzzer_allocator<std::_Tree_node<fuzzer::TracePC::PCTableEntry_const*,void*>_>_>
+            (param_1,*(undefined4 *)(iVar1 + 4));
+  *(int *)(iVar1 + 4) = iVar1;
+  *(int *)iVar1 = iVar1;
+  *(int *)(iVar1 + 8) = iVar1;
+  param_1[1] = 0;
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x1000001d, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000001d, 4)
+ ---  CALL (ram, 0x420480, 8) , (register, 0x4, 4) , (unique, 0x17200, 4)
+(unique, 0x10000021, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000021, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000025, 4) , (unique, 0x17200, 4)
+(unique, 0x10000025, 4) CAST (unique, 0x17200, 4)
+(unique, 0x10000029, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x8, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000029, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+ ---  RETURN (const, 0x0, 4)

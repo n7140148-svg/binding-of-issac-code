@@ -1,0 +1,30 @@
+========== FUNCTION FUN_0040f310@0040f310 ==========
+
+---- ASSEMBLY ----
+0040f310  MOV EDX,dword ptr [ECX + 0x4]
+0040f313  MOV EAX,0x2aaaaaab
+0040f318  SUB EDX,dword ptr [ECX]
+0040f31a  IMUL EDX
+0040f31c  SAR EDX,0x2
+0040f31f  MOV EAX,EDX
+0040f321  SHR EAX,0x1f
+0040f324  ADD EAX,EDX
+0040f326  RET
+
+---- DECOMPILED C ----
+
+int __fastcall FUN_0040f310(int *param_1)
+
+{
+  return (param_1[1] - *param_1) / 0x18;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(register, 0x8, 4) INT_SUB (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(unique, 0x10000004, 4) INT_SDIV (register, 0x8, 4) , (const, 0x18, 4)
+(register, 0x0, 4) COPY (unique, 0x10000004, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

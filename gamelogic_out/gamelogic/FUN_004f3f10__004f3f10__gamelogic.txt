@@ -1,0 +1,29 @@
+========== FUNCTION FUN_004f3f10@004f3f10 ==========
+
+---- ASSEMBLY ----
+004f3f10  PUSH EBP
+004f3f11  MOV EBP,ESP
+004f3f13  MOV EDX,dword ptr [EBP + 0x8]
+004f3f16  LEA EAX,[EDX*0x8 + 0x0]
+004f3f1d  SUB EAX,EDX
+004f3f1f  MOV EAX,dword ptr [ECX + EAX*0x4 + 0x14c4]
+004f3f26  POP EBP
+004f3f27  RET 0x4
+
+---- DECOMPILED C ----
+
+undefined4 __thiscall FUN_004f3f10(int param_1,int param_2)
+
+{
+  return *(undefined4 *)(param_1 + 0x14c4 + param_2 * 0x1c);
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x7a00, 4) INT_ADD (register, 0x4, 4) , (const, 0x14c4, 4)
+(unique, 0x10000014, 4) INT_ADD (unique, 0x7a00, 4) , (unique, 0x10000010, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x7d00, 4)
+(register, 0x0, 4) COPY (unique, 0x17200, 4)
+(unique, 0x10000010, 4) INT_MULT (stack, 0x4, 4) , (const, 0x1c, 4)
+(unique, 0x7d00, 4) CAST (unique, 0x10000014, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

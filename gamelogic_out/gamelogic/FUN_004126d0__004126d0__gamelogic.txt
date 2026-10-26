@@ -1,0 +1,27 @@
+========== FUNCTION FUN_004126d0@004126d0 ==========
+
+---- ASSEMBLY ----
+004126d0  MOV EAX,dword ptr [ECX]
+004126d2  CMP EAX,dword ptr [ECX + 0x4]
+004126d5  SETNZ AL
+004126d8  RET
+
+---- DECOMPILED C ----
+
+undefined4 __fastcall FUN_004126d0(int *param_1)
+
+{
+  return CONCAT31((int3)((uint)*param_1 >> 8),*param_1 != param_1[1]);
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (unique, 0xa300, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(register, 0x1, 3) SUBPIECE (unique, 0x10000008, 4) , (const, 0x0, 4)
+(register, 0x0, 4) PIECE (register, 0x1, 3) , (register, 0x206, 1)
+(unique, 0x10000008, 4) INT_RIGHT (unique, 0x1000000c, 4) , (const, 0x8, 4)
+(unique, 0x1000000c, 4) CAST (unique, 0x17200, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

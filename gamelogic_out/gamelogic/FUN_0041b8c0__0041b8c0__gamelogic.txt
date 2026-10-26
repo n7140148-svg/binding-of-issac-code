@@ -1,0 +1,35 @@
+========== FUNCTION FUN_0041b8c0@0041b8c0 ==========
+
+---- ASSEMBLY ----
+0041b8c0  PUSH EBP
+0041b8c1  MOV EBP,ESP
+0041b8c3  MOV EDX,dword ptr [EBP + 0x8]
+0041b8c6  MOV EAX,dword ptr [EDX]
+0041b8c8  MOV dword ptr [ECX + 0x9c],EAX
+0041b8ce  MOV EAX,dword ptr [EDX + 0x4]
+0041b8d1  MOV dword ptr [ECX + 0xa0],EAX
+0041b8d7  POP EBP
+0041b8d8  RET 0x4
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_0041b8c0(int param_1,undefined4 *param_2)
+
+{
+  *(undefined4 *)(param_1 + 0x9c) = *param_2;
+  *(undefined4 *)(param_1 + 0xa0) = param_2[1];
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (stack, 0x4, 4)
+(unique, 0x10000008, 4) INT_ADD (register, 0x4, 4) , (const, 0x9c, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (unique, 0x17200, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000008, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(unique, 0x1000000c, 4) INT_ADD (register, 0x4, 4) , (const, 0xa0, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (unique, 0x17200, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000000c, 4)
+ ---  RETURN (const, 0x0, 4)

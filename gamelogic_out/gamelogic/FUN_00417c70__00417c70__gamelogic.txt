@@ -1,0 +1,34 @@
+========== FUNCTION FUN_00417c70@00417c70 ==========
+
+---- ASSEMBLY ----
+00417c70  MOVSS XMM0,dword ptr [EDX]
+00417c74  COMISS XMM0,dword ptr [ECX]
+00417c77  CMOVA ECX,EDX
+00417c7a  MOV EAX,ECX
+00417c7c  RET
+
+---- DECOMPILED C ----
+
+float * __fastcall FUN_00417c70(float *param_1,float *param_2)
+
+{
+  if (*param_1 <= *param_2 && *param_2 != *param_1) {
+    param_1 = param_2;
+  }
+  return param_1;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (register, 0x8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x50200, 1) FLOAT_NOTEQUAL (unique, 0xa300, 4) , (unique, 0xa300, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x50400, 1) FLOAT_LESSEQUAL (unique, 0xa300, 4) , (unique, 0xa300, 4)
+ ---  CBRANCH (ram, 0x417c7a, 1) , (unique, 0x1000000d, 1)
+(unique, 0x1000000d, 1) BOOL_AND (unique, 0x50400, 1) , (unique, 0x50200, 1)
+(unique, 0x10000010, 4) COPY (register, 0x4, 4)
+(unique, 0x10000014, 4) COPY (register, 0x8, 4)
+(register, 0x0, 4) COPY (register, 0x4, 4)
+(register, 0x4, 4) MULTIEQUAL (unique, 0x10000010, 4) , (unique, 0x10000014, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

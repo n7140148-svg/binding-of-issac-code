@@ -1,0 +1,45 @@
+========== FUNCTION FUN_00430a40@00430a40 ==========
+
+---- ASSEMBLY ----
+00430a40  PUSH EBP
+00430a41  MOV EBP,ESP
+00430a43  AND ESP,0xfffffff8
+00430a46  SUB ESP,0x8
+00430a49  PUSH dword ptr [EBP + 0xc]
+00430a4c  LEA EAX,[ESP + 0x4]
+00430a50  PUSH EAX
+00430a51  CALL 0x00430ab0
+00430a56  MOV EAX,dword ptr [EBP + 0x8]
+00430a59  MOV ECX,dword ptr [ESP]
+00430a5c  MOV dword ptr [EAX],ECX
+00430a5e  MOV CL,byte ptr [ESP + 0x4]
+00430a62  MOV byte ptr [EAX + 0x4],CL
+00430a65  MOV ESP,EBP
+00430a67  POP EBP
+00430a68  RET 0x8
+
+---- DECOMPILED C ----
+
+void FUN_00430a40(undefined4 *param_1,undefined4 param_2)
+
+{
+  undefined4 local_10;
+  undefined1 local_c;
+  
+  FUN_00430ab0(&local_10,param_2);
+  *param_1 = local_10;
+  *(undefined1 *)(param_1 + 1) = local_c;
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x10, 4) PTRSUB (register, 0x10, 4) , (const, 0xfffffff0, 4)
+ ---  CALL (ram, 0x430ab0, 8) , (register, 0x10, 4) , (stack, 0x8, 4)
+(stack, 0xfffffffffffffff0, 4) INDIRECT (stack, 0xfffffffffffffff0, 4) , (const, 0x22, 4)
+(stack, 0xfffffffffffffff4, 1) INDIRECT (stack, 0xfffffffffffffff4, 1) , (const, 0x22, 4)
+ ---  STORE (const, 0x1a1, 4) , (stack, 0x4, 4) , (stack, 0xfffffffffffffff0, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x10000021, 4) , (stack, 0xfffffffffffffff4, 1)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(unique, 0x10000021, 4) CAST (unique, 0x6600, 4)
+ ---  RETURN (const, 0x0, 4)

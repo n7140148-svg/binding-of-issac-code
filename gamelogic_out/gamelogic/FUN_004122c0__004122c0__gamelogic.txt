@@ -1,0 +1,39 @@
+========== FUNCTION FUN_004122c0@004122c0 ==========
+
+---- ASSEMBLY ----
+004122c0  PUSH EBP
+004122c1  MOV EBP,ESP
+004122c3  MOV EDX,dword ptr [EBP + 0x8]
+004122c6  MOV EAX,dword ptr [EBP + 0xc]
+004122c9  NOT EDX
+004122cb  AND dword ptr [ECX + 0x160],EDX
+004122d1  NOT EAX
+004122d3  AND dword ptr [ECX + 0x164],EAX
+004122d9  POP EBP
+004122da  RET 0x8
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_004122c0(int param_1,uint param_2,uint param_3)
+
+{
+  *(uint *)(param_1 + 0x160) = *(uint *)(param_1 + 0x160) & ~param_2;
+  *(uint *)(param_1 + 0x164) = *(uint *)(param_1 + 0x164) & ~param_3;
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(register, 0x8, 4) INT_NEGATE (stack, 0x4, 4)
+(unique, 0x10000004, 4) INT_ADD (register, 0x4, 4) , (const, 0x160, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0xa300, 4) INT_AND (unique, 0xa300, 4) , (register, 0x8, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (unique, 0xa300, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000004, 4)
+(register, 0x0, 4) INT_NEGATE (stack, 0x8, 4)
+(unique, 0x10000008, 4) INT_ADD (register, 0x4, 4) , (const, 0x164, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0xa300, 4) INT_AND (unique, 0xa300, 4) , (register, 0x0, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (unique, 0xa300, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000008, 4)
+ ---  RETURN (const, 0x0, 4)

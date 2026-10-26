@@ -1,0 +1,87 @@
+========== FUNCTION FUN_0056bec0@0056bec0 ==========
+
+---- ASSEMBLY ----
+0056bec0  PUSH EBP
+0056bec1  MOV EBP,ESP
+0056bec3  SUB ESP,0x1c
+0056bec6  MOVSS XMM0,dword ptr [ECX + 0x2a4]
+0056bece  LEA EAX,[EBP + -0x1c]
+0056bed1  MOVSS dword ptr [EBP + -0xc],XMM0
+0056bed6  MOVSS XMM0,dword ptr [ECX + 0x294]
+0056bede  MOVSS dword ptr [EBP + -0x8],XMM0
+0056bee3  MOVSS XMM0,dword ptr [ECX + 0x2a8]
+0056beeb  MOVSS dword ptr [EBP + -0x10],XMM0
+0056bef0  MOVSS XMM0,dword ptr [ECX + 0x298]
+0056bef8  PUSH 0xb40290
+0056befd  PUSH EAX
+0056befe  MOVSS dword ptr [EBP + -0x14],XMM0
+0056bf03  CALL 0x0068e000
+0056bf08  MOVSS XMM0,dword ptr [EBP + -0x8]
+0056bf0d  MOV ECX,EAX
+0056bf0f  ADDSS XMM0,dword ptr [EBP + -0xc]
+0056bf14  MOV EAX,dword ptr [EBP + 0x8]
+0056bf17  ADDSS XMM0,dword ptr [ECX]
+0056bf1b  MOVSS dword ptr [EAX],XMM0
+0056bf1f  MOVSS XMM0,dword ptr [EBP + -0x10]
+0056bf24  ADDSS XMM0,dword ptr [EBP + -0x14]
+0056bf29  ADDSS XMM0,dword ptr [ECX + 0x4]
+0056bf2e  MOVSS dword ptr [EAX + 0x4],XMM0
+0056bf33  MOV ESP,EBP
+0056bf35  POP EBP
+0056bf36  RET 0x4
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_0056bec0(int param_1,float *param_2)
+
+{
+  float *pfVar1;
+  undefined1 local_20 [8];
+  float local_18;
+  float local_14;
+  float local_10;
+  float local_c;
+  
+  local_10 = *(float *)(param_1 + 0x2a4);
+  local_c = *(float *)(param_1 + 0x294);
+  local_14 = *(float *)(param_1 + 0x2a8);
+  local_18 = *(float *)(param_1 + 0x298);
+  pfVar1 = (float *)FUN_0068e000(local_20,"ShootPos");
+  *param_2 = local_c + local_10 + *pfVar1;
+  param_2[1] = local_14 + local_18 + pfVar1[1];
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x10000029, 4) INT_ADD (register, 0x4, 4) , (const, 0x2a4, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000029, 4)
+(unique, 0x6600, 4) PTRSUB (register, 0x10, 4) , (const, 0xffffffe0, 4)
+(unique, 0x1000002d, 4) INT_ADD (register, 0x4, 4) , (const, 0x294, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000002d, 4)
+(unique, 0x10000031, 4) INT_ADD (register, 0x4, 4) , (const, 0x2a8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000031, 4)
+(unique, 0x10000035, 4) INT_ADD (register, 0x4, 4) , (const, 0x298, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000035, 4)
+(unique, 0x10000039, 4) CALL (ram, 0x68e000, 8) , (unique, 0x6600, 4) , (unique, 0x10000019, 4)
+(stack, 0xffffffffffffffe8, 4) INDIRECT (unique, 0xa300, 4) , (const, 0x3b, 4)
+(stack, 0xffffffffffffffec, 4) INDIRECT (unique, 0xa300, 4) , (const, 0x3b, 4)
+(stack, 0xfffffffffffffff0, 4) INDIRECT (unique, 0xa300, 4) , (const, 0x3b, 4)
+(stack, 0xfffffffffffffff4, 4) INDIRECT (unique, 0xa300, 4) , (const, 0x3b, 4)
+(unique, 0x10000019, 4) COPY (const, 0xb40290, 4)
+(register, 0x0, 4) CAST (unique, 0x10000039, 4)
+(register, 0x1200, 4) FLOAT_ADD (stack, 0xfffffffffffffff4, 4) , (stack, 0xfffffffffffffff0, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (register, 0x0, 4)
+(register, 0x1200, 4) FLOAT_ADD (register, 0x1200, 4) , (unique, 0xa300, 4)
+ ---  STORE (const, 0x1a1, 4) , (stack, 0x4, 4) , (register, 0x1200, 4)
+(register, 0x1200, 4) FLOAT_ADD (stack, 0xffffffffffffffec, 4) , (stack, 0xffffffffffffffe8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x1200, 4) FLOAT_ADD (register, 0x1200, 4) , (unique, 0xa300, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x0, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (register, 0x1200, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+ ---  RETURN (const, 0x0, 4)

@@ -1,0 +1,68 @@
+========== FUNCTION FUN_0041edf0@0041edf0 ==========
+
+---- ASSEMBLY ----
+0041edf0  PUSH ESI
+0041edf1  PUSH EDI
+0041edf2  MOV EDI,ECX
+0041edf4  LEA ECX,[EDI + 0x98]
+0041edfa  CALL 0x0040f700
+0041edff  LEA ECX,[EDI + 0x8c]
+0041ee05  CALL 0x0040f700
+0041ee0a  LEA ECX,[EDI + 0x48]
+0041ee0d  CALL 0x0040f700
+0041ee12  LEA ECX,[EDI + 0x2c]
+0041ee15  CALL 0x0040f700
+0041ee1a  LEA ECX,[EDI + 0x20]
+0041ee1d  CALL 0x0040f700
+0041ee22  MOV EAX,dword ptr [EDI + 0x18]
+0041ee25  LEA ESI,[EDI + 0x18]
+0041ee28  MOV ECX,ESI
+0041ee2a  PUSH dword ptr [EAX + 0x4]
+0041ee2d  PUSH ESI
+0041ee2e  CALL 0x00420480
+0041ee33  PUSH 0x14
+0041ee35  PUSH dword ptr [ESI]
+0041ee37  CALL 0x009eb08e
+0041ee3c  ADD ESP,0x8
+0041ee3f  MOV ECX,EDI
+0041ee41  POP EDI
+0041ee42  POP ESI
+0041ee43  JMP 0x00407be0
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_0041edf0(int param_1)
+
+{
+  FID_conflict__Tidy();
+  FID_conflict__Tidy();
+  FID_conflict__Tidy();
+  FID_conflict__Tidy();
+  FID_conflict__Tidy();
+  FID_conflict__Erase_tree<fuzzer::fuzzer_allocator<std::_Tree_node<fuzzer::TracePC::PCTableEntry_const*,void*>_>_>
+            ((undefined4 *)(param_1 + 0x18),*(undefined4 *)(*(int *)(param_1 + 0x18) + 4));
+  FUN_009eb08e(*(undefined4 *)(param_1 + 0x18),0x14);
+  FUN_00407be0();
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+ ---  CALL (ram, 0x40f700, 8)
+ ---  CALL (ram, 0x40f700, 8)
+ ---  CALL (ram, 0x40f700, 8)
+ ---  CALL (ram, 0x40f700, 8)
+ ---  CALL (ram, 0x40f700, 8)
+(unique, 0x1000005c, 4) INT_ADD (register, 0x4, 4) , (const, 0x18, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000005c, 4)
+(unique, 0x10000060, 4) INT_ADD (register, 0x4, 4) , (const, 0x18, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000060, 4)
+(unique, 0x10000064, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000064, 4)
+ ---  CALL (ram, 0x420480, 8) , (unique, 0x6600, 4) , (unique, 0x17200, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+ ---  CALL (ram, 0x9eb08e, 8) , (unique, 0x17200, 4) , (const, 0x14, 4)
+ ---  CALL (ram, 0x407be0, 8)
+ ---  RETURN (const, 0x0, 8)

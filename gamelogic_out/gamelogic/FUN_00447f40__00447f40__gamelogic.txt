@@ -1,0 +1,52 @@
+========== FUNCTION FUN_00447f40@00447f40 ==========
+
+---- ASSEMBLY ----
+00447f40  PUSH EBP
+00447f41  MOV EBP,ESP
+00447f43  MOV EAX,dword ptr [EBP + 0x8]
+00447f46  CMP EAX,0x1bf
+00447f4b  JA 0x00447f6c
+00447f4d  CMP dword ptr [ECX + EAX*0x4 + 0x76c],0x3b6
+00447f58  LEA ECX,[ECX + EAX*0x4]
+00447f5b  JG 0x00447f6c
+00447f5d  MOV EAX,dword ptr [EBP + 0xc]
+00447f60  MOV dword ptr [ECX + 0x76c],EAX
+00447f66  MOV AL,0x1
+00447f68  POP EBP
+00447f69  RET 0x8
+00447f6c  XOR AL,AL
+00447f6e  POP EBP
+00447f6f  RET 0x8
+
+---- DECOMPILED C ----
+
+undefined4 __thiscall FUN_00447f40(int param_1,uint param_2,undefined4 param_3)
+
+{
+  if ((param_2 < 0x1c0) && (*(int *)(param_1 + 0x76c + param_2 * 4) < 0x3b7)) {
+    *(undefined4 *)(param_1 + param_2 * 4 + 0x76c) = param_3;
+    return 1;
+  }
+  return 0;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17f00, 1) INT_LESS (stack, 0x4, 4) , (const, 0x1c0, 4)
+ ---  CBRANCH (ram, 0x447f6c, 1) , (unique, 0x17f00, 1)
+(unique, 0x7a00, 4) INT_ADD (register, 0x4, 4) , (const, 0x76c, 4)
+(unique, 0x7b00, 4) INT_MULT (stack, 0x4, 4) , (const, 0x4, 4)
+(unique, 0x10000016, 4) INT_ADD (unique, 0x7a00, 4) , (unique, 0x7b00, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x7d00, 4)
+(unique, 0x7d00, 4) CAST (unique, 0x10000016, 4)
+(unique, 0x6a00, 4) INT_MULT (stack, 0x4, 4) , (const, 0x4, 4)
+(unique, 0x6c00, 4) INT_ADD (register, 0x4, 4) , (unique, 0x6a00, 4)
+(unique, 0x19000, 1) INT_SLESS (unique, 0x17200, 4) , (const, 0x3b7, 4)
+ ---  CBRANCH (ram, 0x447f6c, 1) , (unique, 0x19000, 1)
+(unique, 0x1000001a, 4) INT_ADD (unique, 0x6c00, 4) , (const, 0x76c, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (stack, 0x8, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000001a, 4)
+(register, 0x0, 4) COPY (const, 0x1, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)
+(register, 0x0, 4) COPY (const, 0x0, 4)
+ ---  RETURN (const, 0x0, 4) , (register, 0x0, 4)

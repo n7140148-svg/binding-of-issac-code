@@ -1,0 +1,85 @@
+========== FUNCTION thunk_FUN_0040f760@0040f330 ==========
+
+---- ASSEMBLY ----
+0040f330  JMP 0x0040f760
+
+---- DECOMPILED C ----
+
+void __fastcall thunk_FUN_0040f760(int *param_1)
+
+{
+  uint uVar1;
+  int iVar2;
+  int iVar3;
+  
+  iVar2 = *param_1;
+  if (iVar2 != 0) {
+    iVar3 = param_1[1];
+    if (iVar2 != iVar3) {
+      do {
+        FUN_00407be0();
+        iVar2 = iVar2 + 0x18;
+      } while (iVar2 != iVar3);
+      iVar2 = *param_1;
+    }
+    uVar1 = ((param_1[2] - iVar2) / 0x18) * 0x18;
+    iVar3 = iVar2;
+    if (0xfff < uVar1) {
+      iVar3 = *(int *)(iVar2 + -4);
+      uVar1 = uVar1 + 0x23;
+      if (0x1f < (iVar2 - iVar3) - 4U) {
+                    /* WARNING: Subroutine does not return */
+        _invalid_parameter_noinfo_noreturn();
+      }
+    }
+    FUN_009eb08e(iVar3,uVar1);
+    *param_1 = 0;
+    param_1[1] = 0;
+    param_1[2] = 0;
+  }
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x0, 4)
+ ---  CBRANCH (ram, 0x40f7d6, 1) , (register, 0x206, 1)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (unique, 0x17200, 4)
+ ---  CBRANCH (ram, 0x40f782, 1) , (register, 0x206, 1)
+(register, 0x18, 4) MULTIEQUAL (unique, 0x17200, 4) , (register, 0x18, 4)
+ ---  CALL (ram, 0x407be0, 8)
+(register, 0x18, 4) INT_ADD (register, 0x18, 4) , (const, 0x18, 4)
+(register, 0x206, 1) INT_NOTEQUAL (register, 0x18, 4) , (unique, 0x17200, 4)
+ ---  CBRANCH (ram, 0x40f772, 1) , (register, 0x206, 1)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (register, 0x4, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x18, 4) MULTIEQUAL (unique, 0x17200, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x2, 4) , (const, 0x4, 4)
+(register, 0x4, 4) INT_SUB (unique, 0x17200, 4) , (register, 0x18, 4)
+(unique, 0x10000047, 4) INT_SDIV (register, 0x4, 4) , (const, 0x18, 4)
+(register, 0x0, 4) INT_MULT (unique, 0x10000047, 4) , (const, 0x18, 4)
+(register, 0x200, 1) INT_LESS (const, 0xfff, 4) , (register, 0x0, 4)
+ ---  CBRANCH (ram, 0x40f7b8, 1) , (register, 0x200, 1)
+(unique, 0x10000066, 4) COPY (register, 0x18, 4)
+(unique, 0x1000006a, 4) INT_ADD (register, 0x18, 4) , (const, 0xfffffffc, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000006a, 4)
+(register, 0x0, 4) INT_ADD (register, 0x0, 4) , (const, 0x23, 4)
+(register, 0x18, 4) INT_SUB (register, 0x18, 4) , (unique, 0x17200, 4)
+(register, 0x18, 4) INT_SUB (register, 0x18, 4) , (const, 0x4, 4)
+(unique, 0x17f00, 1) INT_LESS (const, 0x1f, 4) , (register, 0x18, 4)
+ ---  CBRANCH (ram, 0x40f7d9, 1) , (unique, 0x17f00, 1)
+(register, 0x0, 4) MULTIEQUAL (register, 0x0, 4) , (register, 0x0, 4)
+(register, 0x18, 4) MULTIEQUAL (unique, 0x10000066, 4) , (unique, 0x17200, 4)
+ ---  CALL (ram, 0x9eb08e, 8) , (register, 0x18, 4) , (register, 0x0, 4)
+ ---  STORE (const, 0x1a1, 4) , (register, 0x4, 4) , (const, 0x0, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x1, 4) , (const, 0x4, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (const, 0x0, 4)
+(unique, 0x6600, 4) PTRADD (register, 0x4, 4) , (const, 0x2, 4) , (const, 0x4, 4)
+ ---  RETURN (const, 0x0, 4)
+ ---  CALL (ram, 0xa065ac, 8)
+ ---  RETURN (const, 0x1, 4)

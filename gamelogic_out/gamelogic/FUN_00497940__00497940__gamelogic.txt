@@ -1,0 +1,75 @@
+========== FUNCTION FUN_00497940@00497940 ==========
+
+---- ASSEMBLY ----
+00497940  PUSH EBP
+00497941  MOV EBP,ESP
+00497943  PUSH ECX
+00497944  CMP dword ptr [ECX + 0xbc],0x0
+0049794b  MOVAPS XMM0,XMM1
+0049794e  PUSH ESI
+0049794f  LEA ESI,[ECX + 0x3c]
+00497952  MOVSS dword ptr [EBP + -0x4],XMM0
+00497957  JG 0x0049797a
+00497959  CMP dword ptr [ESI + 0x14],0x10
+0049795d  MOV EAX,ESI
+0049795f  JC 0x00497963
+00497961  MOV EAX,dword ptr [ESI]
+00497963  PUSH 0x0
+00497965  PUSH EAX
+00497966  PUSH 0xa0830c
+0049796b  PUSH 0x3
+0049796d  CALL 0x0095e330
+0049797a  MOV EAX,dword ptr [ESI + 0x7c]
+0049797d  POP ESI
+0049797e  MOVSS dword ptr [EAX + 0x60],XMM0
+00497983  MOV ESP,EBP
+00497985  POP EBP
+00497986  RET
+
+---- DECOMPILED C ----
+
+void __fastcall FUN_00497940(int param_1)
+
+{
+  int *piVar1;
+  undefined4 in_XMM1_Da;
+  
+  piVar1 = (int *)(param_1 + 0x3c);
+  if (*(int *)(param_1 + 0xbc) < 1) {
+    if (0xf < *(uint *)(param_1 + 0x50)) {
+      piVar1 = (int *)*piVar1;
+    }
+                    /* WARNING: Subroutine does not return */
+    FUN_0095e330(3,"%s: No layer with Id %d\n",piVar1,0);
+  }
+  *(undefined4 *)(*(int *)(param_1 + 0xb8) + 0x60) = in_XMM1_Da;
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x1000002f, 4) INT_ADD (register, 0x4, 4) , (const, 0xbc, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000002f, 4)
+(unique, 0x10000033, 4) INT_ADD (register, 0x4, 4) , (const, 0x3c, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000033, 4)
+(unique, 0x19000, 1) INT_SLESS (unique, 0x17200, 4) , (const, 0x1, 4)
+ ---  CBRANCH (ram, 0x49797a, 1) , (unique, 0x19000, 1)
+(unique, 0x1000003f, 4) INT_ADD (register, 0x4, 4) , (const, 0x50, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x200, 1) INT_LESS (const, 0xf, 4) , (unique, 0x17200, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000003f, 4)
+ ---  CBRANCH (ram, 0x497963, 1) , (register, 0x200, 1)
+(unique, 0x10000043, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x17200, 4) CAST (unique, 0x10000043, 4)
+(register, 0x0, 4) MULTIEQUAL (unique, 0x6600, 4) , (unique, 0x17200, 4)
+ ---  CALL (ram, 0x95e330, 8) , (const, 0x3, 4) , (unique, 0x1000002b, 4) , (register, 0x0, 4) , (const, 0x0, 4)
+ ---  RETURN (const, 0x1, 4)
+(unique, 0x1000002b, 4) COPY (const, 0xa0830c, 4)
+(unique, 0x10000037, 4) INT_ADD (register, 0x4, 4) , (const, 0xb8, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000037, 4)
+(unique, 0x1000003b, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x60, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6600, 4) , (register, 0x1240, 4)
+(unique, 0x6600, 4) CAST (unique, 0x1000003b, 4)
+ ---  RETURN (const, 0x0, 4)

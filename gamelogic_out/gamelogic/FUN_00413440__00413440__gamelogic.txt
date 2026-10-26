@@ -1,0 +1,79 @@
+========== FUNCTION FUN_00413440@00413440 ==========
+
+---- ASSEMBLY ----
+00413440  PUSH EBP
+00413441  MOV EBP,ESP
+00413443  PUSH ESI
+00413444  PUSH EDI
+00413445  MOV EDI,dword ptr [EBP + 0x8]
+00413448  MOV ESI,ECX
+0041344a  MOV ECX,EDI
+0041344c  MOV EAX,dword ptr [EDI]
+0041344e  MOV EAX,dword ptr [EAX + 0x44]
+00413451  CALL EAX
+00413453  TEST AL,AL
+00413455  JZ 0x00413479
+00413457  CMP dword ptr [EDI + 0x28],0x362
+0041345e  JZ 0x00413479
+00413460  INC dword ptr [ESI + 0xa8]
+00413466  MOV ECX,EDI
+00413468  MOV EAX,dword ptr [EDI]
+0041346a  MOV EAX,dword ptr [EAX + 0x48]
+0041346d  CALL EAX
+0041346f  TEST AL,AL
+00413471  JZ 0x00413479
+00413473  INC dword ptr [ESI + 0xb0]
+00413479  POP EDI
+0041347a  POP ESI
+0041347b  POP EBP
+0041347c  RET 0x4
+
+---- DECOMPILED C ----
+
+void __thiscall FUN_00413440(int param_1,int *param_2)
+
+{
+  char cVar1;
+  
+  cVar1 = (**(code **)(*param_2 + 0x44))();
+  if ((cVar1 != '\0') && (param_2[10] != 0x362)) {
+    *(int *)(param_1 + 0xa8) = *(int *)(param_1 + 0xa8) + 1;
+    cVar1 = (**(code **)(*param_2 + 0x48))();
+    if (cVar1 != '\0') {
+      *(int *)(param_1 + 0xb0) = *(int *)(param_1 + 0xb0) + 1;
+    }
+  }
+  return;
+}
+
+
+---- PCODE (high-level ops) ----
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (stack, 0x4, 4)
+(unique, 0x10000029, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x44, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000029, 4)
+(register, 0x0, 1) CALLIND (unique, 0x17200, 4)
+(register, 0x206, 1) INT_NOTEQUAL (register, 0x0, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x413479, 1) , (register, 0x206, 1)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(register, 0x206, 1) INT_NOTEQUAL (unique, 0x17200, 4) , (const, 0x362, 4)
+(unique, 0x6600, 4) PTRADD (stack, 0x4, 4) , (const, 0xa, 4) , (const, 0x4, 4)
+ ---  CBRANCH (ram, 0x413479, 1) , (register, 0x206, 1)
+(unique, 0x1000002d, 4) INT_ADD (register, 0x4, 4) , (const, 0xa8, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0xa300, 4) INT_ADD (unique, 0xa300, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (unique, 0xa300, 4)
+(unique, 0x6800, 4) CAST (unique, 0x1000002d, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (stack, 0x4, 4)
+(unique, 0x10000031, 4) INT_ADD (unique, 0x17200, 4) , (const, 0x48, 4)
+(unique, 0x17200, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6600, 4)
+(unique, 0x6600, 4) CAST (unique, 0x10000031, 4)
+(register, 0x0, 1) CALLIND (unique, 0x17200, 4)
+(register, 0x206, 1) INT_NOTEQUAL (register, 0x0, 1) , (const, 0x0, 1)
+ ---  CBRANCH (ram, 0x413479, 1) , (register, 0x206, 1)
+(unique, 0x10000035, 4) INT_ADD (register, 0x4, 4) , (const, 0xb0, 4)
+(unique, 0xa300, 4) LOAD (const, 0x1a1, 4) , (unique, 0x6800, 4)
+(unique, 0xa300, 4) INT_ADD (unique, 0xa300, 4) , (const, 0x1, 4)
+ ---  STORE (const, 0x1a1, 4) , (unique, 0x6800, 4) , (unique, 0xa300, 4)
+(unique, 0x6800, 4) CAST (unique, 0x10000035, 4)
+ ---  RETURN (const, 0x0, 4)
