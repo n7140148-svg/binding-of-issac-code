@@ -1,0 +1,80 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_007e7c20@007e7c20
+---- CALLEES ----
+0095e330 FUN_0095e330
+---- ASSEMBLY ----
+007e7c20  PUSH EBP
+007e7c21  MOV EBP,ESP
+007e7c23  AND ESP,0xffffffc0
+007e7c26  MOVSS XMM1,dword ptr [EBP + 0x8]
+007e7c2b  SUB ESP,0x38
+007e7c2e  XOR DL,DL
+007e7c30  XORPS XMM0,XMM0
+007e7c33  PUSH EBX
+007e7c34  PUSH ESI
+007e7c35  MOV ESI,ECX
+007e7c37  MOV BL,byte ptr [ESI + 0x8]
+007e7c3a  MULSS XMM1,dword ptr [ESI + 0xc]
+007e7c3f  TEST BL,BL
+007e7c41  JZ 0x007e7c6a
+007e7c43  MOV ECX,dword ptr [ESI + 0x4]
+007e7c46  NOP dword ptr [EAX + EAX*0x1]
+007e7c50  MOVZX EAX,DL
+007e7c53  LEA EAX,[EAX + EAX*0x2]
+007e7c56  ADDSS XMM0,dword ptr [ECX + EAX*0x4 + 0x8]
+007e7c5c  LEA EAX,[ECX + EAX*0x4]
+007e7c5f  COMISS XMM0,XMM1
+007e7c62  JA 0x007e7c9b
+007e7c64  INC DL
+007e7c66  CMP DL,BL
+007e7c68  JC 0x007e7c50
+007e7c6a  MOV ECX,dword ptr [ESI + 0x4]
+007e7c6d  SUB ESP,0x8
+007e7c70  MOVSS XMM0,dword ptr [ECX + 0x8]
+007e7c75  MOVZX EAX,word ptr [ECX + 0x6]
+007e7c79  CVTPS2PD XMM0,XMM0
+007e7c7c  MOVSD qword ptr [ESP],XMM0
+007e7c81  PUSH EAX
+007e7c82  MOVZX EAX,word ptr [ECX + 0x4]
+007e7c86  PUSH EAX
+007e7c87  PUSH dword ptr [ECX]
+007e7c89  PUSH 0xb4e438
+007e7c8e  PUSH 0x0
+007e7c90  CALL 0x0095e330
+007e7c95  MOV EAX,dword ptr [ESI + 0x4]
+007e7c98  ADD ESP,0x1c
+007e7c9b  POP ESI
+007e7c9c  POP EBX
+007e7c9d  MOV ESP,EBP
+007e7c9f  POP EBP
+007e7ca0  RET 0x4
+---- DECOMPILED C ----
+
+int __thiscall FUN_007e7c20(int param_1,float param_2)
+
+{
+  undefined4 *puVar1;
+  byte bVar2;
+  float fVar3;
+  
+  bVar2 = 0;
+  fVar3 = 0.0;
+  if (*(byte *)(param_1 + 8) != 0) {
+    do {
+      fVar3 = fVar3 + *(float *)(*(int *)(param_1 + 4) + 8 + (uint)bVar2 * 0xc);
+      if (param_2 * *(float *)(param_1 + 0xc) < fVar3) {
+        return *(int *)(param_1 + 4) + (uint)bVar2 * 0xc;
+      }
+      bVar2 = bVar2 + 1;
+    } while (bVar2 < *(byte *)(param_1 + 8));
+  }
+  puVar1 = *(undefined4 **)(param_1 + 4);
+  FUN_0095e330(0,
+               "[warn] RoomConfig::Spawn::PickEntry did not terminate properly. Picking first entry: (%d, %d, %d, %f)\n"
+               ,*puVar1,*(undefined2 *)(puVar1 + 1),*(undefined2 *)((int)puVar1 + 6),
+               (double)(float)puVar1[2]);
+  return *(int *)(param_1 + 4);
+}
+

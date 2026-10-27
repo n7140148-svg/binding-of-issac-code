@@ -1,5 +1,18 @@
 # Isaac 逆向阶段性成果 · 交接包（Handover Package）
 
+## Continuation: 2026-10-27
+
+Runnable C# code: [reference/README.md](reference/README.md).
+Read [the code delivery report](reports/FINAL_CODE_2026-10-27.md) for verified
+algorithms, build results and remaining compatibility gaps. Whole-game reverse
+engineering is not complete. The older handover text below is historical.
+
+Start with [the continuation report](reports/CONTINUATION_2026-10-27.md)
+and [the gameplay function map](gl_INDEX.md). This pass adds gameplay RNG,
+item-pool selection, recovered level orchestration, damage and wave findings,
+plus reproducible tools and target-bound evidence. The handoff below is
+historical; see the report for corrections to its export coverage claims.
+
 > 打包日期：2026-10-26
 > 目标（用户口授）：**逆向到「能用于我们项目」的程度，音频与贴图不需要**。
 > 本包用途：**交给另一个 AI 直接接着干，继续把游戏逻辑代码（道具抽取 / 楼层房间生成 / 敌人 AI / 战斗 / RNG）逆出来**。

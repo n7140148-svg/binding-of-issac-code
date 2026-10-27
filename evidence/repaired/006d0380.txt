@@ -1,0 +1,61 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_006d0380@006d0380
+---- CALLEES ----
+007f23c0 FUN_007f23c0
+---- ASSEMBLY ----
+006d0380  CMP dword ptr [ECX + 0x1bb80],0x0
+006d0387  MOV EDX,dword ptr [0x00bfd680]
+006d038d  JZ 0x006d039d
+006d038f  MOV EAX,dword ptr [EDX + 0x20a9ac]
+006d0395  CMP EAX,dword ptr [EDX + 0x20a9b0]
+006d039b  JZ 0x006d03f8
+006d039d  CMP dword ptr [ECX + 0x1a30d8],0x0
+006d03a4  JG 0x006d03f8
+006d03a6  CMP dword ptr [ECX + 0x1d154],0x0
+006d03ad  JNZ 0x006d03f8
+006d03af  CMP dword ptr [ECX + 0x3d808],0x0
+006d03b6  JNZ 0x006d03f8
+006d03b8  CMP dword ptr [ECX + 0x1ba0c],0x0
+006d03bf  JNZ 0x006d03f8
+006d03c1  CMP dword ptr [ECX + 0x1b6c0],0x0
+006d03c8  JNZ 0x006d03f8
+006d03ca  MOV EAX,dword ptr [ECX + 0x1bcc0]
+006d03d0  TEST EAX,EAX
+006d03d2  JZ 0x006d03d9
+006d03d4  CMP EAX,0x2
+006d03d7  JZ 0x006d03f8
+006d03d9  CMP dword ptr [ECX + 0x10203c],0x0
+006d03e0  JNZ 0x006d03f8
+006d03e2  CMP dword ptr [EDX + 0x8],0x2
+006d03e6  JNZ 0x006d03f8
+006d03e8  ADD ECX,0x1c33fc
+006d03ee  CALL 0x007f23c0
+006d03f3  TEST AL,AL
+006d03f5  JNZ 0x006d03f8
+006d03f7  RET
+006d03f8  MOV AL,0x1
+006d03fa  RET
+---- DECOMPILED C ----
+
+undefined1 __fastcall FUN_006d0380(int param_1)
+
+{
+  char cVar1;
+  
+  if ((((((*(int *)(param_1 + 0x1bb80) == 0) ||
+         (*(int *)(DAT_00bfd680 + 0x20a9ac) != *(int *)(DAT_00bfd680 + 0x20a9b0))) &&
+        (*(int *)(param_1 + 0x1a30d8) < 1)) &&
+       ((*(int *)(param_1 + 0x1d154) == 0 && (*(int *)(param_1 + 0x3d808) == 0)))) &&
+      ((*(int *)(param_1 + 0x1ba0c) == 0 && (*(int *)(param_1 + 0x1b6c0) == 0)))) &&
+     ((((*(int *)(param_1 + 0x1bcc0) == 0 || (*(int *)(param_1 + 0x1bcc0) != 2)) &&
+       (*(int *)(param_1 + 0x10203c) == 0)) && (*(int *)(DAT_00bfd680 + 8) == 2)))) {
+    cVar1 = FUN_007f23c0();
+    if (cVar1 == '\0') {
+      return 0;
+    }
+  }
+  return 1;
+}
+

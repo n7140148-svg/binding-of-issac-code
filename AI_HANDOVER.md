@@ -1,5 +1,17 @@
 # 给下一个 AI 的接手指南（游戏逻辑逆向）
 
+> 2026-10-27 code delivery: start with [reference/README.md](reference/README.md)
+> and [the delivery report](reports/FINAL_CODE_2026-10-27.md). The runnable code
+> separates recovered algorithms from original gameplay policies. Compatibility
+> gaps and concrete remaining targets are listed there; do not restart analysis.
+>
+> Earlier continuation: read [the report](reports/CONTINUATION_2026-10-27.md)
+> and [gl_INDEX.md](gl_INDEX.md) first. The old dump is partial, its CSV is
+> malformed, and logger 0x0095e330 has a wrong no-return annotation in the
+> database. Fresh exports and temporary correction tools are included.
+> Gameplay RNG is distinct from the archive generator referenced below.
+> Continue from the report's next function addresses and preserve unknowns.
+
 你是接手《以撒的结合：悔改》(Binding of Isaac: Repentance) 逆向的 AI。
 本包已经把"资源/归档子系统"逆完，并准备好了"游戏逻辑发现脚本"。你的任务：
 

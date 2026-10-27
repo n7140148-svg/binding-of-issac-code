@@ -1,5 +1,20 @@
 # 当前逆向成果（截至 2026-10-26 23:06）
 
+## Continuation update: 2026-10-27
+
+Runnable reference code is now in [reference](reference/README.md), with recovered
+RNGs, seed codec, weighted pool/spawn logic and pending damage, plus explicitly
+original floor, AI and HP models. See [the delivery report](reports/FINAL_CODE_2026-10-27.md)
+for coverage and validation. Full Isaac compatibility remains incomplete.
+
+New gameplay analysis and corrected coverage are in
+[CONTINUATION_2026-10-27.md](reports/CONTINUATION_2026-10-27.md).
+Pool-selection/RNG and level orchestration now have semantic notes and fresh
+exports. Combat and enemy waves have partial main paths. The full five-system
+investigation remains unfinished. A temporary correction to the logger's
+no-return annotation recovered previously omitted code. Continue from
+[gl_INDEX.md](gl_INDEX.md); the older status below is historical.
+
 ## 进度总览（逆向打包任务）
 
 | # | 子任务 | 状态 | 实测数据 / 说明 |

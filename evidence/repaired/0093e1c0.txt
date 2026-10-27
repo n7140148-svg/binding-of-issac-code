@@ -1,0 +1,73 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_0093e1c0@0093e1c0
+---- CALLEES ----
+EXTERNAL:0000015e _invalid_parameter_noinfo_noreturn
+0093e080 FUN_0093e080
+0093e220 FUN_0093e220
+009eb08e FUN_009eb08e
+---- ASSEMBLY ----
+0093e1c0  PUSH EBP
+0093e1c1  MOV EBP,ESP
+0093e1c3  PUSH ECX
+0093e1c4  PUSH ESI
+0093e1c5  LEA EAX,[EBP + 0x8]
+0093e1c8  MOV ESI,ECX
+0093e1ca  PUSH EAX
+0093e1cb  CALL 0x0093e080
+0093e1d0  ADD ESP,0x4
+0093e1d3  MOV ECX,ESI
+0093e1d5  PUSH EAX
+0093e1d6  CALL 0x0093e220
+0093e1db  MOV EDX,dword ptr [EBP + 0x1c]
+0093e1de  CMP EDX,0x10
+0093e1e1  JC 0x0093e211
+0093e1e3  MOV ECX,dword ptr [EBP + 0x8]
+0093e1e6  INC EDX
+0093e1e7  MOV EAX,ECX
+0093e1e9  CMP EDX,0x1000
+0093e1ef  JC 0x0093e207
+0093e1f1  MOV ECX,dword ptr [ECX + -0x4]
+0093e1f4  ADD EDX,0x23
+0093e1f7  SUB EAX,ECX
+0093e1f9  ADD EAX,-0x4
+0093e1fc  CMP EAX,0x1f
+0093e1ff  JBE 0x0093e207
+0093e201  CALL dword ptr [0x00a065ac]
+0093e207  PUSH EDX
+0093e208  PUSH ECX
+0093e209  CALL 0x009eb08e
+0093e20e  ADD ESP,0x8
+0093e211  POP ESI
+0093e212  POP ECX
+0093e213  POP EBP
+0093e214  RET 0x18
+---- DECOMPILED C ----
+
+void FUN_0093e1c0(int param_1)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  uint uVar3;
+  uint in_stack_00000018;
+  
+  uVar1 = FUN_0093e080(&param_1);
+  FUN_0093e220(uVar1);
+  if (0xf < in_stack_00000018) {
+    uVar3 = in_stack_00000018 + 1;
+    iVar2 = param_1;
+    if (0xfff < uVar3) {
+      iVar2 = *(int *)(param_1 + -4);
+      uVar3 = in_stack_00000018 + 0x24;
+      if (0x1f < (param_1 - iVar2) - 4U) {
+                    /* WARNING: Subroutine does not return */
+        _invalid_parameter_noinfo_noreturn();
+      }
+    }
+    FUN_009eb08e(iVar2,uVar3);
+  }
+  return;
+}
+

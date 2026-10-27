@@ -1,0 +1,120 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_00910d10@00910d10
+---- CALLEES ----
+00910940 FUN_00910940
+---- ASSEMBLY ----
+00910d10  PUSH EBP
+00910d11  MOV EBP,ESP
+00910d13  AND ESP,0xfffffff8
+00910d16  PUSH ECX
+00910d17  PUSH EBX
+00910d18  PUSH ESI
+00910d19  MOV ESI,ECX
+00910d1b  PUSH EDI
+00910d1c  MOV EAX,dword ptr [ESI + 0x364]
+00910d22  CMP EAX,dword ptr [ESI + 0x368]
+00910d28  JZ 0x00910d42
+00910d2a  MOV ECX,dword ptr [EAX + 0x8]
+00910d2d  MOV EAX,dword ptr [EAX + 0xc]
+00910d30  DEC EAX
+00910d31  CMP ECX,0xc
+00910d34  JA 0x00910d42
+00910d36  CMP EAX,0xc
+00910d39  JA 0x00910d42
+00910d3b  IMUL EBX,EAX,0xd
+00910d3e  ADD EBX,ECX
+00910d40  JMP 0x00910d45
+00910d42  OR EBX,0xffffffff
+00910d45  MOV ECX,dword ptr [EBP + 0xc]
+00910d48  CALL 0x00910940
+00910d4d  MOV EDX,dword ptr [EAX]
+00910d4f  ADD EDX,0x4
+00910d52  MOV ECX,dword ptr [EDX + -0x4]
+00910d55  CMP ECX,dword ptr [0x00bc5f10]
+00910d5b  JNZ 0x00910d66
+00910d5d  MOV EAX,[0x00bc5f14]
+00910d62  CMP dword ptr [EDX],EAX
+00910d64  JZ 0x00910daf
+00910d66  MOV EAX,dword ptr [EBP + 0x8]
+00910d69  MOV EDI,dword ptr [EAX]
+00910d6b  ADD EDI,ECX
+00910d6d  MOV ECX,dword ptr [EAX + 0x4]
+00910d70  MOV EAX,dword ptr [EDX]
+00910d72  ADD EAX,ECX
+00910d74  CMP EDI,0xc
+00910d77  JA 0x00910d85
+00910d79  CMP EAX,0xc
+00910d7c  JA 0x00910d85
+00910d7e  IMUL EAX,EAX,0xd
+00910d81  ADD EAX,EDI
+00910d83  JMP 0x00910d88
+00910d85  OR EAX,0xffffffff
+00910d88  CMP byte ptr [ESI + 0x391],0x0
+00910d8f  JZ 0x00910d95
+00910d91  CMP EAX,EBX
+00910d93  JZ 0x00910dba
+00910d95  TEST EAX,EAX
+00910d97  JS 0x00910dba
+00910d99  CMP dword ptr [ESI + EAX*0x4 + 0x14],0x0
+00910d9e  JGE 0x00910dba
+00910da0  CMP byte ptr [EAX + ESI*0x1 + 0x2b8],0x0
+00910da8  JNZ 0x00910dba
+00910daa  ADD EDX,0x8
+00910dad  JMP 0x00910d52
+00910daf  MOV AL,0x1
+00910db1  POP EDI
+00910db2  POP ESI
+00910db3  POP EBX
+00910db4  MOV ESP,EBP
+00910db6  POP EBP
+00910db7  RET 0x8
+00910dba  POP EDI
+00910dbb  POP ESI
+00910dbc  XOR AL,AL
+00910dbe  POP EBX
+00910dbf  MOV ESP,EBP
+00910dc1  POP EBP
+00910dc2  RET 0x8
+---- DECOMPILED C ----
+
+undefined4 __thiscall FUN_00910d10(int param_1,int *param_2)
+
+{
+  uint uVar1;
+  int *piVar2;
+  int iVar3;
+  int iVar4;
+  
+  iVar4 = *(int *)(param_1 + 0x364);
+  if (iVar4 != *(int *)(param_1 + 0x368)) {
+    uVar1 = *(int *)(iVar4 + 0xc) - 1;
+    if ((*(uint *)(iVar4 + 8) < 0xd) && (uVar1 < 0xd)) {
+      iVar4 = uVar1 * 0xd + *(uint *)(iVar4 + 8);
+      goto LAB_00910d45;
+    }
+  }
+  iVar4 = -1;
+LAB_00910d45:
+  piVar2 = (int *)FUN_00910940();
+  piVar2 = (int *)(*piVar2 + 4);
+  while( true ) {
+    if ((piVar2[-1] == DAT_00bc5f10) && (*piVar2 == DAT_00bc5f14)) {
+      return 1;
+    }
+    uVar1 = *param_2 + piVar2[-1];
+    if ((uVar1 < 0xd) && ((uint)(*piVar2 + param_2[1]) < 0xd)) {
+      iVar3 = (*piVar2 + param_2[1]) * 0xd + uVar1;
+    }
+    else {
+      iVar3 = -1;
+    }
+    if ((((*(char *)(param_1 + 0x391) != '\0') && (iVar3 == iVar4)) || (iVar3 < 0)) ||
+       ((-1 < *(int *)(param_1 + 0x14 + iVar3 * 4) || (*(char *)(iVar3 + 0x2b8 + param_1) != '\0')))
+       ) break;
+    piVar2 = piVar2 + 2;
+  }
+  return 0;
+}
+

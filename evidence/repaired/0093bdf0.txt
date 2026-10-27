@@ -1,0 +1,116 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_0093bdf0@0093bdf0
+---- CALLEES ----
+00420480 FID_conflict:_Erase_tree<fuzzer::fuzzer_allocator<std::_Tree_node<fuzzer::TracePC::PCTableEntry_const*,void*>_>_>
+006da460 FUN_006da460
+---- ASSEMBLY ----
+0093bdf0  PUSH EBP
+0093bdf1  MOV EBP,ESP
+0093bdf3  PUSH EBX
+0093bdf4  MOV EBX,dword ptr [EBP + 0x8]
+0093bdf7  PUSH EDI
+0093bdf8  MOV EDI,ECX
+0093bdfa  CMP EDI,EBX
+0093bdfc  JZ 0x0093be6f
+0093bdfe  MOV AL,byte ptr [EBX]
+0093be00  LEA ECX,[EBX + 0x54]
+0093be03  MOV byte ptr [EDI],AL
+0093be05  MOV EAX,dword ptr [EBX + 0x4]
+0093be08  MOV dword ptr [EDI + 0x4],EAX
+0093be0b  MOV EAX,dword ptr [EBX + 0x50]
+0093be0e  MOV dword ptr [EDI + 0x50],EAX
+0093be11  LEA EAX,[EDI + 0x54]
+0093be14  CMP EAX,ECX
+0093be16  JZ 0x0093be45
+0093be18  PUSH ESI
+0093be19  MOV ESI,dword ptr [EAX]
+0093be1b  MOV ECX,EAX
+0093be1d  PUSH dword ptr [ESI + 0x4]
+0093be20  PUSH EAX
+0093be21  CALL 0x00420480
+0093be26  PUSH dword ptr [EBP + 0x8]
+0093be29  LEA EAX,[EBX + 0x54]
+0093be2c  MOV dword ptr [ESI + 0x4],ESI
+0093be2f  LEA ECX,[EDI + 0x54]
+0093be32  MOV dword ptr [ESI],ESI
+0093be34  MOV dword ptr [ESI + 0x8],ESI
+0093be37  PUSH EAX
+0093be38  MOV dword ptr [ECX + 0x4],0x0
+0093be3f  CALL 0x006da460
+0093be44  POP ESI
+0093be45  MOVUPS XMM0,xmmword ptr [EBX + 0x8]
+0093be49  MOVUPS xmmword ptr [EDI + 0x8],XMM0
+0093be4d  MOVUPS XMM0,xmmword ptr [EBX + 0x18]
+0093be51  MOVUPS xmmword ptr [EDI + 0x18],XMM0
+0093be55  MOVUPS XMM0,xmmword ptr [EBX + 0x28]
+0093be59  MOVUPS xmmword ptr [EDI + 0x28],XMM0
+0093be5d  MOVUPS XMM0,xmmword ptr [EBX + 0x38]
+0093be61  MOVUPS xmmword ptr [EDI + 0x38],XMM0
+0093be65  MOVQ XMM0,qword ptr [EBX + 0x48]
+0093be6a  MOVQ qword ptr [EDI + 0x48],XMM0
+0093be6f  MOV EAX,EDI
+0093be71  POP EDI
+0093be72  POP EBX
+0093be73  POP EBP
+0093be74  RET 0x4
+---- DECOMPILED C ----
+
+undefined1 * __thiscall FUN_0093bdf0(undefined1 *param_1,undefined1 *param_2)
+
+{
+  int *piVar1;
+  int iVar2;
+  undefined4 uVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  
+  if (param_1 != param_2) {
+    *param_1 = *param_2;
+    *(undefined4 *)(param_1 + 4) = *(undefined4 *)(param_2 + 4);
+    *(undefined4 *)(param_1 + 0x50) = *(undefined4 *)(param_2 + 0x50);
+    piVar1 = (int *)(param_1 + 0x54);
+    if (piVar1 != (int *)(param_2 + 0x54)) {
+      iVar2 = *piVar1;
+      FID_conflict__Erase_tree<fuzzer::fuzzer_allocator<std::_Tree_node<fuzzer::TracePC::PCTableEntry_const*,void*>_>_>
+                (piVar1,*(undefined4 *)(iVar2 + 4));
+      *(int *)(iVar2 + 4) = iVar2;
+      *(int *)iVar2 = iVar2;
+      *(int *)(iVar2 + 8) = iVar2;
+      *(undefined4 *)(param_1 + 0x58) = 0;
+      FUN_006da460(param_2 + 0x54,param_2);
+    }
+    uVar3 = *(undefined4 *)(param_2 + 0xc);
+    uVar4 = *(undefined4 *)(param_2 + 0x10);
+    uVar5 = *(undefined4 *)(param_2 + 0x14);
+    *(undefined4 *)(param_1 + 8) = *(undefined4 *)(param_2 + 8);
+    *(undefined4 *)(param_1 + 0xc) = uVar3;
+    *(undefined4 *)(param_1 + 0x10) = uVar4;
+    *(undefined4 *)(param_1 + 0x14) = uVar5;
+    uVar3 = *(undefined4 *)(param_2 + 0x1c);
+    uVar4 = *(undefined4 *)(param_2 + 0x20);
+    uVar5 = *(undefined4 *)(param_2 + 0x24);
+    *(undefined4 *)(param_1 + 0x18) = *(undefined4 *)(param_2 + 0x18);
+    *(undefined4 *)(param_1 + 0x1c) = uVar3;
+    *(undefined4 *)(param_1 + 0x20) = uVar4;
+    *(undefined4 *)(param_1 + 0x24) = uVar5;
+    uVar3 = *(undefined4 *)(param_2 + 0x2c);
+    uVar4 = *(undefined4 *)(param_2 + 0x30);
+    uVar5 = *(undefined4 *)(param_2 + 0x34);
+    *(undefined4 *)(param_1 + 0x28) = *(undefined4 *)(param_2 + 0x28);
+    *(undefined4 *)(param_1 + 0x2c) = uVar3;
+    *(undefined4 *)(param_1 + 0x30) = uVar4;
+    *(undefined4 *)(param_1 + 0x34) = uVar5;
+    uVar3 = *(undefined4 *)(param_2 + 0x3c);
+    uVar4 = *(undefined4 *)(param_2 + 0x40);
+    uVar5 = *(undefined4 *)(param_2 + 0x44);
+    *(undefined4 *)(param_1 + 0x38) = *(undefined4 *)(param_2 + 0x38);
+    *(undefined4 *)(param_1 + 0x3c) = uVar3;
+    *(undefined4 *)(param_1 + 0x40) = uVar4;
+    *(undefined4 *)(param_1 + 0x44) = uVar5;
+    *(undefined8 *)(param_1 + 0x48) = *(undefined8 *)(param_2 + 0x48);
+  }
+  return param_1;
+}
+

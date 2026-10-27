@@ -1,0 +1,140 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_00910dd0@00910dd0
+---- CALLEES ----
+0090ffa0 FUN_0090ffa0
+009101d0 FUN_009101d0
+---- ASSEMBLY ----
+00910dd0  PUSH EBP
+00910dd1  MOV EBP,ESP
+00910dd3  AND ESP,0xfffffff8
+00910dd6  SUB ESP,0x24
+00910dd9  PUSH EBX
+00910dda  PUSH ESI
+00910ddb  MOV ESI,dword ptr [EBP + 0xc]
+00910dde  XOR EBX,EBX
+00910de0  PUSH EDI
+00910de1  MOV EDI,dword ptr [EBP + 0x8]
+00910de4  MOV dword ptr [ESP + 0xc],ECX
+00910de8  PUSH ECX
+00910de9  PUSH EBX
+00910dea  PUSH ESI
+00910deb  MOV EDX,EDI
+00910ded  LEA ECX,[ESP + 0x24]
+00910df1  CALL 0x0090ffa0
+00910df6  ADD ESP,0xc
+00910df9  LEA ECX,[ESP + 0x20]
+00910dfd  MOV EDX,EDI
+00910dff  PUSH 0x1
+00910e01  PUSH EBX
+00910e02  PUSH ESI
+00910e03  CALL 0x009101d0
+00910e08  MOV ECX,dword ptr [ESP + 0x2c]
+00910e0c  ADD ESP,0xc
+00910e0f  CMP ECX,0xc
+00910e12  JA 0x00910e9c
+00910e18  MOV EAX,dword ptr [ESP + 0x24]
+00910e1c  CMP EAX,0xc
+00910e1f  JA 0x00910e9c
+00910e21  IMUL EAX,EAX,0xd
+00910e24  ADD EAX,ECX
+00910e26  JS 0x00910e9c
+00910e28  MOV EDX,dword ptr [ESP + 0xc]
+00910e2c  MOV EAX,dword ptr [EDX + EAX*0x4 + 0x14]
+00910e30  TEST EAX,EAX
+00910e32  JS 0x00910e9c
+00910e34  MOV ECX,dword ptr [ESP + 0x18]
+00910e38  MOV EDI,dword ptr [ESP + 0x1c]
+00910e3c  CMP ECX,dword ptr [0x00bc5f10]
+00910e42  JNZ 0x00910e4c
+00910e44  CMP EDI,dword ptr [0x00bc5f14]
+00910e4a  JZ 0x00910eb1
+00910e4c  LEA ECX,[EAX + EAX*0x8]
+00910e4f  XOR ESI,ESI
+00910e51  MOV EAX,dword ptr [EDX + 0x364]
+00910e57  LEA EAX,[EAX + ECX*0x8]
+00910e5a  LEA ECX,[EAX + 0x8]
+00910e5d  MOV dword ptr [ESP + 0x10],EAX
+00910e61  MOV dword ptr [ESP + 0x14],ECX
+00910e65  PUSH 0x0
+00910e67  PUSH ESI
+00910e68  PUSH dword ptr [EAX + 0x18]
+00910e6b  MOV EDX,ECX
+00910e6d  LEA ECX,[ESP + 0x34]
+00910e71  CALL 0x009101d0
+00910e76  MOV ECX,dword ptr [ESP + 0x24]
+00910e7a  ADD ESP,0xc
+00910e7d  CMP dword ptr [EAX],ECX
+00910e7f  JNZ 0x00910e86
+00910e81  CMP dword ptr [EAX + 0x4],EDI
+00910e84  JZ 0x00910e96
+00910e86  INC ESI
+00910e87  CMP ESI,0x8
+00910e8a  JGE 0x00910eb1
+00910e8c  MOV EAX,dword ptr [ESP + 0x10]
+00910e90  MOV ECX,dword ptr [ESP + 0x14]
+00910e94  JMP 0x00910e65
+00910e96  MOV ESI,dword ptr [EBP + 0xc]
+00910e99  MOV EDI,dword ptr [EBP + 0x8]
+00910e9c  INC EBX
+00910e9d  CMP EBX,0x8
+00910ea0  JL 0x00910de8
+00910ea6  MOV AL,0x1
+00910ea8  POP EDI
+00910ea9  POP ESI
+00910eaa  POP EBX
+00910eab  MOV ESP,EBP
+00910ead  POP EBP
+00910eae  RET 0x8
+00910eb1  POP EDI
+00910eb2  POP ESI
+00910eb3  XOR AL,AL
+00910eb5  POP EBX
+00910eb6  MOV ESP,EBP
+00910eb8  POP EBP
+00910eb9  RET 0x8
+---- DECOMPILED C ----
+
+undefined4 __thiscall FUN_00910dd0(uint param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  int iVar2;
+  uint *puVar3;
+  uint uVar4;
+  int iVar5;
+  int iVar6;
+  uint local_20;
+  uint local_1c;
+  uint local_18;
+  uint local_14;
+  
+  iVar5 = 0;
+  uVar4 = param_1;
+  do {
+    FUN_0090ffa0(param_3,iVar5,uVar4);
+    FUN_009101d0(param_3,iVar5,1);
+    uVar4 = local_18;
+    if ((((local_18 < 0xd) && (local_14 < 0xd)) && (iVar2 = local_14 * 0xd + local_18, -1 < iVar2))
+       && (iVar2 = *(int *)(param_1 + 0x14 + iVar2 * 4), -1 < iVar2)) {
+      if ((local_20 == DAT_00bc5f10) && (local_1c == DAT_00bc5f14)) {
+        return 0;
+      }
+      iVar6 = 0;
+      iVar1 = *(int *)(param_1 + 0x364);
+      while ((puVar3 = (uint *)FUN_009101d0(*(undefined4 *)(iVar1 + iVar2 * 0x48 + 0x18),iVar6,0),
+             *puVar3 != local_20 || (uVar4 = local_20, puVar3[1] != local_1c))) {
+        iVar6 = iVar6 + 1;
+        if (7 < iVar6) {
+          return 0;
+        }
+      }
+    }
+    iVar5 = iVar5 + 1;
+    if (7 < iVar5) {
+      return 1;
+    }
+  } while( true );
+}
+

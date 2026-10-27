@@ -1,0 +1,95 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_0082ee90@0082ee90
+---- CALLEES ----
+EXTERNAL:0000002e lua_rawset
+EXTERNAL:00000044 lua_pushstring
+EXTERNAL:00000053 lua_newuserdata
+EXTERNAL:0000005e lua_rotate
+EXTERNAL:00000061 lua_absindex
+EXTERNAL:0000006a lua_pushcclosure
+EXTERNAL:0000006f lua_pushvalue
+---- ASSEMBLY ----
+0082ee90  PUSH EBP
+0082ee91  MOV EBP,ESP
+0082ee93  SUB ESP,0x8
+0082ee96  PUSH ESI
+0082ee97  MOV EAX,ECX
+0082ee99  PUSH EDI
+0082ee9a  PUSH 0x4
+0082ee9c  MOV dword ptr [EBP + -0x8],EAX
+0082ee9f  MOV EDI,dword ptr [EAX]
+0082eea1  PUSH EDI
+0082eea2  MOV dword ptr [EBP + -0x4],EDI
+0082eea5  CALL dword ptr [0x00a061e8]
+0082eeab  PUSH 0x1
+0082eead  PUSH 0x851100
+0082eeb2  PUSH EDI
+0082eeb3  MOV dword ptr [EAX],0x705f30
+0082eeb9  CALL dword ptr [0x00a06244]
+0082eebf  PUSH -0x1
+0082eec1  PUSH EDI
+0082eec2  CALL dword ptr [0x00a06258]
+0082eec8  PUSH -0x5
+0082eeca  PUSH EDI
+0082eecb  CALL dword ptr [0x00a06220]
+0082eed1  PUSH 0xb54b8c
+0082eed6  PUSH EDI
+0082eed7  MOV ESI,EAX
+0082eed9  CALL dword ptr [0x00a061ac]
+0082eedf  PUSH 0x1
+0082eee1  PUSH -0x2
+0082eee3  PUSH EDI
+0082eee4  CALL dword ptr [0x00a06214]
+0082eeea  PUSH ESI
+0082eeeb  PUSH EDI
+0082eeec  MOV EDI,dword ptr [0x00a06154]
+0082eef2  CALL EDI
+0082eef4  ADD ESP,0x40
+0082eef7  PUSH -0x3
+0082eef9  PUSH dword ptr [EBP + -0x4]
+0082eefc  CALL dword ptr [0x00a06220]
+0082ef02  PUSH 0xb54b8c
+0082ef07  PUSH dword ptr [EBP + -0x4]
+0082ef0a  MOV ESI,EAX
+0082ef0c  CALL dword ptr [0x00a061ac]
+0082ef12  PUSH 0x1
+0082ef14  PUSH -0x2
+0082ef16  PUSH dword ptr [EBP + -0x4]
+0082ef19  CALL dword ptr [0x00a06214]
+0082ef1f  PUSH ESI
+0082ef20  PUSH dword ptr [EBP + -0x4]
+0082ef23  CALL EDI
+0082ef25  MOV EAX,dword ptr [EBP + -0x8]
+0082ef28  ADD ESP,0x24
+0082ef2b  POP EDI
+0082ef2c  POP ESI
+0082ef2d  MOV ESP,EBP
+0082ef2f  POP EBP
+0082ef30  RET 0x8
+---- DECOMPILED C ----
+
+undefined4 * __fastcall FUN_0082ee90(undefined4 *param_1)
+
+{
+  undefined4 uVar1;
+  undefined4 *puVar2;
+  undefined4 uVar3;
+  
+  uVar1 = *param_1;
+  puVar2 = (undefined4 *)lua_newuserdata(uVar1,4);
+  *puVar2 = FUN_00705f30;
+  lua_pushcclosure(uVar1,FUN_00851100,1);
+  lua_pushvalue(uVar1,0xffffffff);
+  uVar3 = lua_absindex(uVar1,0xfffffffb);
+  lua_pushstring(uVar1,"GetStageSeed");
+  lua_rotate(uVar1,0xfffffffe,1);
+  lua_rawset(uVar1,uVar3);
+  uVar3 = lua_absindex(uVar1,0xfffffffd);
+  lua_pushstring(uVar1,"GetStageSeed");
+  lua_rotate(uVar1,0xfffffffe,1);
+  lua_rawset(uVar1,uVar3);
+  return param_1;
+}
+

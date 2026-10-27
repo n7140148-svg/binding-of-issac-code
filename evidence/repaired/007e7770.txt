@@ -1,0 +1,64 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_007e7770@007e7770
+---- CALLEES ----
+007e7180 FUN_007e7180
+---- ASSEMBLY ----
+007e7770  PUSH EBP
+007e7771  MOV EBP,ESP
+007e7773  AND ESP,0xfffffff8
+007e7776  PUSH ECX
+007e7777  PUSH ESI
+007e7778  PUSH -0x1
+007e777a  PUSH dword ptr [EBP + 0x34]
+007e777d  MOV ESI,ECX
+007e777f  PUSH dword ptr [EBP + 0x30]
+007e7782  PUSH dword ptr [EBP + 0x2c]
+007e7785  PUSH dword ptr [EBP + 0x28]
+007e7788  PUSH -0x1
+007e778a  PUSH 0x0
+007e778c  PUSH dword ptr [EBP + 0x1c]
+007e778f  PUSH dword ptr [EBP + 0x18]
+007e7792  PUSH dword ptr [EBP + 0x10]
+007e7795  PUSH dword ptr [EBP + 0xc]
+007e7798  PUSH dword ptr [EBP + 0x8]
+007e779b  CALL 0x007e7180
+007e77a0  TEST EAX,EAX
+007e77a2  JNZ 0x007e77cb
+007e77a4  PUSH -0x1
+007e77a6  PUSH dword ptr [EBP + 0x34]
+007e77a9  MOV ECX,ESI
+007e77ab  PUSH dword ptr [EBP + 0x30]
+007e77ae  PUSH dword ptr [EBP + 0x2c]
+007e77b1  PUSH dword ptr [EBP + 0x28]
+007e77b4  PUSH -0x1
+007e77b6  PUSH EAX
+007e77b7  PUSH dword ptr [EBP + 0x1c]
+007e77ba  PUSH dword ptr [EBP + 0x18]
+007e77bd  PUSH dword ptr [EBP + 0x14]
+007e77c0  PUSH dword ptr [EBP + 0xc]
+007e77c3  PUSH dword ptr [EBP + 0x8]
+007e77c6  CALL 0x007e7180
+007e77cb  POP ESI
+007e77cc  MOV ESP,EBP
+007e77ce  POP EBP
+007e77cf  RET 0x34
+---- DECOMPILED C ----
+
+void FUN_007e7770(undefined4 param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,
+                 undefined4 param_5,undefined4 param_6,undefined4 param_7,undefined4 param_8,
+                 undefined4 param_9,undefined4 param_10,undefined4 param_11,undefined4 param_12)
+
+{
+  int iVar1;
+  
+  iVar1 = FUN_007e7180(param_1,param_2,param_3,param_5,param_6,0,0xffffffff,param_9,param_10,
+                       param_11,param_12,0xffffffff);
+  if (iVar1 == 0) {
+    FUN_007e7180(param_1,param_2,param_4,param_5,param_6,0,0xffffffff,param_9,param_10,param_11,
+                 param_12,0xffffffff);
+  }
+  return;
+}
+

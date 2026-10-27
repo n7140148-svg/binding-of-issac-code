@@ -1,0 +1,33 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_00705f30@00705f30
+---- CALLEES ----
+0095e330 FUN_0095e330
+---- ASSEMBLY ----
+00705f30  PUSH EBP
+00705f31  MOV EBP,ESP
+00705f33  PUSH ESI
+00705f34  MOV ESI,ECX
+00705f36  CMP dword ptr [ESI + 0x4],0x0
+00705f3a  JNZ 0x00705f4b
+00705f3c  PUSH 0xb40020
+00705f41  PUSH 0x3
+00705f43  CALL 0x0095e330
+00705f48  ADD ESP,0x8
+00705f4b  MOV EAX,dword ptr [EBP + 0x8]
+00705f4e  MOV EAX,dword ptr [ESI + EAX*0x4 + 0x18]
+00705f52  POP ESI
+00705f53  POP EBP
+00705f54  RET 0x4
+---- DECOMPILED C ----
+
+undefined4 __thiscall FUN_00705f30(int param_1,int param_2)
+
+{
+  if (*(int *)(param_1 + 4) == 0) {
+    FUN_0095e330(3,"Error: Game Start Seed was not set.\n");
+  }
+  return *(undefined4 *)(param_1 + 0x18 + param_2 * 4);
+}
+

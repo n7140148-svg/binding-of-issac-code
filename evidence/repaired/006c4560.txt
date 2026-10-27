@@ -1,0 +1,68 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_006c4560@006c4560
+---- CALLEES ----
+0095e330 FUN_0095e330
+---- ASSEMBLY ----
+006c4560  PUSH ESI
+006c4561  MOV ESI,ECX
+006c4563  CMP dword ptr [ESI + 0x4],0x0
+006c4567  JNZ 0x006c4578
+006c4569  PUSH 0xb40020
+006c456e  PUSH 0x3
+006c4570  CALL 0x0095e330
+006c4575  ADD ESP,0x8
+006c4578  MOV EDX,dword ptr [ESI + 0x8]
+006c457b  TEST EDX,EDX
+006c457d  JNZ 0x006c4596
+006c457f  PUSH 0xb4d6c4
+006c4584  PUSH 0x3
+006c4586  CALL 0x0095e330
+006c458b  MOV EDX,dword ptr [ESI + 0x8]
+006c458e  ADD ESP,0x8
+006c4591  TEST EDX,EDX
+006c4593  JNZ 0x006c4596
+006c4595  INT3
+006c4596  MOV ECX,dword ptr [ESI + 0xc]
+006c4599  MOV EAX,EDX
+006c459b  SHR EAX,CL
+006c459d  MOV ECX,dword ptr [ESI + 0x10]
+006c45a0  XOR EAX,EDX
+006c45a2  MOV EDX,EAX
+006c45a4  SHL EDX,CL
+006c45a6  MOV ECX,dword ptr [ESI + 0x14]
+006c45a9  XOR EDX,EAX
+006c45ab  MOV EAX,EDX
+006c45ad  SHR EAX,CL
+006c45af  XOR EAX,EDX
+006c45b1  MOV dword ptr [ESI + 0x8],EAX
+006c45b4  POP ESI
+006c45b5  RET
+---- DECOMPILED C ----
+
+void __fastcall FUN_006c4560(int param_1)
+
+{
+  code *pcVar1;
+  uint uVar2;
+  
+  if (*(int *)(param_1 + 4) == 0) {
+    FUN_0095e330(3,"Error: Game Start Seed was not set.\n");
+  }
+  uVar2 = *(uint *)(param_1 + 8);
+  if (uVar2 == 0) {
+    FUN_0095e330(3,"RNG Seed is zero!\n");
+    uVar2 = *(uint *)(param_1 + 8);
+    if (uVar2 == 0) {
+      pcVar1 = (code *)swi(3);
+      (*pcVar1)();
+      return;
+    }
+  }
+  uVar2 = uVar2 >> ((byte)*(undefined4 *)(param_1 + 0xc) & 0x1f) ^ uVar2;
+  uVar2 = uVar2 << ((byte)*(undefined4 *)(param_1 + 0x10) & 0x1f) ^ uVar2;
+  *(uint *)(param_1 + 8) = uVar2 >> ((byte)*(undefined4 *)(param_1 + 0x14) & 0x1f) ^ uVar2;
+  return;
+}
+

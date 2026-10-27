@@ -1,0 +1,48 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_007a7e20@007a7e20
+---- CALLEES ----
+0095e330 FUN_0095e330
+---- ASSEMBLY ----
+007a7e20  PUSH ESI
+007a7e21  MOV ESI,ECX
+007a7e23  MOV EDX,dword ptr [ESI]
+007a7e25  TEST EDX,EDX
+007a7e27  JNZ 0x007a7e3f
+007a7e29  PUSH 0xb4d6c4
+007a7e2e  PUSH 0x3
+007a7e30  CALL 0x0095e330
+007a7e3f  MOV ECX,dword ptr [ESI + 0x4]
+007a7e42  MOV EAX,EDX
+007a7e44  SHR EAX,CL
+007a7e46  MOV ECX,dword ptr [ESI + 0x8]
+007a7e49  XOR EAX,EDX
+007a7e4b  MOV EDX,EAX
+007a7e4d  SHL EDX,CL
+007a7e4f  MOV ECX,dword ptr [ESI + 0xc]
+007a7e52  XOR EDX,EAX
+007a7e54  MOV EAX,EDX
+007a7e56  SHR EAX,CL
+007a7e58  XOR EAX,EDX
+007a7e5a  MOV dword ptr [ESI],EAX
+007a7e5c  POP ESI
+007a7e5d  RET
+---- DECOMPILED C ----
+
+void __fastcall FUN_007a7e20(uint *param_1)
+
+{
+  uint uVar1;
+  
+  uVar1 = *param_1;
+  if (uVar1 == 0) {
+                    /* WARNING: Subroutine does not return */
+    FUN_0095e330(3,"RNG Seed is zero!\n");
+  }
+  uVar1 = uVar1 >> ((byte)param_1[1] & 0x1f) ^ uVar1;
+  uVar1 = uVar1 << ((byte)param_1[2] & 0x1f) ^ uVar1;
+  *param_1 = uVar1 >> ((byte)param_1[3] & 0x1f) ^ uVar1;
+  return;
+}
+

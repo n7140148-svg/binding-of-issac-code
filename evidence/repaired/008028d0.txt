@@ -1,0 +1,137 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_008028d0@008028d0
+---- CALLEES ----
+EXTERNAL:00000035 lua_settop
+EXTERNAL:0000003f lua_gettop
+EXTERNAL:00000055 luaL_checkinteger
+EXTERNAL:0000005c lua_type
+EXTERNAL:0000006b luaL_unref
+00680cc0 FUN_00680cc0
+008110b0 FUN_008110b0
+---- ASSEMBLY ----
+008028d0  PUSH EBP
+008028d1  MOV EBP,ESP
+008028d3  PUSH -0x1
+008028d5  PUSH 0x9fb8f0
+008028da  MOV EAX,FS:[0x0]
+008028e0  PUSH EAX
+008028e1  SUB ESP,0x20
+008028e4  PUSH EBX
+008028e5  PUSH ESI
+008028e6  PUSH EDI
+008028e7  MOV EAX,[0x00baa3b4]
+008028ec  XOR EAX,EBP
+008028ee  PUSH EAX
+008028ef  LEA EAX,[EBP + -0xc]
+008028f2  MOV FS:[0x0],EAX
+008028f8  MOV dword ptr [EBP + -0x10],ESP
+008028fb  MOV ECX,dword ptr [0x00bfd674]
+00802901  XOR EBX,EBX
+00802903  MOV dword ptr [EBP + -0x28],0x3e
+0080290a  MOV dword ptr [EBP + -0x24],0xffffffff
+00802911  MOV dword ptr [EBP + -0x14],EBX
+00802914  MOV EAX,dword ptr [ECX + 0x10]
+00802917  MOV dword ptr [EBP + -0x2c],EAX
+0080291a  MOV EAX,dword ptr [ECX]
+0080291c  TEST dword ptr [EAX + 0x4],0x40000000
+00802923  JZ 0x008029fa
+00802929  PUSH dword ptr [EBP + 0x10]
+0080292c  LEA EAX,[EBP + -0x20]
+0080292f  MOV dword ptr [EBP + -0x4],EBX
+00802932  PUSH dword ptr [EBP + 0xc]
+00802935  PUSH dword ptr [EBP + 0x8]
+00802938  PUSH ECX
+00802939  PUSH EAX
+0080293a  LEA ECX,[EBP + -0x2c]
+0080293d  CALL 0x008110b0
+00802942  CMP dword ptr [EBP + -0x1c],-0x1
+00802946  MOV EDI,dword ptr [EBP + -0x20]
+00802949  JZ 0x00802995
+0080294b  PUSH EDI
+0080294c  LEA ECX,[EBP + -0x20]
+0080294f  CALL 0x00680cc0
+00802954  PUSH -0x1
+00802956  PUSH EDI
+00802957  CALL dword ptr [0x00a0620c]
+0080295d  PUSH -0x2
+0080295f  PUSH EDI
+00802960  MOV ESI,EAX
+00802962  CALL dword ptr [0x00a06170]
+00802968  ADD ESP,0x10
+0080296b  TEST ESI,ESI
+0080296d  JZ 0x00802995
+0080296f  PUSH EDI
+00802970  LEA ECX,[EBP + -0x20]
+00802973  CALL 0x00680cc0
+00802978  PUSH EDI
+00802979  CALL dword ptr [0x00a06198]
+0080297f  PUSH EAX
+00802980  PUSH EDI
+00802981  CALL dword ptr [0x00a061f0]
+00802987  PUSH -0x2
+00802989  PUSH EDI
+0080298a  MOV EBX,EAX
+0080298c  CALL dword ptr [0x00a06170]
+00802992  ADD ESP,0x14
+00802995  PUSH dword ptr [EBP + -0x1c]
+00802998  PUSH 0xfff0b9d8
+0080299d  PUSH EDI
+0080299e  CALL dword ptr [0x00a06248]
+008029a4  ADD ESP,0xc
+008029a7  JMP 0x008029fa
+008029fa  MOV EAX,EBX
+008029fc  MOV ECX,dword ptr [EBP + -0xc]
+008029ff  MOV dword ptr FS:[0x0],ECX
+00802a06  POP ECX
+00802a07  POP EDI
+00802a08  POP ESI
+00802a09  POP EBX
+00802a0a  MOV ESP,EBP
+00802a0c  POP EBP
+00802a0d  RET 0xc
+---- DECOMPILED C ----
+
+undefined4 FUN_008028d0(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int *unaff_FS_OFFSET;
+  uint uStack_40;
+  undefined4 local_24;
+  int local_20;
+  undefined4 local_18;
+  undefined1 *local_14;
+  int local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  puStack_c = &LAB_009fb8f0;
+  local_10 = *unaff_FS_OFFSET;
+  uStack_40 = DAT_00baa3b4 ^ (uint)&stack0xfffffffc;
+  local_14 = (undefined1 *)&uStack_40;
+  *unaff_FS_OFFSET = (int)&local_10;
+  uVar2 = 0;
+  local_18 = 0;
+  if ((*(uint *)(*DAT_00bfd674 + 4) & 0x40000000) != 0) {
+    local_8 = 0;
+    FUN_008110b0(&local_24,DAT_00bfd674,param_1,param_2,param_3);
+    if (local_20 != -1) {
+      FUN_00680cc0(local_24);
+      iVar1 = lua_type(local_24,0xffffffff);
+      lua_settop(local_24,0xfffffffe);
+      if (iVar1 != 0) {
+        FUN_00680cc0(local_24);
+        uVar2 = lua_gettop(local_24);
+        uVar2 = luaL_checkinteger(local_24,uVar2);
+        lua_settop(local_24,0xfffffffe);
+      }
+    }
+    luaL_unref(local_24,0xfff0b9d8,local_20);
+  }
+  *unaff_FS_OFFSET = local_10;
+  return uVar2;
+}
+

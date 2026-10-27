@@ -1,0 +1,39 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_006c3d50@006c3d50
+---- CALLEES ----
+---- ASSEMBLY ----
+006c3d50  MOV dword ptr [0x00bffe10],ECX
+006c3d56  MOV EAX,0x1
+006c3d5b  NOP dword ptr [EAX + EAX*0x1]
+006c3d60  MOV ECX,dword ptr [EAX*0x4 + 0xbffe0c]
+006c3d67  MOV EDX,ECX
+006c3d69  SHR EDX,0x1e
+006c3d6c  XOR EDX,ECX
+006c3d6e  IMUL ECX,EDX,0x6c078965
+006c3d74  ADD ECX,EAX
+006c3d76  MOV dword ptr [EAX*0x4 + 0xbffe10],ECX
+006c3d7d  INC EAX
+006c3d7e  CMP EAX,0x270
+006c3d83  JL 0x006c3d60
+006c3d85  MOV [0x00bc5304],EAX
+006c3d8a  RET
+---- DECOMPILED C ----
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void __fastcall FUN_006c3d50(undefined4 param_1)
+
+{
+  DAT_00bc5304 = 1;
+  _DAT_00bffe10 = param_1;
+  do {
+    *(uint *)(&DAT_00bffe10 + DAT_00bc5304 * 4) =
+         ((uint)(&DAT_00bffe0c)[DAT_00bc5304] >> 0x1e ^ (&DAT_00bffe0c)[DAT_00bc5304]) * 0x6c078965
+         + DAT_00bc5304;
+    DAT_00bc5304 = DAT_00bc5304 + 1;
+  } while (DAT_00bc5304 < 0x270);
+  return;
+}
+

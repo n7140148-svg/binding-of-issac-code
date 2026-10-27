@@ -1,0 +1,45 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_00444be0@00444be0
+---- CALLEES ----
+004079f0 FUN_004079f0
+---- ASSEMBLY ----
+00444be0  PUSH EBP
+00444be1  MOV EBP,ESP
+00444be3  MOV EAX,dword ptr [ECX + 0x4]
+00444be6  TEST EAX,EAX
+00444be8  JZ 0x00444bfa
+00444bea  MOV ECX,dword ptr [EBP + 0x8]
+00444bed  PUSH EAX
+00444bee  CALL 0x004079f0
+00444bf3  MOV EAX,dword ptr [EBP + 0x8]
+00444bf6  POP EBP
+00444bf7  RET 0x4
+00444bfa  MOV EAX,dword ptr [EBP + 0x8]
+00444bfd  MOV dword ptr [EAX],0x0
+00444c03  MOV dword ptr [EAX + 0x10],0x0
+00444c0a  MOV dword ptr [EAX + 0x14],0xf
+00444c11  MOV byte ptr [EAX],0x0
+00444c14  MOV dword ptr [EAX + 0x10],0x0
+00444c1b  MOV byte ptr [EAX],0x0
+00444c1e  POP EBP
+00444c1f  RET 0x4
+---- DECOMPILED C ----
+
+undefined4 * __thiscall FUN_00444be0(int param_1,undefined4 *param_2)
+
+{
+  if (*(int *)(param_1 + 4) != 0) {
+    FUN_004079f0(*(int *)(param_1 + 4));
+    return param_2;
+  }
+  *param_2 = 0;
+  param_2[4] = 0;
+  param_2[5] = 0xf;
+  *(undefined1 *)param_2 = 0;
+  param_2[4] = 0;
+  *(undefined1 *)param_2 = 0;
+  return param_2;
+}
+

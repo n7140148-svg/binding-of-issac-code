@@ -1,0 +1,139 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_00910820@00910820
+---- CALLEES ----
+00426fb0 FUN_00426fb0
+00910530 FUN_00910530
+009106c0 FUN_009106c0
+---- ASSEMBLY ----
+00910820  PUSH EBP
+00910821  MOV EBP,ESP
+00910823  AND ESP,0xfffffff8
+00910826  SUB ESP,0xc
+00910829  PUSH EBX
+0091082a  PUSH ESI
+0091082b  PUSH EDI
+0091082c  MOV EDI,ECX
+0091082e  MOV EAX,dword ptr [EDI + 0x370]
+00910834  LEA EBX,[EDI + 0x370]
+0091083a  MOV dword ptr [EBX + 0x4],EAX
+0091083d  MOV dword ptr [ESP + 0xc],EDI
+00910841  MOV EAX,dword ptr [EDI + 0x37c]
+00910847  MOV dword ptr [EDI + 0x380],EAX
+0091084d  CALL 0x009106c0
+00910852  MOV ECX,dword ptr [ESP + 0xc]
+00910856  MOV EAX,0x38e38e39
+0091085b  MOV EDI,dword ptr [EDI + 0x364]
+00910861  XOR ESI,ESI
+00910863  MOV ECX,dword ptr [ECX + 0x368]
+00910869  SUB ECX,EDI
+0091086b  IMUL ECX
+0091086d  SAR EDX,0x4
+00910870  MOV EAX,EDX
+00910872  SHR EAX,0x1f
+00910875  ADD EAX,EDX
+00910877  JZ 0x00910916
+0091087d  XOR EAX,EAX
+0091087f  MOV dword ptr [ESP + 0x10],EAX
+00910883  MOV ECX,dword ptr [ESP + 0xc]
+00910887  ADD EDI,EAX
+00910889  PUSH EDI
+0091088a  CALL 0x00910530
+0091088f  CMP byte ptr [EDI + 0x3c],0x0
+00910893  MOV dword ptr [ESP + 0x14],ESI
+00910897  JZ 0x009108b3
+00910899  MOV EAX,dword ptr [EBX + 0x4]
+0091089c  CMP EAX,dword ptr [EBX + 0x8]
+0091089f  JZ 0x009108a9
+009108a1  MOV dword ptr [EAX],ESI
+009108a3  ADD dword ptr [EBX + 0x4],0x4
+009108a7  JMP 0x009108e1
+009108a9  LEA ECX,[ESP + 0x14]
+009108ad  PUSH ECX
+009108ae  PUSH EAX
+009108af  MOV ECX,EBX
+009108b1  JMP 0x009108dc
+009108b3  MOV EAX,dword ptr [ESP + 0xc]
+009108b7  MOV ECX,dword ptr [EAX + 0x380]
+009108bd  CMP ECX,dword ptr [EAX + 0x384]
+009108c3  JZ 0x009108d0
+009108c5  MOV dword ptr [ECX],ESI
+009108c7  ADD dword ptr [EAX + 0x380],0x4
+009108ce  JMP 0x009108e1
+009108d0  LEA EDX,[ESP + 0x14]
+009108d4  PUSH EDX
+009108d5  PUSH ECX
+009108d6  LEA ECX,[EAX + 0x37c]
+009108dc  CALL 0x00426fb0
+009108e1  MOV EAX,dword ptr [ESP + 0xc]
+009108e5  INC ESI
+009108e6  ADD dword ptr [ESP + 0x10],0x48
+009108eb  MOV ECX,dword ptr [EAX + 0x368]
+009108f1  MOV EDI,dword ptr [EAX + 0x364]
+009108f7  SUB ECX,EDI
+009108f9  MOV EAX,0x38e38e39
+009108fe  IMUL ECX
+00910900  SAR EDX,0x4
+00910903  MOV EAX,EDX
+00910905  SHR EAX,0x1f
+00910908  ADD EAX,EDX
+0091090a  CMP ESI,EAX
+0091090c  MOV EAX,dword ptr [ESP + 0x10]
+00910910  JC 0x00910883
+00910916  POP EDI
+00910917  POP ESI
+00910918  POP EBX
+00910919  MOV ESP,EBP
+0091091b  POP EBP
+0091091c  RET
+---- DECOMPILED C ----
+
+void __fastcall FUN_00910820(int param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  uint uVar3;
+  int iVar4;
+  uint *puVar5;
+  int local_10;
+  uint local_c [2];
+  
+  *(undefined4 *)(param_1 + 0x374) = *(undefined4 *)(param_1 + 0x370);
+  *(undefined4 *)(param_1 + 0x380) = *(undefined4 *)(param_1 + 0x37c);
+  FUN_009106c0();
+  iVar4 = *(int *)(param_1 + 0x364);
+  uVar3 = 0;
+  iVar2 = *(int *)(param_1 + 0x368) - iVar4;
+  iVar1 = iVar2 >> 0x1f;
+  if (iVar2 / 0x48 + iVar1 != iVar1) {
+    local_10 = 0;
+    do {
+      FUN_00910530(iVar4 + local_10);
+      local_c[0] = uVar3;
+      if (*(char *)(iVar4 + local_10 + 0x3c) == '\0') {
+        puVar5 = *(uint **)(param_1 + 0x380);
+        if (puVar5 == *(uint **)(param_1 + 900)) goto LAB_009108dc;
+        *puVar5 = uVar3;
+        *(int *)(param_1 + 0x380) = *(int *)(param_1 + 0x380) + 4;
+      }
+      else {
+        puVar5 = *(uint **)(param_1 + 0x374);
+        if (puVar5 == *(uint **)(param_1 + 0x378)) {
+LAB_009108dc:
+          FUN_00426fb0(puVar5,local_c);
+        }
+        else {
+          *puVar5 = uVar3;
+          *(int *)(param_1 + 0x374) = *(int *)(param_1 + 0x374) + 4;
+        }
+      }
+      uVar3 = uVar3 + 1;
+      local_10 = local_10 + 0x48;
+      iVar4 = *(int *)(param_1 + 0x364);
+    } while (uVar3 < (uint)((*(int *)(param_1 + 0x368) - iVar4) / 0x48));
+  }
+  return;
+}
+

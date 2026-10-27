@@ -1,0 +1,76 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_007a7d50@007a7d50
+---- CALLEES ----
+0095e330 FUN_0095e330
+---- ASSEMBLY ----
+007a7d50  PUSH EBP
+007a7d51  MOV EBP,ESP
+007a7d53  PUSH ESI
+007a7d54  MOV ESI,ECX
+007a7d56  MOV EDX,dword ptr [ESI]
+007a7d58  TEST EDX,EDX
+007a7d5a  JNZ 0x007a7d72
+007a7d5c  PUSH 0xb4d6c4
+007a7d61  PUSH 0x3
+007a7d63  CALL 0x0095e330
+007a7d68  MOV EDX,dword ptr [ESI]
+007a7d6a  ADD ESP,0x8
+007a7d6d  TEST EDX,EDX
+007a7d6f  JNZ 0x007a7d72
+007a7d71  INT3
+007a7d72  MOV ECX,dword ptr [ESI + 0x4]
+007a7d75  MOV EAX,EDX
+007a7d77  SHR EAX,CL
+007a7d79  MOV ECX,dword ptr [ESI + 0x8]
+007a7d7c  XOR EAX,EDX
+007a7d7e  MOV EDX,EAX
+007a7d80  SHL EDX,CL
+007a7d82  MOV ECX,dword ptr [ESI + 0xc]
+007a7d85  XOR EDX,EAX
+007a7d87  MOV EAX,EDX
+007a7d89  SHR EAX,CL
+007a7d8b  MOV ECX,dword ptr [EBP + 0x8]
+007a7d8e  XOR EAX,EDX
+007a7d90  MOV dword ptr [ESI],EAX
+007a7d92  TEST ECX,ECX
+007a7d94  JNZ 0x007a7d9d
+007a7d96  XOR EAX,EAX
+007a7d98  POP ESI
+007a7d99  POP EBP
+007a7d9a  RET 0x4
+007a7d9d  XOR EDX,EDX
+007a7d9f  DIV ECX
+007a7da1  POP ESI
+007a7da2  MOV EAX,EDX
+007a7da4  POP EBP
+007a7da5  RET 0x4
+---- DECOMPILED C ----
+
+uint __thiscall FUN_007a7d50(uint *param_1,uint param_2)
+
+{
+  code *pcVar1;
+  uint uVar2;
+  
+  uVar2 = *param_1;
+  if (uVar2 == 0) {
+    FUN_0095e330(3,"RNG Seed is zero!\n");
+    uVar2 = *param_1;
+    if (uVar2 == 0) {
+      pcVar1 = (code *)swi(3);
+      uVar2 = (*pcVar1)();
+      return uVar2;
+    }
+  }
+  uVar2 = uVar2 >> ((byte)param_1[1] & 0x1f) ^ uVar2;
+  uVar2 = uVar2 << ((byte)param_1[2] & 0x1f) ^ uVar2;
+  uVar2 = uVar2 >> ((byte)param_1[3] & 0x1f) ^ uVar2;
+  *param_1 = uVar2;
+  if (param_2 == 0) {
+    return 0;
+  }
+  return uVar2 % param_2;
+}
+

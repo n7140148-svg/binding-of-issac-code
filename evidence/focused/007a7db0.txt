@@ -1,0 +1,63 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_007a7db0@007a7db0
+---- CALLEES ----
+0095e330 FUN_0095e330
+---- ASSEMBLY ----
+007a7db0  PUSH EBP
+007a7db1  MOV EBP,ESP
+007a7db3  PUSH ECX
+007a7db4  PUSH ESI
+007a7db5  MOV ESI,ECX
+007a7db7  MOV EDX,dword ptr [ESI]
+007a7db9  TEST EDX,EDX
+007a7dbb  JNZ 0x007a7dd3
+007a7dbd  PUSH 0xb4d6c4
+007a7dc2  PUSH 0x3
+007a7dc4  CALL 0x0095e330
+007a7dd3  MOV ECX,dword ptr [ESI + 0x4]
+007a7dd6  MOV EAX,EDX
+007a7dd8  SHR EAX,CL
+007a7dda  MOV ECX,dword ptr [ESI + 0x8]
+007a7ddd  XOR EAX,EDX
+007a7ddf  MOV EDX,EAX
+007a7de1  SHL EDX,CL
+007a7de3  MOV ECX,dword ptr [ESI + 0xc]
+007a7de6  XOR EDX,EAX
+007a7de8  MOV EAX,EDX
+007a7dea  SHR EAX,CL
+007a7dec  XOR EAX,EDX
+007a7dee  MOV dword ptr [ESI],EAX
+007a7df0  POP ESI
+007a7df1  MOVD XMM0,EAX
+007a7df5  CVTDQ2PD XMM0,XMM0
+007a7df9  SHR EAX,0x1f
+007a7dfc  ADDSD XMM0,qword ptr [EAX*0x8 + 0xb6c940]
+007a7e05  CVTPD2PS XMM0,XMM0
+007a7e09  MULSS XMM0,dword ptr [0x00b6a198]
+007a7e11  MOVSS dword ptr [EBP + -0x4],XMM0
+007a7e16  FLD float ptr [EBP + -0x4]
+007a7e19  MOV ESP,EBP
+007a7e1b  POP EBP
+007a7e1c  RET
+---- DECOMPILED C ----
+
+float10 __fastcall FUN_007a7db0(uint *param_1)
+
+{
+  uint uVar1;
+  
+  uVar1 = *param_1;
+  if (uVar1 == 0) {
+                    /* WARNING: Subroutine does not return */
+    FUN_0095e330(3,"RNG Seed is zero!\n");
+  }
+  uVar1 = uVar1 >> ((byte)param_1[1] & 0x1f) ^ uVar1;
+  uVar1 = uVar1 << ((byte)param_1[2] & 0x1f) ^ uVar1;
+  uVar1 = uVar1 >> ((byte)param_1[3] & 0x1f) ^ uVar1;
+  *param_1 = uVar1;
+  return (float10)((float)((double)(int)uVar1 + (double)(&DAT_00b6c940)[-((int)uVar1 >> 0x1f)]) *
+                  DAT_00b6a198);
+}
+

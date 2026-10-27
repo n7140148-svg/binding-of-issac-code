@@ -1,0 +1,85 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_00910fd0@00910fd0
+---- CALLEES ----
+00910920 FUN_00910920
+---- ASSEMBLY ----
+00910fd0  PUSH EBP
+00910fd1  MOV EBP,ESP
+00910fd3  AND ESP,0xfffffff8
+00910fd6  SUB ESP,0xc
+00910fd9  MOV EAX,dword ptr [EBP + 0x8]
+00910fdc  MOV EDX,ECX
+00910fde  PUSH EBX
+00910fdf  PUSH ESI
+00910fe0  PUSH EDI
+00910fe1  MOV ECX,dword ptr [EAX]
+00910fe3  XOR EBX,EBX
+00910fe5  MOV EDI,dword ptr [EAX + 0x4]
+00910fe8  MOV ESI,0xbea988
+00910fed  MOV dword ptr [ESP + 0x10],EDX
+00910ff1  MOV dword ptr [ESP + 0x14],ECX
+00910ff5  MOV dword ptr [ESP + 0xc],EDI
+00910ff9  NOP dword ptr [EAX]
+00911000  MOV EAX,dword ptr [ESI + 0x4]
+00911003  ADD ECX,dword ptr [ESI]
+00911005  ADD EAX,EDI
+00911007  CMP ECX,0xc
+0091100a  JA 0x0091103d
+0091100c  CMP EAX,0xc
+0091100f  JA 0x0091103d
+00911011  IMUL EAX,EAX,0xd
+00911014  ADD EAX,ECX
+00911016  JS 0x0091103d
+00911018  MOV EDI,dword ptr [EDX + EAX*0x4 + 0x14]
+0091101c  TEST EDI,EDI
+0091101e  JS 0x00911039
+00911020  MOV ECX,dword ptr [EBP + 0x8]
+00911023  CALL 0x00910920
+00911028  MOV EDX,dword ptr [ESP + 0x10]
+0091102c  CMP EDI,dword ptr [EDX + EAX*0x4 + 0x14]
+00911030  MOV EDI,dword ptr [ESP + 0xc]
+00911034  JZ 0x0091103d
+00911036  INC EBX
+00911037  JMP 0x0091103d
+00911039  MOV EDI,dword ptr [ESP + 0xc]
+0091103d  MOV ECX,dword ptr [ESP + 0x14]
+00911041  ADD ESI,0x8
+00911044  CMP ESI,0xbea9a8
+0091104a  JL 0x00911000
+0091104c  POP EDI
+0091104d  POP ESI
+0091104e  MOV EAX,EBX
+00911050  POP EBX
+00911051  MOV ESP,EBP
+00911053  POP EBP
+00911054  RET 0x4
+---- DECOMPILED C ----
+
+int __thiscall FUN_00910fd0(int param_1,int *param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  int *piVar6;
+  
+  iVar1 = *param_2;
+  iVar5 = 0;
+  iVar2 = param_2[1];
+  piVar6 = &DAT_00bea988;
+  do {
+    if (((((uint)(iVar1 + *piVar6) < 0xd) && ((uint)(piVar6[1] + iVar2) < 0xd)) &&
+        (iVar3 = (piVar6[1] + iVar2) * 0xd + iVar1 + *piVar6, -1 < iVar3)) &&
+       ((iVar3 = *(int *)(param_1 + 0x14 + iVar3 * 4), -1 < iVar3 &&
+        (iVar4 = FUN_00910920(), iVar3 != *(int *)(param_1 + 0x14 + iVar4 * 4))))) {
+      iVar5 = iVar5 + 1;
+    }
+    piVar6 = piVar6 + 2;
+  } while ((int)piVar6 < 0xbea9a8);
+  return iVar5;
+}
+

@@ -1,0 +1,157 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_00800e30@00800e30
+---- CALLEES ----
+EXTERNAL:00000032 lua_toboolean
+EXTERNAL:00000035 lua_settop
+EXTERNAL:0000003f lua_gettop
+EXTERNAL:0000005c lua_type
+EXTERNAL:0000006b luaL_unref
+00680cc0 FUN_00680cc0
+008106c0 FUN_008106c0
+---- ASSEMBLY ----
+00800e30  PUSH EBP
+00800e31  MOV EBP,ESP
+00800e33  PUSH -0x1
+00800e35  PUSH 0x9fb660
+00800e3a  MOV EAX,FS:[0x0]
+00800e40  PUSH EAX
+00800e41  SUB ESP,0x20
+00800e44  PUSH EBX
+00800e45  PUSH ESI
+00800e46  PUSH EDI
+00800e47  MOV EAX,[0x00baa3b4]
+00800e4c  XOR EAX,EBP
+00800e4e  PUSH EAX
+00800e4f  LEA EAX,[EBP + -0xc]
+00800e52  MOV FS:[0x0],EAX
+00800e58  MOV dword ptr [EBP + -0x10],ESP
+00800e5b  MOV EDX,dword ptr [0x00bfd674]
+00800e61  MOV ESI,dword ptr [EBP + 0x8]
+00800e64  MOV dword ptr [EBP + -0x24],0xb
+00800e6b  MOV EAX,dword ptr [EDX + 0x10]
+00800e6e  MOV ECX,dword ptr [ESI + 0x28]
+00800e71  MOV dword ptr [EBP + -0x28],EAX
+00800e74  MOV EAX,dword ptr [EDX]
+00800e76  MOV dword ptr [EBP + -0x20],ECX
+00800e79  TEST dword ptr [EAX],0x800
+00800e7f  JZ 0x00800f3c
+00800e85  PUSH dword ptr [EBP + 0x18]
+00800e88  MOV dword ptr [EBP + -0x4],0x0
+00800e8f  LEA EAX,[EBP + 0xc]
+00800e92  PUSH dword ptr [EBP + 0x14]
+00800e95  PUSH dword ptr [EBP + 0x10]
+00800e98  PUSH dword ptr [EBP + 0xc]
+00800e9b  PUSH ECX
+00800e9c  MOVSS dword ptr [ESP],XMM2
+00800ea1  PUSH ESI
+00800ea2  PUSH ECX
+00800ea3  PUSH EAX
+00800ea4  LEA ECX,[EBP + -0x28]
+00800ea7  CALL 0x008106c0
+00800eac  MOV EBX,dword ptr [EBP + 0x10]
+00800eaf  MOV EDI,dword ptr [EBP + 0xc]
+00800eb2  CMP EBX,-0x1
+00800eb5  JZ 0x00800f2c
+00800eb7  PUSH EDI
+00800eb8  LEA ECX,[EBP + 0xc]
+00800ebb  CALL 0x00680cc0
+00800ec0  PUSH -0x1
+00800ec2  PUSH EDI
+00800ec3  CALL dword ptr [0x00a0620c]
+00800ec9  PUSH -0x2
+00800ecb  PUSH EDI
+00800ecc  MOV ESI,EAX
+00800ece  CALL dword ptr [0x00a06170]
+00800ed4  ADD ESP,0x10
+00800ed7  TEST ESI,ESI
+00800ed9  JZ 0x00800f2c
+00800edb  PUSH EDI
+00800edc  LEA ECX,[EBP + 0xc]
+00800edf  CALL 0x00680cc0
+00800ee4  PUSH EDI
+00800ee5  CALL dword ptr [0x00a06198]
+00800eeb  ADD ESP,0x4
+00800eee  PUSH EAX
+00800eef  PUSH EDI
+00800ef0  CALL dword ptr [0x00a06164]
+00800ef6  TEST EAX,EAX
+00800ef8  PUSH -0x2
+00800efa  PUSH EDI
+00800efb  SETNZ BL
+00800efe  CALL dword ptr [0x00a06170]
+00800f04  PUSH dword ptr [EBP + 0x10]
+00800f07  PUSH 0xfff0b9d8
+00800f0c  PUSH EDI
+00800f0d  CALL dword ptr [0x00a06248]
+00800f13  ADD ESP,0x1c
+00800f16  MOV AL,BL
+00800f18  MOV ECX,dword ptr [EBP + -0xc]
+00800f1b  MOV dword ptr FS:[0x0],ECX
+00800f22  POP ECX
+00800f23  POP EDI
+00800f24  POP ESI
+00800f25  POP EBX
+00800f26  MOV ESP,EBP
+00800f28  POP EBP
+00800f29  RET 0x14
+00800f2c  PUSH EBX
+00800f2d  PUSH 0xfff0b9d8
+00800f32  PUSH EDI
+00800f33  CALL dword ptr [0x00a06248]
+00800f39  ADD ESP,0xc
+00800f3c  MOV AL,0x1
+00800f3e  MOV ECX,dword ptr [EBP + -0xc]
+00800f41  MOV dword ptr FS:[0x0],ECX
+00800f48  POP ECX
+00800f49  POP EDI
+00800f4a  POP ESI
+00800f4b  POP EBX
+00800f4c  MOV ESP,EBP
+00800f4e  POP EBP
+00800f4f  RET 0x14
+---- DECOMPILED C ----
+
+bool FUN_00800e30(int param_1,undefined4 param_2,int param_3,undefined4 param_4,undefined4 param_5)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  undefined4 uVar3;
+  int iVar4;
+  int *unaff_FS_OFFSET;
+  undefined4 in_XMM2_Da;
+  int local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  puStack_c = &LAB_009fb660;
+  local_10 = *unaff_FS_OFFSET;
+  *unaff_FS_OFFSET = (int)&local_10;
+  if ((*(uint *)*DAT_00bfd674 & 0x800) != 0) {
+    local_8 = 0;
+    FUN_008106c0(&param_2,*(undefined4 *)(param_1 + 0x28),param_1,in_XMM2_Da,param_2,param_3,param_4
+                 ,param_5);
+    iVar4 = param_3;
+    uVar1 = param_2;
+    if (param_3 != -1) {
+      FUN_00680cc0(param_2);
+      iVar2 = lua_type(uVar1,0xffffffff);
+      lua_settop(uVar1,0xfffffffe);
+      if (iVar2 != 0) {
+        FUN_00680cc0(uVar1);
+        uVar3 = lua_gettop(uVar1);
+        iVar4 = lua_toboolean(uVar1,uVar3);
+        lua_settop(uVar1,0xfffffffe);
+        luaL_unref(uVar1,0xfff0b9d8,param_3);
+        *unaff_FS_OFFSET = local_10;
+        return iVar4 != 0;
+      }
+    }
+    luaL_unref(uVar1,0xfff0b9d8,iVar4);
+  }
+  *unaff_FS_OFFSET = local_10;
+  return true;
+}
+

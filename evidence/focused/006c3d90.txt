@@ -1,0 +1,128 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_006c3d90@006c3d90
+---- CALLEES ----
+006c3d50 FUN_006c3d50
+---- ASSEMBLY ----
+006c3d90  MOV EAX,[0x00bc5304]
+006c3d95  CMP EAX,0x270
+006c3d9a  JL 0x006c3e7a
+006c3da0  CMP EAX,0x271
+006c3da5  JNZ 0x006c3db1
+006c3da7  MOV ECX,0x1571
+006c3dac  CALL 0x006c3d50
+006c3db1  XOR EAX,EAX
+006c3db3  NOP dword ptr [EAX]
+006c3db7  NOP word ptr [EAX + EAX*0x1]
+006c3dc0  MOV EDX,dword ptr [EAX*0x4 + 0xbffe14]
+006c3dc7  XOR EDX,dword ptr [EAX*0x4 + 0xbffe10]
+006c3dce  AND EDX,0x7fffffff
+006c3dd4  XOR EDX,dword ptr [EAX*0x4 + 0xbffe10]
+006c3ddb  MOV ECX,EDX
+006c3ddd  SHR EDX,0x1
+006c3ddf  AND ECX,0x1
+006c3de2  XOR EDX,dword ptr [ECX*0x4 + 0xb49b28]
+006c3de9  XOR EDX,dword ptr [EAX*0x4 + 0xc00444]
+006c3df0  MOV dword ptr [EAX*0x4 + 0xbffe10],EDX
+006c3df7  INC EAX
+006c3df8  CMP EAX,0xe3
+006c3dfd  JL 0x006c3dc0
+006c3dff  PUSH ESI
+006c3e00  PUSH EDI
+006c3e01  LEA EDI,[EAX*0x4 + 0xbffe10]
+006c3e08  MOV EAX,dword ptr [EDI]
+006c3e0a  NOP word ptr [EAX + EAX*0x1]
+006c3e10  MOV ECX,dword ptr [EDI + 0x4]
+006c3e13  LEA EDX,[EDI + 0x4]
+006c3e16  XOR ECX,EAX
+006c3e18  AND ECX,0x7fffffff
+006c3e1e  XOR ECX,EAX
+006c3e20  MOV EAX,ECX
+006c3e22  SHR ECX,0x1
+006c3e24  AND EAX,0x1
+006c3e27  MOV EAX,dword ptr [EAX*0x4 + 0xb49b28]
+006c3e2e  XOR EAX,dword ptr [EDX + 0xfffffc70]
+006c3e34  XOR EAX,ECX
+006c3e36  MOV dword ptr [EDI],EAX
+006c3e38  MOV EDI,EDX
+006c3e3a  MOV EAX,dword ptr [EDX]
+006c3e3c  CMP EDI,0xc007cc
+006c3e42  JL 0x006c3e10
+006c3e44  MOV ECX,dword ptr [0x00bffe10]
+006c3e4a  XOR ECX,dword ptr [0x00c007cc]
+006c3e50  AND ECX,0x7fffffff
+006c3e56  XOR ECX,dword ptr [0x00c007cc]
+006c3e5c  MOV EAX,ECX
+006c3e5e  SHR ECX,0x1
+006c3e60  AND EAX,0x1
+006c3e63  POP EDI
+006c3e64  POP ESI
+006c3e65  XOR ECX,dword ptr [EAX*0x4 + 0xb49b28]
+006c3e6c  XOR ECX,dword ptr [0x00c00440]
+006c3e72  XOR EAX,EAX
+006c3e74  MOV dword ptr [0x00c007cc],ECX
+006c3e7a  MOV ECX,dword ptr [EAX*0x4 + 0xbffe10]
+006c3e81  INC EAX
+006c3e82  MOV [0x00bc5304],EAX
+006c3e87  MOV EAX,ECX
+006c3e89  SHR EAX,0xb
+006c3e8c  XOR ECX,EAX
+006c3e8e  MOV EAX,ECX
+006c3e90  AND EAX,0xff3a58ad
+006c3e95  SHL EAX,0x7
+006c3e98  XOR ECX,EAX
+006c3e9a  MOV EAX,ECX
+006c3e9c  AND EAX,0xffffdf8c
+006c3ea1  SHL EAX,0xf
+006c3ea4  XOR ECX,EAX
+006c3ea6  MOV EAX,ECX
+006c3ea8  SHR EAX,0x12
+006c3eab  XOR EAX,ECX
+006c3ead  RET
+---- DECOMPILED C ----
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+uint FUN_006c3d90(void)
+
+{
+  uint *puVar1;
+  int iVar2;
+  uint uVar3;
+  uint *puVar4;
+  
+  if (0x26f < DAT_00bc5304) {
+    if (DAT_00bc5304 == 0x271) {
+      FUN_006c3d50();
+    }
+    iVar2 = 0;
+    do {
+      uVar3 = (*(uint *)(&DAT_00bffe14 + iVar2 * 4) ^ *(uint *)(&DAT_00bffe10 + iVar2 * 4)) &
+              0x7fffffff ^ *(uint *)(&DAT_00bffe10 + iVar2 * 4);
+      *(uint *)(&DAT_00bffe10 + iVar2 * 4) =
+           uVar3 >> 1 ^ *(uint *)(&DAT_00b49b28 + (uVar3 & 1) * 4) ^ (&DAT_00c00444)[iVar2];
+      iVar2 = iVar2 + 1;
+    } while (iVar2 < 0xe3);
+    uVar3 = *(uint *)(&DAT_00bffe10 + iVar2 * 4);
+    puVar4 = (uint *)(&DAT_00bffe10 + iVar2 * 4);
+    do {
+      puVar1 = puVar4 + 1;
+      uVar3 = (puVar4[1] ^ uVar3) & 0x7fffffff ^ uVar3;
+      *puVar4 = *(uint *)(&DAT_00b49b28 + (uVar3 & 1) * 4) ^ puVar4[-0xe3] ^ uVar3 >> 1;
+      uVar3 = *puVar1;
+      puVar4 = puVar1;
+    } while ((int)puVar1 < 0xc007cc);
+    _DAT_00c007cc = (_DAT_00bffe10 ^ _DAT_00c007cc) & 0x7fffffff ^ _DAT_00c007cc;
+    _DAT_00c007cc =
+         _DAT_00c007cc >> 1 ^ *(uint *)(&DAT_00b49b28 + (_DAT_00c007cc & 1) * 4) ^ _DAT_00c00440;
+    DAT_00bc5304 = 0;
+  }
+  iVar2 = DAT_00bc5304 * 4;
+  DAT_00bc5304 = DAT_00bc5304 + 1;
+  uVar3 = *(uint *)(&DAT_00bffe10 + iVar2) ^ *(uint *)(&DAT_00bffe10 + iVar2) >> 0xb;
+  uVar3 = uVar3 ^ (uVar3 & 0xff3a58ad) << 7;
+  uVar3 = uVar3 ^ (uVar3 & 0xffffdf8c) << 0xf;
+  return uVar3 >> 0x12 ^ uVar3;
+}
+

@@ -1,0 +1,145 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_00910ec0@00910ec0
+---- CALLEES ----
+0071d450 FUN_0071d450
+00910940 FUN_00910940
+00912800 FUN_00912800
+0095e330 FUN_0095e330
+---- ASSEMBLY ----
+00910ec0  PUSH EBP
+00910ec1  MOV EBP,ESP
+00910ec3  AND ESP,0xfffffff8
+00910ec6  SUB ESP,0xc
+00910ec9  PUSH EBX
+00910eca  MOV EBX,dword ptr [EBP + 0x8]
+00910ecd  MOV EAX,0x38e38e39
+00910ed2  PUSH ESI
+00910ed3  PUSH EDI
+00910ed4  MOV EDI,ECX
+00910ed6  MOV ECX,dword ptr [EDI + 0x368]
+00910edc  LEA ESI,[EDI + 0x364]
+00910ee2  MOV dword ptr [ESP + 0x14],EDI
+00910ee6  MOV EDX,ECX
+00910ee8  SUB EDX,dword ptr [ESI]
+00910eea  IMUL EDX
+00910eec  PUSH EBX
+00910eed  SAR EDX,0x4
+00910ef0  MOV EAX,EDX
+00910ef2  SHR EAX,0x1f
+00910ef5  ADD EAX,EDX
+00910ef7  MOV dword ptr [ESP + 0x10],EAX
+00910efb  CMP ECX,dword ptr [ESI + 0x8]
+00910efe  JZ 0x00910f0b
+00910f00  CALL 0x0071d450
+00910f05  ADD dword ptr [ESI + 0x4],0x48
+00910f09  JMP 0x00910f13
+00910f0b  PUSH ECX
+00910f0c  MOV ECX,ESI
+00910f0e  CALL 0x00912800
+00910f13  MOV EAX,dword ptr [EDI + 0x368]
+00910f19  MOV ECX,dword ptr [ESP + 0xc]
+00910f1d  MOV dword ptr [EAX + -0x44],ECX
+00910f20  MOV ECX,dword ptr [EBX + 0x18]
+00910f23  CALL 0x00910940
+00910f28  MOV ECX,dword ptr [EBX + 0x18]
+00910f2b  MOV dword ptr [ESP + 0x10],EAX
+00910f2f  CMP ECX,0x1
+00910f32  JZ 0x00910f48
+00910f34  PUSH ECX
+00910f35  PUSH 0xb5acb8
+00910f3a  PUSH 0x0
+00910f3c  CALL 0x0095e330
+00910f41  MOV EAX,dword ptr [ESP + 0x1c]
+00910f45  ADD ESP,0xc
+00910f48  XOR EDI,EDI
+00910f4a  NOP word ptr [EAX + EAX*0x1]
+00910f50  MOV ECX,dword ptr [EAX]
+00910f52  MOV EDX,dword ptr [ECX + EDI*0x1]
+00910f55  CMP EDX,dword ptr [0x00bc5f10]
+00910f5b  JNZ 0x00910f69
+00910f5d  MOV EAX,dword ptr [ECX + EDI*0x1 + 0x4]
+00910f61  CMP EAX,dword ptr [0x00bc5f14]
+00910f67  JZ 0x00910faf
+00910f69  MOV EAX,dword ptr [EBX + 0xc]
+00910f6c  ADD EDX,dword ptr [EBX + 0x8]
+00910f6f  MOV ECX,dword ptr [ECX + EDI*0x1 + 0x4]
+00910f73  ADD EAX,ECX
+00910f75  CMP EDX,0xc
+00910f78  JA 0x00910f88
+00910f7a  CMP EAX,0xc
+00910f7d  JA 0x00910f88
+00910f7f  IMUL ESI,EAX,0xd
+00910f82  ADD ESI,EDX
+00910f84  JNS 0x00910f9a
+00910f86  JMP 0x00910f8b
+00910f88  OR ESI,0xffffffff
+00910f8b  PUSH 0xb5acd0
+00910f90  PUSH 0x3
+00910f92  CALL 0x0095e330
+00910f97  ADD ESP,0x8
+00910f9a  MOV EAX,dword ptr [ESP + 0x14]
+00910f9e  ADD EDI,0x8
+00910fa1  MOV ECX,dword ptr [ESP + 0xc]
+00910fa5  MOV dword ptr [EAX + ESI*0x4 + 0x14],ECX
+00910fa9  MOV EAX,dword ptr [ESP + 0x10]
+00910fad  JMP 0x00910f50
+00910faf  MOV EAX,dword ptr [ESP + 0x14]
+00910fb3  POP EDI
+00910fb4  POP ESI
+00910fb5  POP EBX
+00910fb6  MOV EAX,dword ptr [EAX + 0x368]
+00910fbc  SUB EAX,0x48
+00910fbf  MOV ESP,EBP
+00910fc1  POP EBP
+00910fc2  RET 0x4
+---- DECOMPILED C ----
+
+int __thiscall FUN_00910ec0(int param_1,int param_2)
+
+{
+  int iVar1;
+  int *piVar2;
+  uint uVar3;
+  uint uVar4;
+  int iVar5;
+  int iVar6;
+  
+  iVar6 = *(int *)(param_1 + 0x368);
+  iVar1 = (iVar6 - *(int *)(param_1 + 0x364)) / 0x48;
+  if (iVar6 == *(int *)(param_1 + 0x36c)) {
+    FUN_00912800(iVar6,param_2);
+  }
+  else {
+    FUN_0071d450(param_2);
+    *(int *)(param_1 + 0x368) = *(int *)(param_1 + 0x368) + 0x48;
+  }
+  *(int *)(*(int *)(param_1 + 0x368) + -0x44) = iVar1;
+  piVar2 = (int *)FUN_00910940();
+  if (*(int *)(param_2 + 0x18) != 1) {
+    FUN_0095e330(0,"place_room: shape %d\n",*(int *)(param_2 + 0x18));
+  }
+  iVar6 = 0;
+  do {
+    iVar5 = *piVar2;
+    if ((*(int *)(iVar5 + iVar6) == DAT_00bc5f10) && (*(int *)(iVar5 + 4 + iVar6) == DAT_00bc5f14))
+    {
+      return *(int *)(param_1 + 0x368) + -0x48;
+    }
+    uVar4 = *(int *)(iVar5 + iVar6) + *(int *)(param_2 + 8);
+    uVar3 = *(int *)(param_2 + 0xc) + *(int *)(iVar5 + 4 + iVar6);
+    if ((uVar4 < 0xd) && (uVar3 < 0xd)) {
+      iVar5 = uVar3 * 0xd + uVar4;
+      if (iVar5 < 0) goto LAB_00910f8b;
+    }
+    else {
+      iVar5 = -1;
+LAB_00910f8b:
+      FUN_0095e330(3,"[LevelGenerator] place_room: invalid room\n");
+    }
+    iVar6 = iVar6 + 8;
+    *(int *)(param_1 + 0x14 + iVar5 * 4) = iVar1;
+  } while( true );
+}
+

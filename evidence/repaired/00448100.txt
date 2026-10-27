@@ -1,0 +1,28 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_00448100@00448100
+---- CALLEES ----
+---- ASSEMBLY ----
+00448100  MOV EAX,dword ptr [ECX + 0x160]
+00448106  AND EAX,0x20000000
+0044810b  OR EAX,0x0
+0044810e  JZ 0x00448113
+00448110  MOV AL,0x1
+00448112  RET
+00448113  XOR AL,AL
+00448115  RET
+---- DECOMPILED C ----
+
+undefined4 __fastcall FUN_00448100(int param_1)
+
+{
+  uint uVar1;
+  
+  uVar1 = *(uint *)(param_1 + 0x160) & 0x20000000;
+  if (uVar1 != 0) {
+    return CONCAT31((int3)(uVar1 >> 8),1);
+  }
+  return 0;
+}
+

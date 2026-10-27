@@ -1,0 +1,214 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_00910530@00910530
+---- CALLEES ----
+00408260 FUN_00408260
+00420480 FID_conflict:_Erase_tree<fuzzer::fuzzer_allocator<std::_Tree_node<fuzzer::TracePC::PCTableEntry_const*,void*>_>_>
+004206b0 FUN_004206b0
+004c3a90 FUN_004c3a90
+004d1da0 FUN_004d1da0
+009101d0 FUN_009101d0
+009eacf8 operator_new
+---- ASSEMBLY ----
+00910530  PUSH EBP
+00910531  MOV EBP,ESP
+00910533  PUSH -0x1
+00910535  PUSH 0xa0100d
+0091053a  MOV EAX,FS:[0x0]
+00910540  PUSH EAX
+00910541  SUB ESP,0x30
+00910544  PUSH EBX
+00910545  PUSH ESI
+00910546  PUSH EDI
+00910547  MOV EAX,[0x00baa3b4]
+0091054c  XOR EAX,EBP
+0091054e  PUSH EAX
+0091054f  LEA EAX,[EBP + -0xc]
+00910552  MOV FS:[0x0],EAX
+00910558  MOV dword ptr [EBP + -0x10],ECX
+0091055b  MOV EBX,dword ptr [EBP + 0x8]
+0091055e  LEA EAX,[EBX + 0x1c]
+00910561  LEA EDI,[EBX + 0x30]
+00910564  MOV dword ptr [EAX],0x0
+0091056a  MOV ESI,dword ptr [EDI]
+0091056c  MOV ECX,EDI
+0091056e  MOV dword ptr [EBP + -0x14],EAX
+00910571  PUSH dword ptr [ESI + 0x4]
+00910574  PUSH EDI
+00910575  CALL 0x00420480
+0091057a  MOV dword ptr [ESI + 0x4],ESI
+0091057d  MOV dword ptr [ESI],ESI
+0091057f  MOV dword ptr [ESI + 0x8],ESI
+00910582  XOR ESI,ESI
+00910584  MOV dword ptr [EDI + 0x4],0x0
+0091058b  PUSH 0x0
+0091058d  LEA EAX,[EBX + 0x8]
+00910590  PUSH ESI
+00910591  PUSH dword ptr [EBX + 0x18]
+00910594  MOV EDX,EAX
+00910596  LEA ECX,[EBP + -0x1c]
+00910599  CALL 0x009101d0
+0091059e  MOV ECX,dword ptr [EBP + -0x1c]
+009105a1  ADD ESP,0xc
+009105a4  CMP ECX,0xc
+009105a7  JA 0x00910688
+009105ad  MOV EAX,dword ptr [EBP + -0x18]
+009105b0  CMP EAX,0xc
+009105b3  JA 0x00910688
+009105b9  IMUL EAX,EAX,0xd
+009105bc  ADD EAX,ECX
+009105be  JS 0x00910688
+009105c4  MOV EBX,dword ptr [EBP + -0x10]
+009105c7  ADD EBX,0x14
+009105ca  CMP dword ptr [EBX + EAX*0x4],0x0
+009105ce  LEA EBX,[EBX + EAX*0x4]
+009105d1  JL 0x00910685
+009105d7  CMP ESI,0x8
+009105da  JNC 0x009106ac
+009105e0  MOV ECX,dword ptr [EBP + -0x14]
+009105e3  MOV EAX,ESI
+009105e5  SHR EAX,0x5
+009105e8  LEA EDX,[ECX + EAX*0x4]
+009105eb  MOV ECX,ESI
+009105ed  AND ECX,0x1f
+009105f0  MOV EAX,0x1
+009105f5  SHL EAX,CL
+009105f7  MOV ECX,EDI
+009105f9  OR dword ptr [EDX],EAX
+009105fb  LEA EAX,[EBP + -0x3c]
+009105fe  PUSH EBX
+009105ff  PUSH EAX
+00910600  CALL 0x004206b0
+00910605  MOV ECX,dword ptr [EAX + 0x8]
+00910608  MOVQ XMM0,qword ptr [EAX]
+0091060c  MOVQ qword ptr [EBP + -0x30],XMM0
+00910611  CMP byte ptr [ECX + 0xd],0x0
+00910615  JNZ 0x0091061e
+00910617  MOV EAX,dword ptr [EBX]
+00910619  CMP EAX,dword ptr [ECX + 0x10]
+0091061c  JGE 0x00910685
+0091061e  CMP dword ptr [EDI + 0x4],0xccccccc
+00910625  JZ 0x009106b1
+0091062b  MOV EAX,dword ptr [EBP + 0x8]
+0091062e  MOV EDI,dword ptr [EDI]
+00910630  ADD EAX,0x30
+00910633  MOV dword ptr [EBP + -0x24],EAX
+00910636  MOV dword ptr [EBP + -0x4],0x0
+0091063d  PUSH 0x14
+0091063f  MOV dword ptr [EBP + -0x20],0x0
+00910646  CALL 0x009eacf8
+0091064b  MOV dword ptr [EBP + -0x4],0xffffffff
+00910652  ADD ESP,0x4
+00910655  MOV ECX,dword ptr [EBX]
+00910657  MOV EBX,dword ptr [EBP + 0x8]
+0091065a  MOV dword ptr [EAX + 0x10],ECX
+0091065d  MOV dword ptr [EAX],EDI
+0091065f  PUSH EAX
+00910660  PUSH dword ptr [EBP + -0x2c]
+00910663  MOV dword ptr [EAX + 0x4],EDI
+00910666  PUSH dword ptr [EBP + -0x30]
+00910669  MOV dword ptr [EAX + 0x8],EDI
+0091066c  LEA EDI,[EBX + 0x30]
+0091066f  MOV ECX,EDI
+00910671  MOV word ptr [EAX + 0xc],0x0
+00910677  MOV dword ptr [EBP + -0x20],0x0
+0091067e  CALL 0x004d1da0
+00910683  JMP 0x00910688
+00910685  MOV EBX,dword ptr [EBP + 0x8]
+00910688  INC ESI
+00910689  CMP ESI,0x8
+0091068c  JL 0x0091058b
+00910692  MOV EAX,dword ptr [EBX + 0x34]
+00910695  MOV dword ptr [EBX + 0x38],EAX
+00910698  MOV ECX,dword ptr [EBP + -0xc]
+0091069b  MOV dword ptr FS:[0x0],ECX
+009106a2  POP ECX
+009106a3  POP EDI
+009106a4  POP ESI
+009106a5  POP EBX
+009106a6  MOV ESP,EBP
+009106a8  POP EBP
+009106a9  RET 0x4
+009106ac  CALL 0x004c3a90
+009106b1  CALL 0x00408260
+---- DECOMPILED C ----
+
+void FUN_00910530(int param_1)
+
+{
+  int *piVar1;
+  undefined4 uVar2;
+  uint uVar3;
+  int iVar4;
+  undefined8 *puVar5;
+  undefined4 *puVar6;
+  uint uVar7;
+  int *unaff_FS_OFFSET;
+  undefined1 local_40 [12];
+  undefined8 local_34;
+  int local_28;
+  undefined4 local_24;
+  uint local_20;
+  uint local_1c;
+  undefined4 *local_18;
+  int local_14;
+  int local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00a0100d;
+  local_10 = *unaff_FS_OFFSET;
+  uVar3 = DAT_00baa3b4 ^ (uint)&stack0xfffffffc;
+  *unaff_FS_OFFSET = (int)&local_10;
+  local_18 = (undefined4 *)(param_1 + 0x1c);
+  *local_18 = 0;
+  iVar4 = *(int *)(param_1 + 0x30);
+  FID_conflict__Erase_tree<fuzzer::fuzzer_allocator<std::_Tree_node<fuzzer::TracePC::PCTableEntry_const*,void*>_>_>
+            ((int *)(param_1 + 0x30),*(undefined4 *)(iVar4 + 4));
+  *(int *)(iVar4 + 4) = iVar4;
+  *(int *)iVar4 = iVar4;
+  *(int *)(iVar4 + 8) = iVar4;
+  uVar7 = 0;
+  *(undefined4 *)(param_1 + 0x34) = 0;
+  do {
+    FUN_009101d0(*(undefined4 *)(param_1 + 0x18),uVar7,0,uVar3);
+    if ((((local_20 < 0xd) && (local_1c < 0xd)) && (iVar4 = local_1c * 0xd + local_20, -1 < iVar4))
+       && (piVar1 = (int *)(local_14 + 0x14 + iVar4 * 4), -1 < *(int *)(local_14 + 0x14 + iVar4 * 4)
+          )) {
+      if (7 < uVar7) {
+                    /* WARNING: Subroutine does not return */
+        FUN_004c3a90();
+      }
+      local_18[uVar7 >> 5] = local_18[uVar7 >> 5] | 1 << ((byte)uVar7 & 0x1f);
+      puVar5 = (undefined8 *)FUN_004206b0(local_40,piVar1);
+      local_34 = *puVar5;
+      if ((*(char *)(*(int *)(puVar5 + 1) + 0xd) != '\0') ||
+         (*piVar1 < *(int *)(*(int *)(puVar5 + 1) + 0x10))) {
+        if (*(int *)(param_1 + 0x34) == 0xccccccc) {
+                    /* WARNING: Subroutine does not return */
+          FUN_00408260();
+        }
+        uVar2 = *(undefined4 *)(param_1 + 0x30);
+        local_28 = param_1 + 0x30;
+        local_8 = 0;
+        local_24 = 0;
+        puVar6 = operator_new(0x14);
+        local_8 = 0xffffffff;
+        puVar6[4] = *piVar1;
+        *puVar6 = uVar2;
+        puVar6[1] = uVar2;
+        puVar6[2] = uVar2;
+        *(undefined2 *)(puVar6 + 3) = 0;
+        local_24 = 0;
+        FUN_004d1da0((undefined4)local_34,local_34._4_4_,puVar6);
+      }
+    }
+    uVar7 = uVar7 + 1;
+  } while ((int)uVar7 < 8);
+  *(undefined4 *)(param_1 + 0x38) = *(undefined4 *)(param_1 + 0x34);
+  *unaff_FS_OFFSET = local_10;
+  return;
+}
+

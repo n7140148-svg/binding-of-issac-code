@@ -1,0 +1,159 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_0093df80@0093df80
+---- CALLEES ----
+009eacd7 __security_check_cookie
+009ec358 memmove
+---- ASSEMBLY ----
+0093df80  PUSH EBP
+0093df81  MOV EBP,ESP
+0093df83  SUB ESP,0xc
+0093df86  MOV EAX,[0x00baa3b4]
+0093df8b  XOR EAX,EBP
+0093df8d  MOV dword ptr [EBP + -0x4],EAX
+0093df90  PUSH EBX
+0093df91  MOV EBX,dword ptr [EBP + 0xc]
+0093df94  XOR DL,DL
+0093df96  MOV ECX,EBX
+0093df98  PUSH ESI
+0093df99  MOV ESI,dword ptr [EBP + 0x8]
+0093df9c  MOV dword ptr [EBP + -0x8],ESI
+0093df9f  PUSH EDI
+0093dfa0  TEST EBX,EBX
+0093dfa2  JZ 0x0093dfb6
+0093dfa4  ADD DL,CL
+0093dfa6  SHR ECX,0x5
+0093dfa9  MOV AL,DL
+0093dfab  ADD DL,DL
+0093dfad  SHR AL,0x7
+0093dfb0  ADD DL,AL
+0093dfb2  TEST ECX,ECX
+0093dfb4  JNZ 0x0093dfa4
+0093dfb6  XOR EBX,0xfef7ffd
+0093dfbc  MOVZX EAX,DL
+0093dfbf  MOV ECX,EBX
+0093dfc1  MOV dword ptr [ESI],0x0
+0093dfc7  SHL ECX,0x8
+0093dfca  OR ECX,EAX
+0093dfcc  MOV dword ptr [ESI + 0x10],0x0
+0093dfd3  MOV EAX,EBX
+0093dfd5  MOV dword ptr [ESI + 0x14],0xf
+0093dfdc  SHR EAX,0x1b
+0093dfdf  MOV byte ptr [EBP + -0xc],AL
+0093dfe2  MOV EAX,EBX
+0093dfe4  SHR EAX,0x16
+0093dfe7  AND AL,0x1f
+0093dfe9  MOV byte ptr [ESI],0x0
+0093dfec  MOV byte ptr [EBP + -0xb],AL
+0093dfef  MOV EAX,EBX
+0093dff1  SHR EAX,0x11
+0093dff4  AND AL,0x1f
+0093dff6  MOV dword ptr [ESI + 0x10],0x9
+0093dffd  MOV byte ptr [EBP + -0xa],AL
+0093e000  MOV EAX,EBX
+0093e002  SHR EAX,0xc
+0093e005  AND AL,0x1f
+0093e007  MOV byte ptr [EBP + -0x9],AL
+0093e00a  MOV EAX,EBX
+0093e00c  SHR EAX,0x7
+0093e00f  AND AL,0x1f
+0093e011  SHR EBX,0x2
+0093e014  MOV byte ptr [EBP + -0x8],AL
+0093e017  AND BL,0x1f
+0093e01a  MOV EAX,ECX
+0093e01c  MOV byte ptr [EBP + -0x7],BL
+0093e01f  PUSH 0x9
+0093e021  SHR EAX,0x5
+0093e024  AND CL,0x1f
+0093e027  AND AL,0x1f
+0093e029  MOV byte ptr [EBP + -0x5],CL
+0093e02c  PUSH 0xb5c930
+0093e031  PUSH ESI
+0093e032  MOV byte ptr [EBP + -0x6],AL
+0093e035  CALL 0x009ec358
+0093e03a  ADD ESP,0xc
+0093e03d  MOV byte ptr [ESI + 0x9],0x0
+0093e041  XOR ECX,ECX
+0093e043  CMP ECX,0x4
+0093e046  JZ 0x0093e066
+0093e048  LEA EAX,[ECX + -0x1]
+0093e04b  MOV EDI,ESI
+0093e04d  CMOVBE EAX,ECX
+0093e050  CMP dword ptr [ESI + 0x14],0x10
+0093e054  JC 0x0093e058
+0093e056  MOV EDI,dword ptr [ESI]
+0093e058  MOVZX EDX,byte ptr [EBP + EAX*0x1 + -0xc]
+0093e05d  MOV DL,byte ptr [EDX + 0xb5c940]
+0093e063  MOV byte ptr [EDI + ECX*0x1],DL
+0093e066  INC ECX
+0093e067  CMP ECX,0x9
+0093e06a  JC 0x0093e043
+0093e06c  MOV ECX,dword ptr [EBP + -0x4]
+0093e06f  MOV EAX,ESI
+0093e071  POP EDI
+0093e072  POP ESI
+0093e073  XOR ECX,EBP
+0093e075  POP EBX
+0093e076  CALL 0x009eacd7
+0093e07b  MOV ESP,EBP
+0093e07d  POP EBP
+0093e07e  RET
+---- DECOMPILED C ----
+
+/* WARNING: Function: __security_check_cookie replaced with injection: security_check_cookie */
+
+undefined4 * FUN_0093df80(undefined4 *param_1,uint param_2)
+
+{
+  uint uVar1;
+  uint uVar2;
+  char cVar3;
+  byte bVar4;
+  undefined4 *puVar5;
+  byte local_10 [4];
+  undefined4 local_c;
+  uint local_8;
+  
+  local_8 = DAT_00baa3b4 ^ (uint)&stack0xfffffffc;
+  bVar4 = 0;
+  for (uVar2 = param_2; uVar2 != 0; uVar2 = uVar2 >> 5) {
+    cVar3 = bVar4 + (char)uVar2;
+    bVar4 = cVar3 * '\x02' - (cVar3 >> 7);
+  }
+  param_2 = param_2 ^ 0xfef7ffd;
+  *param_1 = 0;
+  param_1[4] = 0;
+  param_1[5] = 0xf;
+  local_10[0] = (byte)(param_2 >> 0x1b);
+  local_10[1] = (byte)(param_2 >> 0x16) & 0x1f;
+  *(undefined1 *)param_1 = 0;
+  local_10[2] = (byte)(param_2 >> 0x11) & 0x1f;
+  param_1[4] = 9;
+  local_10[3] = (byte)(param_2 >> 0xc) & 0x1f;
+  local_c._0_2_ = CONCAT11((char)(param_2 >> 2),(char)(param_2 >> 7)) & 0x1f1f;
+  local_c._0_3_ = (uint3)(ushort)local_c;
+  local_c = CONCAT13(bVar4,(uint3)local_c) & 0x1fffffff;
+  local_c = CONCAT13(local_c._3_1_,
+                     CONCAT12((char)((param_2 << 8 | (uint)bVar4) >> 5),(ushort)local_c)) &
+            0xff1fffff;
+  memmove(param_1,"0000 0000",9);
+  *(undefined1 *)((int)param_1 + 9) = 0;
+  uVar2 = 0;
+  do {
+    if (uVar2 != 4) {
+      uVar1 = uVar2 - 1;
+      if (uVar2 < 5) {
+        uVar1 = uVar2;
+      }
+      puVar5 = param_1;
+      if (0xf < (uint)param_1[5]) {
+        puVar5 = (undefined4 *)*param_1;
+      }
+      *(char *)((int)puVar5 + uVar2) = "ABCDEFGHJKLMNPQRSTWXYZ01234V6789"[local_10[uVar1]];
+    }
+    uVar2 = uVar2 + 1;
+  } while (uVar2 < 9);
+  return param_1;
+}
+

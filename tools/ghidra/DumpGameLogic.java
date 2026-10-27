@@ -17,6 +17,10 @@ import ghidra.program.model.listing.*;
 import ghidra.program.model.address.Address;
 import ghidra.program.model.data.DataType;
 import ghidra.program.model.symbol.Reference;
+import ghidra.program.model.symbol.ReferenceIterator;
+import ghidra.program.model.pcode.HighFunction;
+import ghidra.program.model.pcode.PcodeOp;
+import ghidra.program.model.pcode.PcodeOpAST;
 import java.io.*;
 import java.util.*;
 
@@ -78,8 +82,9 @@ public class DumpGameLogic extends GhidraScript {
                 if (core.contains(kw)) { hits.add(kw); }
             }
             if (hits.isEmpty()) continue;
-            Reference[] refs = currentProgram.getReferenceManager().getReferencesTo(d.getAddress());
-            for (Reference r : refs) {
+            ReferenceIterator refs = currentProgram.getReferenceManager().getReferencesTo(d.getAddress());
+            while (refs.hasNext()) {
+                Reference r = refs.next();
                 Address from = r.getFromAddress();
                 Function f = getFunctionContaining(from);
                 if (f != null) {
@@ -125,13 +130,18 @@ public class DumpGameLogic extends GhidraScript {
                 long sz = f.getBody() != null ? f.getBody().getNumAddresses() : 0;
                 String tag = matchInfo.getOrDefault(key, "?");
                 String matched = tag.startsWith("seed:") ? tag.substring(5) : "";
-                csv.write(String.format("0x%08x,%s,%d,%s,%s\n", v, f.getName(), sz, tag, matched));
+                csv.write(String.format("0x%08x,%s,%d,%s,%s\n", v, csvField(f.getName()), sz, csvField(tag), csvField(matched)));
+                csv.flush();
                 dump(f, glDir);
                 n++;
             }
         }
         println("=== DUMPED " + n + " game-logic candidate functions ===");
         println("=== DONE ===");
+    }
+
+    private String csvField(String value) {
+        return "\"" + value.replace("\"", "\"\"") + "\"";
     }
 
     private void dump(Function f, File outDir) {

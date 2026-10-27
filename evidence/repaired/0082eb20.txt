@@ -1,0 +1,65 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_0082eb20@0082eb20
+---- CALLEES ----
+EXTERNAL:0000002e lua_rawset
+EXTERNAL:00000044 lua_pushstring
+EXTERNAL:00000053 lua_newuserdata
+EXTERNAL:0000005e lua_rotate
+EXTERNAL:00000061 lua_absindex
+EXTERNAL:0000006a lua_pushcclosure
+---- ASSEMBLY ----
+0082eb20  PUSH EBX
+0082eb21  PUSH ESI
+0082eb22  MOV EBX,ECX
+0082eb24  PUSH EDI
+0082eb25  PUSH 0x4
+0082eb27  MOV EDI,dword ptr [EBX]
+0082eb29  PUSH EDI
+0082eb2a  CALL dword ptr [0x00a061e8]
+0082eb30  PUSH 0x1
+0082eb32  PUSH 0x850cd0
+0082eb37  PUSH EDI
+0082eb38  MOV dword ptr [EAX],0x93e1c0
+0082eb3e  CALL dword ptr [0x00a06244]
+0082eb44  PUSH -0x3
+0082eb46  PUSH EDI
+0082eb47  CALL dword ptr [0x00a06220]
+0082eb4d  PUSH 0xb54bd4
+0082eb52  PUSH EDI
+0082eb53  MOV ESI,EAX
+0082eb55  CALL dword ptr [0x00a061ac]
+0082eb5b  PUSH 0x1
+0082eb5d  PUSH -0x2
+0082eb5f  PUSH EDI
+0082eb60  CALL dword ptr [0x00a06214]
+0082eb66  PUSH ESI
+0082eb67  PUSH EDI
+0082eb68  CALL dword ptr [0x00a06154]
+0082eb6e  ADD ESP,0x38
+0082eb71  MOV EAX,EBX
+0082eb73  POP EDI
+0082eb74  POP ESI
+0082eb75  POP EBX
+0082eb76  RET 0x8
+---- DECOMPILED C ----
+
+undefined4 * __fastcall FUN_0082eb20(undefined4 *param_1)
+
+{
+  undefined4 uVar1;
+  undefined4 *puVar2;
+  undefined4 uVar3;
+  
+  uVar1 = *param_1;
+  puVar2 = (undefined4 *)lua_newuserdata(uVar1,4);
+  *puVar2 = FUN_0093e1c0;
+  lua_pushcclosure(uVar1,FUN_00850cd0,1);
+  uVar3 = lua_absindex(uVar1,0xfffffffd);
+  lua_pushstring(uVar1,"SetStartSeed");
+  lua_rotate(uVar1,0xfffffffe,1);
+  lua_rawset(uVar1,uVar3);
+  return param_1;
+}
+

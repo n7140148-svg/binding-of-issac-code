@@ -1,0 +1,106 @@
+Program: isaac-ng.exe
+Executable SHA256: 530b4d2accef833b8dbf6f1a9f781fe1e051c1916ca5acdb579df05a34640627
+Language: x86:LE:32:default
+Function: FUN_005b6370@005b6370
+---- CALLEES ----
+0095e330 FUN_0095e330
+---- ASSEMBLY ----
+005b6370  PUSH EBP
+005b6371  MOV EBP,ESP
+005b6373  PUSH ECX
+005b6374  PUSH ESI
+005b6375  MOV EAX,ECX
+005b6377  MOV ESI,EDX
+005b6379  SUB ESI,EAX
+005b637b  MOV dword ptr [EBP + -0x4],EAX
+005b637e  SAR ESI,0x2
+005b6381  DEC ESI
+005b6382  TEST ESI,ESI
+005b6384  JLE 0x005b63f6
+005b6386  PUSH EBX
+005b6387  PUSH EDI
+005b6388  MOV EDI,dword ptr [EBP + 0x8]
+005b638b  LEA EBX,[ESI + 0x1]
+005b638e  NOP
+005b6390  MOV EAX,dword ptr [EDI]
+005b6392  TEST EAX,EAX
+005b6394  JNZ 0x005b63ac
+005b6396  PUSH 0xb4d6c4
+005b639b  PUSH 0x3
+005b639d  CALL 0x0095e330
+005b63ac  MOV ECX,dword ptr [EDI + 0x4]
+005b63af  MOV EDX,EAX
+005b63b1  SHR EDX,CL
+005b63b3  MOV ECX,dword ptr [EDI + 0x8]
+005b63b6  XOR EDX,EAX
+005b63b8  MOV EAX,EDX
+005b63ba  SHL EAX,CL
+005b63bc  MOV ECX,dword ptr [EDI + 0xc]
+005b63bf  XOR EAX,EDX
+005b63c1  MOV EDX,EAX
+005b63c3  SHR EDX,CL
+005b63c5  XOR EDX,EAX
+005b63c7  MOV dword ptr [EDI],EDX
+005b63c9  TEST EBX,EBX
+005b63cb  JNZ 0x005b63d1
+005b63cd  XOR EDX,EDX
+005b63cf  JMP 0x005b63d7
+005b63d1  MOV EAX,EDX
+005b63d3  XOR EDX,EDX
+005b63d5  DIV EBX
+005b63d7  MOV EAX,dword ptr [EBP + -0x4]
+005b63da  DEC EBX
+005b63db  MOV EDI,dword ptr [EBP + -0x4]
+005b63de  MOV ECX,dword ptr [EAX + ESI*0x4]
+005b63e1  MOV EAX,dword ptr [EAX + EDX*0x4]
+005b63e4  MOV dword ptr [EDI + ESI*0x4],EAX
+005b63e7  MOV EAX,EDI
+005b63e9  MOV EDI,dword ptr [EBP + 0x8]
+005b63ec  DEC ESI
+005b63ed  MOV dword ptr [EAX + EDX*0x4],ECX
+005b63f0  TEST ESI,ESI
+005b63f2  JG 0x005b6390
+005b63f4  POP EDI
+005b63f5  POP EBX
+005b63f6  POP ESI
+005b63f7  MOV ESP,EBP
+005b63f9  POP EBP
+005b63fa  RET
+---- DECOMPILED C ----
+
+void __fastcall FUN_005b6370(int param_1,int param_2,uint *param_3)
+
+{
+  undefined4 uVar1;
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
+  
+  uVar4 = param_2 - param_1 >> 2;
+  uVar2 = uVar4;
+  while( true ) {
+    uVar2 = uVar2 - 1;
+    if ((int)uVar2 < 1) {
+      return;
+    }
+    uVar3 = *param_3;
+    if (uVar3 == 0) break;
+    uVar3 = uVar3 >> ((byte)param_3[1] & 0x1f) ^ uVar3;
+    uVar3 = uVar3 << ((byte)param_3[2] & 0x1f) ^ uVar3;
+    uVar3 = uVar3 >> ((byte)param_3[3] & 0x1f) ^ uVar3;
+    *param_3 = uVar3;
+    if (uVar4 == 0) {
+      uVar3 = 0;
+    }
+    else {
+      uVar3 = uVar3 % uVar4;
+    }
+    uVar4 = uVar4 - 1;
+    uVar1 = *(undefined4 *)(param_1 + uVar2 * 4);
+    *(undefined4 *)(param_1 + uVar2 * 4) = *(undefined4 *)(param_1 + uVar3 * 4);
+    *(undefined4 *)(param_1 + uVar3 * 4) = uVar1;
+  }
+                    /* WARNING: Subroutine does not return */
+  FUN_0095e330(3,"RNG Seed is zero!\n");
+}
+
